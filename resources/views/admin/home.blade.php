@@ -47,7 +47,14 @@
     <title>List Product</title>
 </head>
 <body class="bg-gray-100">
-    <div class="min-h-screen flex">
+    @extends('layouts.navAdmin')
+    @section('nav-admin')
+    <div id="content" class="ml-67 -mt-[100px] flex flex-col items-center justify-center h-screen text-center">
+        <img src="{{ asset('SMK_Negeri_1_Bantul_logo.png') }}" class="w-[300px]">
+        <h1 class="text-5xl font-bold">WELCOME TO ADMIN CANQU</h1>
+    </div>        
+    @endsection
+    {{-- <div class="min-h-screen flex">
         <!-- Sidebar -->
         <aside class="w-64 bg-blue-600 text-white flex flex-col">
             <div class="p-6 text-center">
@@ -63,21 +70,7 @@
             </nav>
         </aside>
 
-        {{-- <div class="text-right mb-6">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                <li>
-                    <form method="POST" action="{{ route('logout') }}" class="inline-block ml-54">
-                        @csrf
-                        <x-responsive-nav-link :href="route('logout')"
-                                onclick="event.preventDefault();
-                                            this.closest('form').submit();" class="text-sm text-white">
-                            {{ __('Log Out') }}
-                            
-                        </x-responsive-nav-link>
-                    </form>
-                </li>
-            </button>
-        </div> --}}
+        
 
         <!-- Main Content -->
         <div class="flex-grow p-8">
@@ -113,6 +106,6 @@
             <!-- Table -->
             
         </div>
-    </div>
+    </div> --}}
 </body>
 </html>
