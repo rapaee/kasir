@@ -15,7 +15,7 @@ Route::get('/', [IndexController::class, 'index'])->name('index');
 
 Route::get('/home', function () {
     return view('home');
-})->name('home'); // Anda bisa menggunakan nama rute 'dashboard'
+})->name('home'); // untuk halaman setelah register otomatis halaman user
 
 
 Route::get('user/home', function () {
