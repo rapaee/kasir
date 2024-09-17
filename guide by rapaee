@@ -1,0 +1,20 @@
+cara membuat controller Laravel 11 yang langsung ada method crud
+"php artisan make:controller namefile --resource"
+
+cara membuat controller Laravel 11 default 
+"php artisan make:controller namafile"
+
+cara migrate fild table ke database
+"php artisan migrate"
+
+perintah untuk migrate yang baru
+"php artisan migrate:fresh"
+
+cara membuat migration
+"php artisan make:migration creata_nama_table"
+
+cara membuat model 
+"php artisan make:model namemodel"
+
+how to login Laravel 11
+"https://youtu.be/enm7dBkvN_I?si=P29NZEjYUOtsZtjh"
