@@ -12,11 +12,11 @@
         <!-- Sidebar -->
         <aside class="w-64 bg-blue-600 text-white flex flex-col">
             <div class="p-6 text-center">
-                <h1 class="text-2xl font-semibold">SB Admin ²</h1>
+                <h1 class="text-2xl font-semibold">CAFETARIAGIT</h1>
             </div>
             <nav class="flex-grow">
                 <ul class="space-y-4 p-4">
-                <li><a href="{{ 'home' }}" class="text-white underline hover:text-gray-300">Dashboard</a></li>
+                <li><a href="{{ 'home' }}" class="text-white hover:text-gray-300">Dashboard</a></li>
                 <li><a href="{{ 'data-barang' }}" class="text-white hover:text-gray-300">Data Barang</a></li>
                 <li><a href="{{ '' }}" class="text-white hover:text-gray-300">Transaksi</a></li>
                 </ul>
