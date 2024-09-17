@@ -51,7 +51,7 @@
         <!-- Sidebar -->
         <aside class="w-64 bg-blue-600 text-white flex flex-col">
             <div class="p-6 text-center">
-                <h1 class="text-2xl font-semibold">SB Admin ²</h1>
+                <h1 class="text-2xl font-semibold">CAFETARIA</h1>
             </div>
             <nav class="flex-grow">
                 <ul class="space-y-4 p-4">
