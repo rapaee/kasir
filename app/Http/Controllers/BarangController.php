@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
- 
+use Illuminate\Http\Request;
 
 
 class BarangController extends Controller
@@ -12,9 +12,15 @@ class BarangController extends Controller
       return view('user.in-ed.add-data-barang');
    }
 
-   public function store()
+   public function store(request $request)
    {
-      
+      $request->validate([
+         'nama_barang' => 'required|string',
+         'harga' => 'required|integer',
+         'kategori_barang' => 'required|string',
+         'stok_barang' => 'required|integer',
+     ]);
+     
    }
 
    }

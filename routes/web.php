@@ -13,6 +13,11 @@ Route::get('/', function () {
 });
 Route::get('/', [IndexController::class, 'index'])->name('index');
 
+Route::get('/home', function () {
+    return view('home');
+})->name('home'); // Anda bisa menggunakan nama rute 'dashboard'
+
+
 Route::get('user/home', function () {
     return view('user/home');
 })->middleware(['auth', 'verified'])->name('home');
