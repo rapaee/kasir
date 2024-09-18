@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Dashboard</title>
+    <title>Report</title>
 </head>
 <body>
-    @extends('layouts.navbar-admin.data-barang')
+    @extends('layouts.navbar-admin.laporan-keuangan')
 
     @section('nav-admin')
     <div class="nav-content flex justify-between items-center h-screen">

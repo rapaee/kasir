@@ -13,7 +13,6 @@ class NavController extends Controller
     {
         return view('admin.data-barang');
     }
-
     /**
      * Show the form for creating a new resource.
      */

@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\LaporanKeuanganController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NavController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +35,8 @@ require __DIR__.'/auth.php';
 //navbar halaman admin
 Route::get('admin/home',[LoginController::class,'index'])->name('home');
 Route::get('/admin/data-barang', [NavController::class, 'index'])->name('data-barang');
+Route::get('/admin/transaksi', [TransaksiController::class, 'index'])->name('transaksi');
+Route::get('/admin/laporan-keuangan', [LaporanKeuanganController::class, 'index'])->name('laporan-keuangan');
 //
 //navbar halaman user
 Route::get('user/home',[UserController::class, 'nav'])->name('home');
