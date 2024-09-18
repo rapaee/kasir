@@ -10,28 +10,6 @@
                     </a> --}}
                 </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    @if (Auth::user()->usertype === 'admin')
-                        <!-- Navigasi untuk Admin -->
-                        <x-nav-link :href="route('admin.home')" :active="request()->routeIs('home')">
-                            {{ __('Admin Dashboard') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('manage.users')" :active="request()->routeIs('manage.users')">
-                            {{ __('Manage Users') }}
-                        </x-nav-link>
-                    @elseif (Auth::user()->usertype === 'user')
-                        <!-- Navigasi untuk User -->
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Dashboard') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Pelanggan') }}
-                        </x-nav-link>
-                    @endif
-
-                </div>
-                
             </div>
 
             <!-- Settings Dropdown -->

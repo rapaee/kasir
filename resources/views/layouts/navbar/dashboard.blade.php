@@ -44,12 +44,14 @@
                         <form method="POST" action="{{ route('logout') }}" class="inline-block ml-54">
                             @csrf
                             <x-responsive-nav-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();" class="text-sm text-white">
+                                onclick="event.preventDefault(); this.closest('form').submit();"
+                                class="text-3xl text-white">
                                 {{ __('Log Out') }}
                             </x-responsive-nav-link>
+
+                        
                         </form>
-                    </li>
+                    </li
                 </div>
             </ul>
         </nav>
