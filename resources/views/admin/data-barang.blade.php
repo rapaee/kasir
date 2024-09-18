@@ -10,18 +10,31 @@
 <body>
     @extends('layouts.navbar-admin.data-barang')
 
-    @section('nav-admin')
-    <div class="nav-content flex justify-between items-center h-screen">
-        <div class="ml-4">
+    @section('navbar-admin')
+    <div class="flex">
+        <div class="w-1/5 bg-blue-600 p-5 text-white">
             <!-- Tambahkan elemen navbar Anda di sini jika diperlukan -->
         </div>
     
-        <div id="content" class="flex flex-col items-center justify-center text-center w-3/4">
-            <h1 class="text-5xl font-bold">WELCOME TO ADMIN</h1>
-            <div class="animasi-teks">
-                SMK NEGERI 1 BANTUL <span class="text-sky-400">CAFETARIA</span>
-                <h1 class="text-5xl font-bold">WELCOME TO ADMIN CANQU</h1>
+        <div class="w-4/5 p-10">
+            <h1 class="text-5xl font-bold mb-6 mt-0">List Product</h1>
+
+           
+            <div class="mb-4 flex justify-end">
+                <button class="bg-blue-500 text-white px-4 py-2 rounded">Add Product</button>
             </div>
+
+            <div class="">
+                <table class="min-w-full bg-white border">
+                    <thead>
+                        <tr>
+                            <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Nama Product</th>
+                            <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Harga</th>
+                            <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Kategori</th>
+                            <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Stok</th>
+                            <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Aksi</th>
+                        </tr>
+                        </thead>
         </div>
     </div>
     @endsection
