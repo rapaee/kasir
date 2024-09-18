@@ -9,7 +9,32 @@
 </head>
 <body>
     @extends('layouts.navbar-admin.transaksi')
-    @section('nav-admin')
+    @section('navbar-admin')
+    <div class="flex">
+        <div class="w-1/5 bg-blue-600 p-5 text-white">
+            <!-- Tambahkan elemen navbar Anda di sini jika diperlukan -->
+        </div>
+    
+        <div class="w-4/5 p-10">
+            <h1 class="text-5xl font-bold mb-6 mt-0">List Transaksi</h1>
+
+           
+            <div class="mb-4 flex justify-end">
+                <button class="bg-blue-500 text-white px-4 py-2 rounded">Add Transaksi</button>
+            </div>
+
+            <div class="">
+                <table class="min-w-full bg-white border">
+                    <thead>
+                        <tr>
+                            <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Nama Product</th>
+                            <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Jumlah Product</th>
+                            <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Sub Total</th>
+                            
+                        </tr>
+                        </thead>
+        </div>
+    </div>
     @endsection
 </body>
 </html>
