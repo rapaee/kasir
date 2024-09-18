@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
         if ($request->user()->usertype === 'admin') {
             return redirect('admin/home');
         } else if ($request->user()->usertype === 'user') {
-            return redirect('user/home');
+            return redirect('/user/home');
         }
     
         // Optional: handle other usertypes if needed, or default redirection.
