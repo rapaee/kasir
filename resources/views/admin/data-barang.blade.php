@@ -13,7 +13,6 @@
     @section('navbar-admin')
     <div class="flex">
         <div class="w-1/5 p-5 text-white">
-            <!-- Tambahkan elemen navbar Anda di sini jika diperlukan -->
         </div>
     
         <div class="ml-96 w-4/5 p-10 fixed">
@@ -31,7 +30,6 @@
                             <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Nama Product</th>
                             <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Harga</th>
                             <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Kategori</th>
-                            <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Stok</th>
                             <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Aksi</th>
                         </tr>
                         </thead>
@@ -42,3 +40,5 @@
    
 </body>
 </html>
+
+
