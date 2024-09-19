@@ -45,7 +45,7 @@ Route::get('user/home',[UserController::class, 'nav'])->name('home');
 Route::get('user/data-barang',[UserController::class, 'nav1'])->name('data-barang.post');
 //
 Route::get('/user/in-ed/add-data-barang',[BarangController::class, 'create'])->name('add-data-barang');
-Route::post('user/in-ed/add-data-barang', [BarangController::class, 'store'])->name('add-data-barang');
+Route::post('user/in-ed/add-data-barang', [BarangController::class, 'store'])->name('add-data-barang.store');
 
 
 

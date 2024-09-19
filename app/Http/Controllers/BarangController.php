@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\product;
+use App\Models\Product;
 use Illuminate\Http\Request;
-
 
 class BarangController extends Controller
 {
@@ -14,24 +12,30 @@ class BarangController extends Controller
       return view('user.in-ed.add-data-barang');
    }
 
-   public function store(request $request)
+   public function store(Request $request)
    {
+      // Validasi input dari form
       $request->validate([
          'nama_barang' => 'required|string',
-         'harga' => 'required|integer',
+         'harga' => 'required|numeric',
          'kategori_barang' => 'required|string',
-     ]);
-   //  try {
-   //    $new_product = new product;
-   //    $new_product -> nama_barang = $request -> nama_barang; 
-   //    $new_product -> harga = $request -> harga; 
-   //    $new_product -> kategori_barang = $request -> kategori_barang; 
-   //    $new_product -> nama_barang = $request -> nama_barang; 
-   //    $new_product -> save(); 
-   //    return redirect()->with('Succes','Berhasil menambhkan product')
-   //  } catch (\Exception $e) {
-   //    //throw $th;
-   //  }
-   }
+         'stok_barang' => 'required|numeric',
+      ]);
 
+      try {
+         // Membuat instance product baru dan menyimpan data
+         $new_product = new Product();
+         $new_product->nama_barang = $request->nama_barang;
+         $new_product->harga = $request->harga; 
+         $new_product->kategori_barang = $request->kategori_barang;
+         $new_product->stok_barang = $request->stok_barang;
+         $new_product->save();
+
+         // Redirect ke halaman data-barang dengan pesan sukses
+         return redirect()->route('data-barang')->with('success', 'Berhasil menambahkan produk');
+      } catch (\Exception $e) {
+         // Redirect kembali ke form tambah data dengan pesan error
+         return redirect()->route('add-data-barang')->with('fail', 'Gagal menambahkan produk ' . $e->getMessage());
+      }
    }
+}

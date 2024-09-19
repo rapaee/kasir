@@ -25,9 +25,13 @@
     <div class="nav-content flex">
 
         <div id="content" class="w-full ml-96">
+            <h1>Product</h1>
             <button class="bg-sky-400 p-2 rounded ml-auto mt-[20px] text-white hover:bg-sky-500 block">
                 <a href="{{ route('add-data-barang') }}">Tambah Produk</a>
             </button>
+            @if (session::has('Success'))
+                    <span class="text-red-500">{{ session::get('success') }}</span>
+                @endif
             <div class="overflow-x-auto">
                 <table class=" w-full bg-white mt-[20px]">
                     <thead>
