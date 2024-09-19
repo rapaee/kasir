@@ -11,11 +11,11 @@
     @extends('layouts.navbar-admin.transaksi')
     @section('navbar-admin')
     <div class="flex">
-        <div class="w-1/5 bg-blue-600 p-5 text-white">
+        <div class="w-1/5 p-5 text-white">
             <!-- Tambahkan elemen navbar Anda di sini jika diperlukan -->
         </div>
     
-        <div class="w-4/5 p-10">
+        <div class="ml-96 w-4/5 p-10 fixed">
             <h1 class="text-5xl font-bold mb-6 mt-0">List Transaksi</h1>
 
            
