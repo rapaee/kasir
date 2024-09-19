@@ -18,7 +18,6 @@ class BarangController extends Controller
          'nama_barang' => 'required|string',
          'harga' => 'required|integer',
          'kategori_barang' => 'required|string',
-         'stok_barang' => 'required|integer',
      ]);
      
    }
