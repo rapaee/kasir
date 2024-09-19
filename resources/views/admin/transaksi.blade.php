@@ -19,9 +19,7 @@
             <h1 class="text-5xl font-bold mb-6 mt-0">List Transaksi</h1>
 
            
-            <div class="mb-4 flex justify-end">
-                <button class="bg-blue-500 text-white px-4 py-2 rounded">Add Transaksi</button>
-            </div>
+           
 
             <div class="">
                 <table class="min-w-full bg-white border">
