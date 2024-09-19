@@ -29,8 +29,8 @@
             <button class="bg-sky-400 p-2 rounded ml-auto mt-[20px] text-white hover:bg-sky-500 block">
                 <a href="{{ route('add-data-barang') }}">Tambah Produk</a>
             </button>
-            @if (session::has('Success'))
-                    <span class="text-red-500">{{ session::get('success') }}</span>
+            @if (Session::has('Success'))
+                    <span class="text-red-500">{{ Session::get('success') }}</span>
                 @endif
             <div class="overflow-x-auto">
                 <table class=" w-full bg-white mt-[20px]">
@@ -45,7 +45,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Rows go here -->
+                        {{-- <td>{{ $loop->iteration }}</td>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->email }}</td>
+                        <td>{{ $item->phone_number }}</td>
+                        <td>{{ $item->created_at }}</td>
+                        <td>{{ $item->updated_at }}</td>
+                        <td><a href="/edit/{{ $item->id }}" class="">Edit</a></td>
+                        <td><a href="/delete/{{ $item->id }}" class="">Delete</a></td> --}}
                     </tbody>
                 </table>
             </div>
