@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\product;
 use Illuminate\Http\Request;
 
 
@@ -20,7 +22,17 @@ class BarangController extends Controller
          'kategori_barang' => 'required|string',
          'stok_barang' => 'required|integer',
      ]);
-     
+   //  try {
+   //    $new_product = new product;
+   //    $new_product -> nama_barang = $request -> nama_barang; 
+   //    $new_product -> harga = $request -> harga; 
+   //    $new_product -> kategori_barang = $request -> kategori_barang; 
+   //    $new_product -> nama_barang = $request -> nama_barang; 
+   //    $new_product -> save(); 
+   //    return redirect()->with('Succes','Berhasil menambhkan product')
+   //  } catch (\Exception $e) {
+   //    //throw $th;
+   //  }
    }
 
    }

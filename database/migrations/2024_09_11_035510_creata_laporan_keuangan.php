@@ -17,7 +17,6 @@ return new class extends Migration
             $table->decimal('total_pendapatan');
             $table->bigInteger('id_kasir')->unsigned();
             $table->timestamps();
-
             $table->foreign('id_kasir')->references('id')->on('users')->onDelete('cascade');
         });
     }
