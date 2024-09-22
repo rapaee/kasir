@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -16,7 +17,11 @@ class UserController extends Controller
     }
     public function nav1()
     {
-        return view('user.data-barang');
+        $new_product = Product::all();
+        // dd($new_product);
+        return view('user.data-barang', [
+            'new_product' => $new_product,
+        ]);
     }
     public function index()
     {

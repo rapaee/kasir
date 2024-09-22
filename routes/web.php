@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+
 //navbar halaman admin
 Route::get('admin/home',[LoginController::class,'index'])->name('home');
 Route::get('/admin/data-barang', [NavController::class, 'index'])->name('data-barang');
@@ -43,6 +44,8 @@ Route::get('/admin/laporan-keuangan', [LaporanKeuanganController::class, 'index'
 //navbar halaman user
 Route::get('user/home',[UserController::class, 'nav'])->name('home');
 Route::get('user/data-barang',[UserController::class, 'nav1'])->name('data-barang.post');
+Route::get('user/laporan-keuangan',[LaporanKeuanganController::class,'index1'])->name('laporan-keuangan.post');
+Route::get('user/transaksi',[TransaksiController::class,'index1'])->name('transaksi.post');
 //
 Route::get('/user/in-ed/add-data-barang',[BarangController::class, 'create'])->name('add-data-barang');
 Route::post('user/in-ed/add-data-barang', [BarangController::class, 'store'])->name('add-data-barang.store');

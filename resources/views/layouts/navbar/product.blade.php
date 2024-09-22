@@ -31,7 +31,11 @@
                 </div>
                 <div class="flex items-center p-10 hover:bg-sky-300">
                     <img src="https://cdn-icons-png.flaticon.com/128/2541/2541369.png" alt="" class="w-8 h-8 mr-4 filter-white">
-                    <li><a href="{{ '' }}" class="text-white text-xl list-none">Transaksi</a></li>
+                    <li><a href="{{ 'transaksi' }}" class="text-white text-xl list-none">Transaksi</a></li>
+                </div>
+                <div class="flex items-center p-10 hover:bg-sky-300">
+                    <img src="https://cdn-icons-png.flaticon.com/128/1450/1450932.png" alt="" class="w-8 h-8 mr-4 filter-white">
+                    <li><a href="{{ 'laporan-keuangan' }}" class="text-white text-xl list-none">Report</a></li>
                 </div>
                 <div class="flex items-center p-10 hover:bg-sky-300">
                     <img src="https://cdn-icons-png.flaticon.com/128/4400/4400629.png" alt="" class="w-8 h-8 mr-4 filter-white">

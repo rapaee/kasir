@@ -10,4 +10,8 @@ class TransaksiController extends Controller
     {
         return view('admin.transaksi');
     }
+    public function index1()
+    {
+        return view('user.transaksi');
+    }
 }

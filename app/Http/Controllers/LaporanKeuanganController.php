@@ -10,4 +10,8 @@ class LaporanKeuanganController extends Controller
     {
         return view('admin.laporan-keuangan');
     }
+    public function index1()
+    {
+        return view('user.laporan-keuangan');
+    }
 }

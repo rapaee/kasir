@@ -27,7 +27,7 @@
     
         {{-- Main content section (Form berada di kanan) --}}
         <div id="content" class="flex flex-col h-screen w-9/12 fixed ml-96">
-            <div class="p-2">
+            <div class="p-2 ">
                 @if (session('fail'))
                     <span class="text-red-500">{{ session('fail') }}</span>
                 @endif
@@ -68,7 +68,7 @@
                     </div>
     
                     <div class="text-right">
-                        <a href="{{ route('data-barang') }}" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer">Cancel</a>
+                        <a href="{{ route('data-barang.post') }}" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer">Cancel</a>
                         <input type="submit" value="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer">
                     </div>
                 </form>

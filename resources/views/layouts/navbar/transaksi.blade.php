@@ -5,13 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
-        .filter-white {
-            filter: brightness(0) invert(1);
-        }
-    </style>
 </head>
 <body>
+    <!-- Parent div to hold the navbar and content -->
     <div class="flex">
 
         <!-- Navbar on the left -->
@@ -25,19 +21,19 @@
                 </div>
             </div>
             <ul class="">
-                <div class="flex z-10 items-center p-10 hover:bg-sky-300 hover-transition">
+                <div class="flex z-10 items-center  p-10 hover:bg-sky-300 hover-transition">
                     <img src="https://cdn-icons-png.flaticon.com/128/1828/1828791.png" alt="" class="w-8 h-8 mr-4 filter-white">
                     <li><a href="{{ 'home' }}" class="text-white text-xl list-none">Dashboard</a></li>
                 </div>
-                <div class="flex items-center   p-10 hover:bg-sky-300">
+                <div class="flex items-center p-10 hover:bg-sky-300">
                     <img src="https://cdn-icons-png.flaticon.com/128/9542/9542653.png" alt="" class="w-8 h-8 mr-4 filter-white">
                     <li><a href="{{ 'data-barang' }}" class="text-white text-xl list-none">Product</a></li>
                 </div>
-                <div class="flex items-center p-10 hover:bg-sky-300">
+                <div class="flex items-center bg-sky-500 p-10 hover:bg-sky-300">
                     <img src="https://cdn-icons-png.flaticon.com/128/2541/2541369.png" alt="" class="w-8 h-8 mr-4 filter-white">
                     <li><a href="{{ 'transaksi' }}" class="text-white text-xl list-none">Transaksi</a></li>
                 </div>
-                <div class="flex items-center p-10 bg-sky-500 hover:bg-sky-300">
+                <div class="flex items-center p-10 hover:bg-sky-300">
                     <img src="https://cdn-icons-png.flaticon.com/128/1450/1450932.png" alt="" class="w-8 h-8 mr-4 filter-white">
                     <li><a href="{{ 'laporan-keuangan' }}" class="text-white text-xl list-none">Report</a></li>
                 </div>

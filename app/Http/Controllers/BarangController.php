@@ -9,9 +9,14 @@ class BarangController extends Controller
    // Menampilkan form untuk tambah data
    public function create()
    {
-      return view('user.in-ed.add-data-barang');
+      // Mengambil semua produk dari database
+      $new_product = Product::all();
+      // Mengirim data produk ke view
+      return view('user.in-ed.add-data-barang', [
+         'new_product' => $new_product,
+         ]);
+      
    }
-
    public function store(Request $request)
    {
       // Validasi input dari form

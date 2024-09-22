@@ -36,7 +36,7 @@
 </head>
 <body>
 
-    @extends('layouts.navbar.dashboard')
+    @extends('layouts.navbar.transaksi')
 
     @section('navbar')
     <div class="nav-content flex">
@@ -45,10 +45,7 @@
         {{-- Main content section --}}
         <div id="content" class="ml-32 flex flex-col items-center justify-center h-screen text-center w-3/4">
             
-            <h1 class="text-5xl font-bold">WELCOME TO USER</h1>
-            <div class="animasi-teks">
-                SMK NEGERI 1 BANTUL <span class="text-sky-400">CAFETARIA</span>
-            </div>
+          
         </div>
     </div>
     
