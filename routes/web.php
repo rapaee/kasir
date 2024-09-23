@@ -52,6 +52,8 @@ Route::get('user/transaksi',[TransaksiController::class,'index1'])->name('transa
 Route::get('/user/in-ed/add-data-barang',[BarangController::class, 'create'])->name('add-data-barang');
 Route::post('user/in-ed/add-data-barang', [BarangController::class, 'store'])->name('add-data-barang.store');
 
+//edit
+Route::get('/user/in-ed/edit-data-barang/{id}', [BarangController::class, 'EditProduct'])->name('edit-data-barang');
 
 
 

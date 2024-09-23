@@ -43,4 +43,38 @@ class BarangController extends Controller
          return redirect()->route('add-data-barang')->with('fail', 'Gagal menambahkan produk ' . $e->getMessage());
       }
    }
+   
+   public function EditProduct(Request $request){
+      $request->validate([
+          'full_name' => 'required|string',
+          'email' => 'required|email|unique:users,email,' . $request->user_id,
+          'phone_number' => 'required|numeric',
+      ]);
+  
+      try {
+          // Update user
+          $update_user = Product::where('id', $request->user_id)->update([
+              'name' => $request->full_name,
+              'email' => $request->email,
+              'phone_number' => $request->phone_number,
+          ]);
+  
+          return redirect()->route('users.index')->with('success', 'User Updated Successfully');
+      } catch (\Exception $e) {
+          return redirect()->route('edit-user', ['id' => $request->user_id])->with('fail', $e->getMessage());
+      }
+  }
+  
+  public function loadEditForm($id) {
+      // Mengambil data barang berdasarkan id
+      $product = Product::find($id);
+  
+      // Jika data tidak ditemukan
+      if (!$product) {
+          return redirect()->back()->with('error', 'Data tidak ditemukan.');
+      }
+  
+      // Menampilkan view edit dengan data barang yang telah diambil
+      return view('user.in-ed.edit-data-barang', compact('product'));
+  }
 }
