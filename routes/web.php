@@ -5,6 +5,7 @@ use App\Http\Controllers\LaporanKeuanganController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NavController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\KasirController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
@@ -43,6 +44,7 @@ Route::get('/admin/laporan-keuangan', [LaporanKeuanganController::class, 'index'
 //
 //navbar halaman user
 Route::get('user/home',[UserController::class, 'nav'])->name('home');
+Route::get('user/data-kasir',[KasirController::class, 'index'])->name('data-kasir.post');
 Route::get('user/data-barang',[UserController::class, 'nav1'])->name('data-barang.post');
 Route::get('user/laporan-keuangan',[LaporanKeuanganController::class,'index1'])->name('laporan-keuangan.post');
 Route::get('user/transaksi',[TransaksiController::class,'index1'])->name('transaksi.post');

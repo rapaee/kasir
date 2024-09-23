@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Product</title>
+    <title>Data Kasir</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         * {
@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    @extends('')
+    @extends('layouts.navbar.data-kasir')
 
     @section('navbar')
     <div class="nav-content flex">
@@ -42,7 +42,6 @@
                             <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">S/N</th>
                             <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Nama</th>
                             <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Nisn</th>
-                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Kelas</th>
                             <th colspan="2" class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Action</th>
                         </tr>
                     </thead>

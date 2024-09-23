@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+          .filter-white {
+            filter: brightness(0) invert(1);
+    }
+    </style>
 </head>
 <body>
     <!-- Parent div to hold the navbar and content -->
@@ -25,11 +30,11 @@
                     <img src="https://cdn-icons-png.flaticon.com/128/1828/1828791.png" alt="" class="w-8 h-8 mr-4 filter-white">
                     <li><a href="{{ 'home' }}" class="text-white text-xl list-none">Dashboard</a></li>
                 </div>
-                <div class="flex items-center p-10 hover:bg-sky-300">
+                <div class="flex items-center p-10 bg-sky-500 hover:bg-sky-300">
                     <img src="https://cdn-icons-png.flaticon.com/128/9542/9542653.png" alt="" class="w-8 h-8 mr-4 filter-white">
                     <li><a href="{{ 'data-kasir' }}" class="text-white text-xl list-none">Kasir</a></li>
                 </div>
-                <div class="flex items-center p-10 bg-sky-500 hover:bg-sky-300">
+                <div class="flex items-center p-10 hover:bg-sky-300">
                     <img src="https://cdn-icons-png.flaticon.com/128/9542/9542653.png" alt="" class="w-8 h-8 mr-4 filter-white">
                     <li><a href="{{ 'data-barang' }}" class="text-white text-xl list-none">Product</a></li>
                 </div>
@@ -47,12 +52,14 @@
                         <form method="POST" action="{{ route('logout') }}" class="inline-block ml-54">
                             @csrf
                             <x-responsive-nav-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();" class="text-lg text-white">
+                                onclick="event.preventDefault(); this.closest('form').submit();"
+                                class="text-lg text-white">
                                 {{ __('Log Out') }}
                             </x-responsive-nav-link>
+
+                        
                         </form>
-                    </li>
+                    </li
                 </div>
             </ul>
         </nav>
