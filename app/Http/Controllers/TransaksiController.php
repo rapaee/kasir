@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
+
 
 class TransaksiController extends Controller
 {
@@ -14,4 +16,6 @@ class TransaksiController extends Controller
     {
         return view('user.transaksi');
     }
+
+    
 }
