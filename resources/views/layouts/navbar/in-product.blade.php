@@ -27,10 +27,10 @@
                 </div>
                 <div class="flex items-center p-10 hover:bg-sky-300">
                     <img src="https://cdn-icons-png.flaticon.com/128/9542/9542653.png" alt="" class="w-8 h-8 mr-4 filter-white">
-                    <li><a href="{{ 'data-kasir' }}" class="text-white text-xl list-none">Kasir</a></li>
+                    <li><a href="{{ '../../user/data-kasir' }}" class="text-white text-xl list-none">Kasir</a></li>
                 </div>
                 <div class="flex items-center p-10 bg-sky-500 hover:bg-sky-300">
-                    <img src="https://cdn-icons-png.flaticon.com/128/9542/9542653.png" alt="" class="w-8 h-8 mr-4 filter-white">
+                    <img src="https://cdn-icons-png.flaticon.com/128/8633/8633559.png" alt="" class="w-8 h-8 mr-4 filter-white">
                     <li><a href="{{ '../../user/data-barang' }}" class="text-white text-xl list-none">Product</a></li>
                 </div>
                 <div class="flex items-center p-10 hover:bg-sky-300">
