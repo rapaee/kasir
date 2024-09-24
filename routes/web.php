@@ -53,8 +53,11 @@ Route::get('/user/in-ed/add-data-barang',[BarangController::class, 'create'])->n
 Route::post('user/in-ed/add-data-barang', [BarangController::class, 'store'])->name('add-data-barang.store');
 
 //edit dan delete
-Route::get('/edit/{id}', [BarangController::class, 'EditProduct']);
-Route::get('/delete/{id}', [BarangController::class, 'destroy'])->name('delete-barang');
+// Route::get('user/edit/{id}', [BarangController::class, 'EditProduct'])->name('edit-data-barang');
+Route::get('/user/edit-data-barang/{id}', [BarangController::class, 'edit'])->name('edit-data-barang');
+Route::put('/user/update-data-barang/{id}', [BarangController::class, 'update'])->name('update-data-barang');
+
+Route::get('user/delete/{id}', [BarangController::class, 'destroy'])->name('delete-barang');
 
 
 
