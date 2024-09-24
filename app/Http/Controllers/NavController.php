@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class NavController extends Controller
@@ -10,8 +11,12 @@ class NavController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        return view('admin.data-barang');
+    {   
+        $new_product = Product::all();
+        return view('admin.data-barang', [
+            'new_product' => $new_product,
+        ]);
+        
     }
     /**
      * Show the form for creating a new resource.
