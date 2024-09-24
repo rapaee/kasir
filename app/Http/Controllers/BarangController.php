@@ -11,12 +11,14 @@ class BarangController extends Controller
    {
       // Mengambil semua produk dari database
       $new_product = Product::all();
+      
       // Mengirim data produk ke view
       return view('user.in-ed.add-data-barang', [
          'new_product' => $new_product,
-         ]);
-      
+      ]);
    }
+
+   // Menyimpan data produk baru
    public function store(Request $request)
    {
       // Validasi input dari form
@@ -28,7 +30,7 @@ class BarangController extends Controller
       ]);
 
       try {
-         // Membuat instance product baru dan menyimpan data
+         // Membuat instance produk baru dan menyimpan data
          $new_product = new Product();
          $new_product->nama_barang = $request->nama_barang;
          $new_product->harga = $request->harga; 
@@ -37,44 +39,24 @@ class BarangController extends Controller
          $new_product->save();
 
          // Redirect ke halaman data-barang dengan pesan sukses
-         return redirect()->route('data-barang.post')->with('success', 'Berhasil menambahkan produk');
+         return redirect()->route('data-barang')->with('success', 'Berhasil menambahkan produk');
       } catch (\Exception $e) {
          // Redirect kembali ke form tambah data dengan pesan error
-         return redirect()->route('add-data-barang')->with('fail', 'Gagal menambahkan produk ' . $e->getMessage());
+         return redirect()->route('add-data-barang')->with('fail', 'Gagal menambahkan produk: ' . $e->getMessage());
       }
    }
-   
-   public function EditProduct(Request $request){
-      $request->validate([
-          'full_name' => 'required|string',
-          'email' => 'required|email|unique:users,email,' . $request->user_id,
-          'phone_number' => 'required|numeric',
-      ]);
-  
-      try {
-          // Update user
-          $update_user = Product::where('id', $request->user_id)->update([
-              'name' => $request->full_name,
-              'email' => $request->email,
-              'phone_number' => $request->phone_number,
-          ]);
-  
-          return redirect()->route('users.index')->with('success', 'User Updated Successfully');
-      } catch (\Exception $e) {
-          return redirect()->route('edit-user', ['id' => $request->user_id])->with('fail', $e->getMessage());
-      }
-  }
-  
-  public function loadEditForm($id) {
-      // Mengambil data barang berdasarkan id
-      $product = Product::find($id);
-  
-      // Jika data tidak ditemukan
-      if (!$product) {
-          return redirect()->back()->with('error', 'Data tidak ditemukan.');
-      }
-  
-      // Menampilkan view edit dengan data barang yang telah diambil
-      return view('user.in-ed.edit-data-barang', compact('product'));
-  }
+   public function destroy($id) {
+    try {
+        // Hapus produk berdasarkan ID
+        Product::where('id_barang', $id)->delete();
+        
+        // Redirect setelah berhasil dihapus ke halaman data-barang
+        return redirect()->route('data-barang.post')->with('success', 'Berhasil menghapus produk');
+    } catch (\Exception $e) {
+        // Redirect jika terjadi error dengan pesan error
+        return redirect()->route('data-barang.post')->with('fail', 'Gagal menghapus produk: ' . $e->getMessage());
+    }
+}
+
+
 }

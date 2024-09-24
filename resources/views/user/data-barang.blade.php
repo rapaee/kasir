@@ -35,6 +35,9 @@
             @if (Session::has('Success'))
                     <span class="text-red-500">{{ Session::get('success') }}</span>
                 @endif
+            @if (Session::has('Fail'))
+                <span class="text-red-500">{{ Session::get('fail') }}</span>
+            @endif
             <div class="overflow-x-auto">
                 <table class=" w-full bg-white mt-[20px] border">
                     <thead>
@@ -58,19 +61,21 @@
                             <td class="text-center py-3 border border-gray-300">{{ $item->stok_barang }}</td>
                             <td colspan="2" class="text-center py-3 border border-gray-300">
                                 <div class="flex justify-center space-x-4">
-                                    <a href="{{ route('edit-data-barang', $item->id) }}" class="text-blue-600 hover:underline">
+                                    <!-- Tombol Edit -->
+                                    <a href="/edit/{{ $item->id }}" class="text-blue-600 hover:underline">
                                         <div class="bg-yellow-400 p-2 w-16 flex items-center justify-center rounded">
-                                            <img src="https://cdn-icons-png.flaticon.com/128/1828/1828911.png" alt="" id="icon" class="w-6 h-6">
-                                        </div>
-                                    </a>                                    
+                                            <img src="https://cdn-icons-png.flaticon.com/128/1828/1828911.png" alt="Edit Icon" id="icon" class="w-6 h-6">
                                         </div>
                                     </a>
-                                    <a href="/delete/{{ $item->id }}" class="text-red-600 hover:underline">
+                                    
+                                    <!-- Tombol Delete -->
+                                    <a href="/delete/{$id}" class="text-red-600 hover:underline">
                                         <div class="bg-red-500 p-2 w-16 flex items-center justify-center rounded">
-                                            <img src="https://cdn-icons-png.flaticon.com/128/542/542724.png" alt="" id="icon" class="w-6 h-6">
+                                            <img src="https://cdn-icons-png.flaticon.com/128/542/542724.png" alt="Delete Icon" id="icon" class="w-6 h-6">
                                         </div>
                                     </a>
                                 </div>
+                                
                                 
                             </td>
                         </tr>

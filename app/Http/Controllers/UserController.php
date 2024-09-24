@@ -18,7 +18,6 @@ class UserController extends Controller
     public function nav1()
     {
         $new_product = Product::all();
-        // dd($new_product);
         return view('user.data-barang', [
             'new_product' => $new_product,
         ]);

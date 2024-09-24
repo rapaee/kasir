@@ -28,10 +28,9 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <form action="{{ route('EditProduct') }}" method="PUT">
+    <form action="{{ route('EditProduct') }}" method="post">
         @csrf
-        @method('PUT')
-
+        <input type="hidden" name="product_id" value="{{ $product->id }}">
         <div class="form-group">
             <label for="nama_barang">Nama Barang</label>
             <input type="text" id="nama_barang" name="nama_barang" class="form-control" 
@@ -44,7 +43,7 @@
         <div class="form-group">
             <label for="harga_barang">Harga Barang</label>
             <input type="number" step="0.01" id="harga_barang" name="harga_barang" class="form-control" 
-                value="{{ old('harga_barang', $edit->harga_barang) }}" required>
+                value="{{ old('harga', $edit->harga_barang) }}" required>
             @error('harga_barang')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
