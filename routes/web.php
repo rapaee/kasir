@@ -1,68 +1,66 @@
-<?php
+<?php 
 
-use App\Http\Controllers\BarangController;
-use App\Http\Controllers\LaporanKeuanganController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\NavController;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\KasirController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TransaksiController;
-use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BarangController; 
+use App\Http\Controllers\LaporanKeuanganController; 
+use App\Http\Controllers\LoginController; 
+use App\Http\Controllers\NavController; 
+use App\Http\Controllers\Auth\AuthenticatedSessionController; 
+use App\Http\Controllers\KasirController; 
+use App\Http\Controllers\ProfileController; 
+use App\Http\Controllers\TransaksiController; 
+use App\Http\Controllers\UserController; 
+use Illuminate\Support\Facades\Route;  
 
-Route::get('/', function () {
-    return view('login');
-});
+// Rute halaman login awal
+Route::get('/', function () { 
+    return view('login'); 
+});  
 
-Route::get('auth/login', function () {
-    return view('login');
-})->name('register'); // untuk halaman setelah register otomatis halaman user
+Route::get('auth/login', function () { 
+    return view('login'); 
+})->name('login'); // Menggunakan 'login' karena ini adalah halaman login
 
+// Rute autentikasi login
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');  
 
-// Route::get('user/home', function () {
-//     return view('user/home');
-// })->middleware(['auth', 'verified'])->name('home');
-Route::get('/login', [AuthenticatedSessionController::class, 'create'])
-    ->name('login');
+// Rute yang membutuhkan autentikasi
+Route::middleware('auth')->group(function () {     
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');     
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');     
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); 
+});  
 
+// Menyertakan rute autentikasi bawaan
+require __DIR__.'/auth.php';  
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Navbar halaman admin
+Route::get('/admin/home',[LoginController::class,'index'])->name('admin.home'); 
+Route::get('/admin/data-kasir',[KasirController::class,'viewAdminkasir'])->name('kasir-admin'); 
+Route::get('/admin/data-barang', [NavController::class, 'index'])->name('data-barang-admin'); 
+Route::get('/admin/transaksi', [TransaksiController::class, 'index'])->name('transaksi-admin'); 
+Route::get('/admin/laporan-keuangan', [LaporanKeuanganController::class, 'index'])->name('laporan-keuangan-admin'); 
 
-require __DIR__.'/auth.php';
+// Navbar halaman user
+Route::get('/user/home',[UserController::class, 'nav'])->name('user.home'); 
+Route::get('/user/data-kasir',[KasirController::class, 'index'])->name('data-kasir-user'); 
+Route::get('/user/data-barang',[UserController::class, 'nav1'])->name('data-barang-user'); 
+Route::get('/user/laporan-keuangan',[LaporanKeuanganController::class,'index1'])->name('laporan-keuangan-user'); 
+Route::get('/user/transaksi',[TransaksiController::class,'index1'])->name('transaksi-user'); 
 
+// Rute untuk tambah barang dan kasir
+Route::get('/user/in-ed/add-data-barang',[BarangController::class, 'create'])->name('add-data-barang'); 
+Route::post('/user/in-ed/add-data-barang', [BarangController::class, 'store'])->name('add-data-barang.store'); 
+Route::get('/user/in-ed/add-kasir',[KasirController::class,'create'])->name('add-kasir'); 
+Route::post('/user/in-ed/add-kasir',[KasirController::class,'store'])->name('add-kasir.store');  
 
-//navbar halaman admin
-Route::get('/admin/home',[LoginController::class,'index'])->name('home');
-Route::get('/admin/data-kasir',[KasirController::class,'viewAdminkasir'])->name('kasir-admin');
-Route::get('/admin/data-barang', [NavController::class, 'index'])->name('data-barang');
-Route::get('/admin/transaksi', [TransaksiController::class, 'index'])->name('transaksi');
-Route::get('/admin/laporan-keuangan', [LaporanKeuanganController::class, 'index'])->name('laporan-keuangan');
-//
-//navbar halaman user
-Route::get('user/home',[UserController::class, 'nav'])->name('home');
-Route::get('user/data-kasir',[KasirController::class, 'index'])->name('data-kasir.post');
-Route::get('user/data-barang',[UserController::class, 'nav1'])->name('data-barang.post');
-Route::get('user/laporan-keuangan',[LaporanKeuanganController::class,'index1'])->name('laporan-keuangan.post');
-Route::get('user/transaksi',[TransaksiController::class,'index1'])->name('transaksi.post');
-//
-Route::get('/user/in-ed/add-data-barang',[BarangController::class, 'create'])->name('add-data-barang');
-Route::post('user/in-ed/add-data-barang', [BarangController::class, 'store'])->name('add-data-barang.store');
-Route::get('/user/in-ed/add-kasir',[KasirController::class,'create'])->name('add-kasir');
-Route::post('/user/in-ed/add-kasir',[KasirController::class,'store'])->name('add-kasir.store');
+// Rute untuk edit dan delete barang
+Route::get('/user/edit/{id}', [BarangController::class, 'EditProduct'])->name('edit-data-barang'); 
+Route::put('/user/in-ed/update-data-barang/{id}', [BarangController::class, 'update'])->name('update-data-barang');  
+Route::delete('/user/delete/{id}', [BarangController::class,'destroy'])->name('delete-data-barang');
 
-//edit dan delete
-// Route::get('user/edit/{id}', [BarangController::class, 'EditProduct'])->name('edit-data-barang');
-Route::get('/edit/{id}', [BarangController::class, 'LoadEditForm']);
-// Route::put('/user/in-ed/update-data-barang/{id}', [BarangController::class, 'update'])->name('update-data-barang');
+// Rute untuk edit dan delete kasir
+Route::get('/admin/edit-data-kasir/{id}', [KasirController::class, 'edit'])->name('edit-data-kasir-admin'); 
+Route::put('/admin/data-kasir/update/{id}', [KasirController::class, 'update'])->name('update-data-kasir-admin');  
+Route::delete('/admin/delete/{id}', [KasirController::class, 'destroy'])->name('delete-kasir-admin'); 
 
-
-
-
-
-
-
+?>
