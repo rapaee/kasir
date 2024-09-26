@@ -45,8 +45,8 @@ Route::get('/user/in-ed/add-kasir',[KasirController::class,'create'])->name('add
 Route::post('/user/in-ed/add-kasir',[KasirController::class,'store'])->name('add-kasir.store');  
 
 // Rute untuk edit dan delete barang
-Route::get('/user/edit/{id}', [BarangController::class, 'EditProduct'])->name('edit-data-barang'); 
-Route::put('/user/in-ed/update-data-barang/{id}', [BarangController::class, 'update'])->name('update-data-barang');  
+Route::get('/user/in-ed/edit-data-barang/{id}', [BarangController::class, 'edit'])->name('edit-data-barang-user');
+Route::put('/user/update/{id}', [BarangController::class, 'update'])->name('update-data-barang');
 Route::delete('/user/delete/{id}', [BarangController::class,'destroy'])->name('delete-data-barang');
 
 // Rute untuk edit dan delete kasir

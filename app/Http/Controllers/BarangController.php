@@ -40,7 +40,7 @@ class BarangController extends Controller
          $new_product->save();
 
          // Redirect ke halaman data-barang dengan pesan sukses
-         return redirect()->route('data-barang.post')->with('success', 'Berhasil menambahkan produk');
+         return redirect()->route('data-barang-user')->with('success', 'Berhasil menambahkan produk');
       } catch (\Exception $e) {
          // Redirect kembali ke form tambah data dengan pesan error
          return redirect()->route('add-data-barang')->with('fail', 'Gagal menambahkan produk: ' . $e->getMessage());
@@ -52,11 +52,42 @@ class BarangController extends Controller
        $dataBarang = Product::find($id);
        if ($dataBarang) {
            $dataBarang->delete();
-           return redirect()->route('data-barang.post')->with('success', 'Data barang berhasil dihapus');
+           return redirect()->route('data-barang-user')->with('success', 'Data barang berhasil dihapus');
        } else {
-           return redirect()->route('data-barang.post')->with('error', 'Data barang tidak ditemukan');
+           return redirect()->route('data-barang-user')->with('error', 'Data barang tidak ditemukan');
        }
    }
+
+   public function edit($id)
+   {
+       $barang = Product::findOrFail($id);
+       return view('user.in-ed.edit-data-barang', compact('barang'));
+   }
+   
+   public function update(Request $request, string $id)
+   {
+       // Validasi input
+       $request->validate([
+           'nama_barang' => 'required|string|max:255',
+           'harga' => 'required|numeric',
+           'kategori_barang' => 'required|string',
+           'stok_barang' => 'required|numeric',
+       ]);
+   
+       // Mengambil data barang berdasarkan id dan memperbarui
+       $barang = Product::findOrFail($id);
+   
+       $barang->update([
+           'nama_barang' => $request->input('nama_barang'),
+           'harga' => $request->input('harga'),
+           'kategori_barang' => $request->input('kategori_barang'),
+           'stok_barang' => $request->input('stok_barang'),
+       ]);
+   
+       // Redirect ke halaman data barang dengan pesan sukses
+       return redirect()->route('data-barang-user')->with('success', 'Data produk berhasil diperbarui.');
+   }
+   
    
 }
 

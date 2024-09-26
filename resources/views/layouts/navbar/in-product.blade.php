@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        
+        .filter-white {
+            filter: brightness(0) invert(1);
+        }
+    </style>
 </head>
 <body>
     <!-- Parent div to hold the navbar and content -->
