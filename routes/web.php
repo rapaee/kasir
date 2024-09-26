@@ -37,8 +37,8 @@ require __DIR__.'/auth.php';
 
 
 //navbar halaman admin
-Route::get('admin/home',[LoginController::class,'index'])->name('home');
-Route::get('admin/data-kasir',[KasirController::class,'viewAdminkasir'])->name('kasir-admin');
+Route::get('/admin/home',[LoginController::class,'index'])->name('home');
+Route::get('/admin/data-kasir',[KasirController::class,'viewAdminkasir'])->name('kasir-admin');
 Route::get('/admin/data-barang', [NavController::class, 'index'])->name('data-barang');
 Route::get('/admin/transaksi', [TransaksiController::class, 'index'])->name('transaksi');
 Route::get('/admin/laporan-keuangan', [LaporanKeuanganController::class, 'index'])->name('laporan-keuangan');
@@ -56,11 +56,16 @@ Route::get('/user/in-ed/add-kasir',[KasirController::class,'create'])->name('add
 Route::post('/user/in-ed/add-kasir',[KasirController::class,'store'])->name('add-kasir.store');
 
 //edit dan delete
-// Route::get('user/edit/{id}', [BarangController::class, 'EditProduct'])->name('edit-data-barang');
+Route::get('user/edit/{id}', [BarangController::class, 'EditProduct'])->name('edit-data-barang');
 Route::get('/edit/{id}', [BarangController::class, 'LoadEditForm']);
-// Route::put('/user/in-ed/update-data-barang/{id}', [BarangController::class, 'update'])->name('update-data-barang');
+Route::put('/user/in-ed/update-data-barang/{id}', [BarangController::class, 'update'])->name('update-data-barang');
 
 Route::delete('delete/{id}', [BarangController::class,'destroy'])->name('data-barang.delete');
+Route::get('/admin/edit-data-kasir/{id}', [KasirController::class, 'edit'])->name('data-kasir.edit');
+Route::put('/admin/data-kasir/update/{id}', [KasirController::class, 'update'])->name('data-kasir.update');
+
+Route::get('user/delete/{id}', [BarangController::class, 'destroy'])->name('delete-barang');
+Route::delete('delete/{id}', [KasirController::class, 'destroy'])->name('data-kasir.delete');
 
 
 

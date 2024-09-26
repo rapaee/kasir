@@ -40,12 +40,35 @@
 
     @section('navbar')
     <div class="nav-content flex">
-       
-        <img src="{{ asset('SMK_Negeri_1_Bantul_logo.png') }}" alt="" srcset="">
-        {{-- Main content section --}}
-        <div id="content" class="ml-32 flex flex-col items-center justify-center h-screen text-center w-3/4">
-            
-           
+
+        <div id="content" class="w-full ml-96">
+            <h1>Laporan Keuangan</h1>
+            <button class="bg-blue-500 p-2 rounded ml-auto mt-[20px] text-white hover:bg-blue-600 block">
+                <a href="{{ route('add-kasir') }}">Add Data</a>
+            </button>
+            @if (Session::has('Success'))
+                    <span class="text-red-500">{{ Session::get('success') }}</span>
+                @endif
+            <div class="overflow-x-auto">
+                <table class=" w-full bg-white mt-[20px] border">
+                    <thead>
+                        <tr>
+                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">S/N</th>
+                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Tanggal</th>
+                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Keterangan</th>
+                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Pendapatan</th>
+                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Laba Kotor</th>
+                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Laba Bersih</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                    </tbody>
+                    
+                    
+                    
+                </table>
+            </div>
         </div>
     </div>
     
