@@ -57,10 +57,10 @@ Route::post('/user/in-ed/add-kasir',[KasirController::class,'store'])->name('add
 
 //edit dan delete
 // Route::get('user/edit/{id}', [BarangController::class, 'EditProduct'])->name('edit-data-barang');
-Route::get('/user/edit-data-barang/{id}', [BarangController::class, 'edit'])->name('edit-data-barang');
-Route::put('/user/update-data-barang/{id}', [BarangController::class, 'update'])->name('update-data-barang');
+Route::get('/edit/{id}', [BarangController::class, 'LoadEditForm']);
+// Route::put('/user/in-ed/update-data-barang/{id}', [BarangController::class, 'update'])->name('update-data-barang');
 
-Route::get('user/delete/{id}', [BarangController::class, 'destroy'])->name('delete-barang');
+Route::delete('delete/{id}', [BarangController::class,'destroy'])->name('data-barang.delete');
 
 
 

@@ -20,11 +20,11 @@
                 <table class="w-full bg-white border">
                     <thead>
                         <tr>
-                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">S/N</th>
-                            <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm font-semibold text-gray-600">Nama Product</th>
-                            <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm font-semibold text-gray-600">Harga</th>
-                            <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm font-semibold text-gray-600">Kategori</th>
-                            <th class="px-6 py-3 border-b-2 border-gray-300 text-center text-sm font-semibold text-gray-600">Stok</th>
+                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600 w-20">S/N</th>
+                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600 w-55">Nama Product</th>
+                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600 w-36">Harga</th>
+                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600 w-36">Kategori</th>
+                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600 w-36">Stok</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,7 +32,7 @@
                         @foreach ($new_product as $item)
                         <tr>
                             <td class="text-center py-3 border border-gray-300">{{ $loop->iteration }}</td>
-                            <td class="text-center py-3 border border-gray-300">{{ $item->nama_barang }}</td>
+                            <td class="text-left py-3 border border-gray-300">{{ $item->nama_barang }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->harga }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->kategori_barang }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->stok_barang }}</td>
