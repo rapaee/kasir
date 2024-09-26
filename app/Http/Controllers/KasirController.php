@@ -69,31 +69,30 @@ class KasirController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
-    {
-        $dataKasir = Kasir::findOrFail($id);
-        return view('admin.edit-data-kasir', compact('dataKasir'));
-    }
-    
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
-    {
-        $request->validate([
-            'nama' => 'required',
-            'nisn' => 'required'
-        ]);
+{
+    // Validasi input
+    $request->validate([
+        'nama' => 'required|string|max:255',
+        'nisn' => 'required|numeric'
+    ]);
 
-        $data = [
-            'nama' => $request ->input('nama'),
-            'nisn' => $request -> input('nisn')
-        ];
+    // Mengambil data kasir berdasarkan id dan memperbarui
+    $kasir = Kasir::findOrFail($id);
 
-        Kasir::where('id',$id)->update($data);
-        return redirect()->route('kasir-admin') ->with('success','Berhasil diperbarui');
-    }
+    $kasir->update([
+        'nama' => $request->input('nama'),
+        'nisn' => $request->input('nisn'),
+    ]);
+
+    // Redirect ke halaman kasir-admin dengan pesan sukses
+    return redirect()->route('kasir-admin')->with('success', 'Data kasir berhasil diperbarui.');
+}
+public function edit($id)
+{
+    $kasir =Kasir::find($id);
+    return view('admin.edit-data-kasir', compact('kasir'));
+}
 
     /**
      * Remove the specified resource from storage.

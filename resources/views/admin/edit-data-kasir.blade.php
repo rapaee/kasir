@@ -23,14 +23,14 @@
                 @if (session('fail'))
                     <span class="text-red-500">{{ session('fail') }}</span>
                 @endif
-                <form action="{{ route('data-kasir.update', $dataKasir->id) }}" method="POST">
+                <form action="{{ route('update-data-kasir-admin', $kasir->id) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <h1 class="text-xl font-bold mb-8">Edit Data Kasir</h1>
-                    <input type="hidden" name="user_id" value="{{ $dataKasir->id }}">
+                    <input type="hidden" name="user_id" value="{{ $kasir->id }}">
                     <div class="mb-4">
                         <label for="nama" class="block text-sm font-medium text-gray-700">Nama</label>
-                        <input type="text" id="nama" name="nama" placeholder="Masukan Nama Anda" value="{{ $dataKasir->nama }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <input type="text" id="nama" name="nama" placeholder="Masukan Nama Anda" value="{{ $kasir->nama }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                         @error('nama')
                             <span class="text-red-700">{{ $message }}</span>
                         @enderror
@@ -38,7 +38,7 @@
     
                     <div class="mb-4">
                         <label for="nisn" class="block text-sm font-medium text-gray-700">Nisn:</label>
-                        <input type="number" id="nisn" name="nisn" placeholder="Masukan Nisn Anda" value="{{ $dataKasir->nisn }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <input type="number" id="nisn" name="nisn" placeholder="Masukan Nisn Anda" value="{{ $kasir->nisn }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                         @error('nisn')
                             <span class="text-red-700">{{ $message }}</span>
                         @enderror

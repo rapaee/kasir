@@ -36,14 +36,14 @@
                             <td class="text-center py-3 border border-gray-300">{{ $item->nama }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->nisn }}</td>
                             <td class="text-center py-2 border border-gray-300">
-                                <form action="{{ route('data-kasir.delete', $item->id) }}" method="post">
+                                <form action="{{ route('delete-kasir-admin', $item->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="action-btn">
                                         Hapus
                                     </button>
                                 </form>
-                                <a href="{{ route('data-kasir.edit', $item->id) }}" class="action-btn">
+                                <a href="{{ route('edit-data-kasir-admin', $item->id) }}" class="action-btn">
                                        Edit
                                 </a>
                             </td>
