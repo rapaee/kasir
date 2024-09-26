@@ -37,8 +37,8 @@ require __DIR__.'/auth.php';
 
 
 //navbar halaman admin
-Route::get('admin/home',[LoginController::class,'index'])->name('home');
-Route::get('admin/data-kasir',[KasirController::class,'viewAdminkasir'])->name('kasir-admin');
+Route::get('/admin/home',[LoginController::class,'index'])->name('home');
+Route::get('/admin/data-kasir',[KasirController::class,'viewAdminkasir'])->name('kasir-admin');
 Route::get('/admin/data-barang', [NavController::class, 'index'])->name('data-barang');
 Route::get('/admin/transaksi', [TransaksiController::class, 'index'])->name('transaksi');
 Route::get('/admin/laporan-keuangan', [LaporanKeuanganController::class, 'index'])->name('laporan-keuangan');
@@ -60,7 +60,7 @@ Route::post('/user/in-ed/add-kasir',[KasirController::class,'store'])->name('add
 Route::get('/edit/{id}', [BarangController::class, 'LoadEditForm']);
 // Route::put('/user/in-ed/update-data-barang/{id}', [BarangController::class, 'update'])->name('update-data-barang');
 
-Route::delete('delete/{id}', [BarangController::class,'destroy'])->name('data-barang.delete');
+
 
 
 
