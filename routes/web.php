@@ -11,11 +11,6 @@ use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController; 
 use Illuminate\Support\Facades\Route;  
 
-
-Route::get('auth/login', function () { 
-    return view('login'); 
-})->name('login'); // Menggunakan 'login' karena ini adalah halaman login
-
 // Rute autentikasi login
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 
@@ -59,3 +54,4 @@ Route::get('/admin/edit-data-kasir/{id}', [KasirController::class, 'edit'])->nam
 Route::put('/admin/data-kasir/update/{id}', [KasirController::class, 'update'])->name('update-data-kasir-admin');
 Route::delete('/admin/delete/{id}', [KasirController::class, 'destroy'])->name('delete-kasir-admin'); 
 
+?>
