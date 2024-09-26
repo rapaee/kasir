@@ -4,63 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Add New User</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-        .filter-white {
-            filter: brightness(0) invert(1);
-        }
-    </style>
-
+    <title>Edit Product</title>
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <div class="card-header">Edit User</div>
-            @if (Session::has('fail'))
-                <span class="alert alert-danger p-2">{{ Session::get('fail') }}</span>
-            @endif
-                <div class="card-body">
-                    <form action="{{ route('EditUser') }}" method="post">
-                        @csrf
-                        <input type="hidden" name="user_id" id="" value="{{ $user->id }}">
-                        <div class="mb-3">
-                            <label for="formGroupExampleInput" class="form-label">Nama Barang</label>
-                            <input type="text" name="nama_barang" value="{{$user->nama_barang}}" class="form-control" id="formGroupExampleInput" placeholder="Enter Nama Barang">
-                            @error('nama_barang')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="formGroupExampleInput2" class="form-label">Harga Barang</label>
-                            <input type="number"step="0.01" name="harga_barang" class="form-control" value="{{$user->harga_barang}}" id="formGroupExampleInput2" placeholder="Enter Harga Barang">
-                            @error('harga_barang')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="formGroupExampleInput2" class="form-label">Phone Number</label>
-                            <input type="text" name="kategori" value="{{ $user->kategori }}" class="form-control" id="formGroupExampleInput2" placeholder="Enter Kategori">
-                            @error('kategori')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="formGroupExampleInput2" class="form-label">Stok</label>
-                            <input type="number" name="harga_barang" class="form-control" value="{{$user->stok}}" id="formGroupExampleInput2" placeholder="Enter Stok">
-                            @error('stok')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </form>
-                   
-                </div>
+    @extends('layouts.navbar.in-product')
+
+    @section('navbar')
+    <div class="nav-content flex justify-between">
+        {{-- Navbar section --}}
+        <div class="w-1/4">
+            {{-- Konten navbar --}}
+        </div>
+    
+        {{-- Main content section (Form berada di kanan) --}}
+        <div id="content" class="flex flex-col h-screen w-9/12 fixed ml-96">
+            <div class="p-2">
+                @if (session('fail'))
+                    <span class="text-red-500">{{ session('fail') }}</span>
+                @endif
+                <form action="{{ route('update-data-barang', $barang->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <h1 class="text-xl font-bold mb-8">Edit Data Product</h1>
+                    
+                    <div class="mb-4">
+                        <label for="nama" class="block text-sm font-medium text-gray-700">Nama Product</label>
+                        <input type="text" id="nama" name="nama_barang" placeholder="Masukkan nama produk" value="{{ old('nama_barang', $barang->nama_barang) }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        @error('nama_barang')
+                            <span class="text-red-700">{{ $message }}</span>
+                        @enderror
+                    </div>
+    
+                    <div class="mb-4">
+                        <label for="harga" class="block text-sm font-medium text-gray-700">Harga</label>
+                        <input type="number" id="harga" name="harga" placeholder="Masukkan harga" value="{{ old('harga', $barang->harga) }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        @error('harga')
+                            <span class="text-red-700">{{ $message }}</span>
+                        @enderror
+                    </div>
+                     
+                    <div class="mb-4">
+                        <label for="kategori" class="block text-sm font-medium text-gray-700">Kategori</label>
+                        <input type="text" id="kategori" name="kategori_barang" placeholder="Masukkan kategori" value="{{ old('kategori_barang', $barang->kategori_barang) }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        @error('kategori_barang')
+                            <span class="text-red-700">{{ $message }}</span>
+                        @enderror
+                    </div>
+                     
+                    <div class="mb-4">
+                        <label for="stok" class="block text-sm font-medium text-gray-700">Stok</label>
+                        <input type="number" id="stok" name="stok_barang" placeholder="Masukkan stok" value="{{ old('stok_barang', $barang->stok_barang) }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        @error('stok_barang')
+                            <span class="text-red-700">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="text-right">
+                        <a href="{{ route('data-barang-user') }}" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer">Cancel</a>
+                        <input type="submit" value="Update" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer">
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+    @endsection
 </body>
 </html>
