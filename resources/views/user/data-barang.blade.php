@@ -60,20 +60,14 @@
                             <td class="text-center py-3 border border-gray-300">{{ $item->kategori_barang }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->stok_barang }}</td>
                             <td colspan="2" class="text-center py-3 border border-gray-300">
-                                <div class="flex justify-center space-x-4">
-                                    <!-- Tombol Edit -->
-                                    <a href="{{ route('edit-data-barang', $item->id) }}" class="text-blue-600 hover:underline">
-                                        <div class="bg-yellow-400 p-2 w-16 flex items-center justify-center rounded">
-                                            <img src="https://cdn-icons-png.flaticon.com/128/1828/1828911.png" alt="Edit Icon" id="icon" class="w-6 h-6">
-                                        </div>
-                                    </a>
-                                    
-                                    <!-- Tombol Delete -->
-                                    <a href="/delete/{$id}" class="text-red-600 hover:underline">
-                                        <div class="bg-red-500 p-2 w-16 flex items-center justify-center rounded">
-                                            <img src="https://cdn-icons-png.flaticon.com/128/542/542724.png" alt="Delete Icon" id="icon" class="w-6 h-6">
-                                        </div>
-                                    </a>
+                                   <form action="{{ route('data-barang.delete',$item->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">
+                                        Delete
+                                    </button>
+                                   </form>
+                                   
                                 </div>
                                 
                                 
