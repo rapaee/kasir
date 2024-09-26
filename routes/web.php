@@ -63,4 +63,3 @@ Route::get('/admin/edit-data-kasir/{id}', [KasirController::class, 'edit'])->nam
 Route::put('/admin/data-kasir/update/{id}', [KasirController::class, 'update'])->name('update-data-kasir-admin');
 Route::delete('/admin/delete/{id}', [KasirController::class, 'destroy'])->name('delete-kasir-admin'); 
 
-?>
