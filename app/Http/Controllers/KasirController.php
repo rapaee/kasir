@@ -51,7 +51,7 @@ class KasirController extends Controller
         $new_product->save();
 
         // Redirect ke halaman data-barang dengan pesan sukses
-        return redirect()->route('data-kasir.post')->with('success', 'Berhasil menambahkan produk');
+        return redirect()->route('data-kasir-user')->with('success', 'Berhasil menambahkan produk');
      } catch (\Exception $e) {
         // Redirect kembali ke form tambah data dengan pesan error
         return redirect()->route('add-kasir')->with('fail', 'Gagal menambahkan produk: ' . $e->getMessage());

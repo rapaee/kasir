@@ -11,17 +11,13 @@ use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController; 
 use Illuminate\Support\Facades\Route;  
 
-// Rute halaman login awal
-Route::get('/', function () { 
-    return view('login'); 
-});  
 
 Route::get('auth/login', function () { 
     return view('login'); 
 })->name('login'); // Menggunakan 'login' karena ini adalah halaman login
 
 // Rute autentikasi login
-Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');  
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 
 // Rute yang membutuhkan autentikasi
 Route::middleware('auth')->group(function () {     
