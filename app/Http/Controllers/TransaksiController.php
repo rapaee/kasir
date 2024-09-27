@@ -43,14 +43,6 @@ class TransaksiController extends Controller
              // Calculate subtotal (jumlah_barang * harga_barang)
              $sub_total = $request->jumlah_barang * $barang->harga;
  
-             // Create TransaksiDetail
-             $transaksiDetail = TransaksiDetail::create([
-                 'transaksi_id' => $transaksi->id,
-                 'barang_id' => $barang->id,
-                 'jumlah_barang' => $request->jumlah_barang,
-                 'sub_total' => $sub_total,
-             ]);
- 
              // Update Transaksi total_harga with the subtotal
              $transaksi->total_harga = $sub_total;
              $transaksi->save();

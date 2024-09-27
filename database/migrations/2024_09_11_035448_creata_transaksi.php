@@ -17,11 +17,12 @@ return new class extends Migration
             $table->string('nama_barang');
             $table->integer('jumlah_barang');
             $table->decimal('harga', 8, 2);
+            $table->decimal('sub_total', 10, 2); // Tambahkan kolom sub_total
             $table->timestamps();
 
+            // Buat relasi ke tabel users
             $table->foreign('id_kasir')->references('id')->on('users')->onDelete('cascade');
         });
-        
     }
 
     /**
