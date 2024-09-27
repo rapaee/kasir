@@ -60,11 +60,11 @@
                             <td class="text-center py-3 border border-gray-300">{{ $item->kategori_barang }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->stok_barang }}</td>
                             <td colspan="2" class="text-center py-3 border border-gray-300">
-                                   <form action="{{ route('delete-data-barang',$item->id) }}" method="post">
+                                   <form action="{{ route('delete-data-barang', $item->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit">
-                                        Delete
+                                        Hapus
                                     </button>
                                    </form>
                                    <a href="{{ route('edit-data-barang-user', $item->id) }}" class="action-btn">

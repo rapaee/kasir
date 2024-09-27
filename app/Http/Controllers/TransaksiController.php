@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kasir;
 use App\Models\Product;
+use App\Models\Transaksi;
+use App\Models\TransaksiDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class TransaksiController extends Controller
@@ -21,7 +25,7 @@ class TransaksiController extends Controller
      public function store(Request $request)
      {
          // Start database transaction for atomic operations
-         \DB::beginTransaction();
+         DB::beginTransaction();
  
          try {
              // Retrieve Kasir using NISN
@@ -52,13 +56,13 @@ class TransaksiController extends Controller
              $transaksi->save();
  
              // Commit the transaction to the database
-             \DB::commit();
+             DB::commit();
  
              return redirect()->back()->with('success', 'Transaksi berhasil disimpan.');
  
          } catch (\Exception $e) {
              // Rollback if there is an error
-             \DB::rollback();
+             DB::rollback();
              return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
          }
      }

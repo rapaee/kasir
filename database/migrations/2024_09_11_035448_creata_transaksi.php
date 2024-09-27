@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('transaksi', function (Blueprint $table) {
-            $table->bigIncrements('id_transaksi'); // Kolom dengan auto_increment
+            $table->bigIncrements('id'); // Kolom dengan auto_increment
             $table->bigInteger('id_kasir')->unsigned(); // Kolom tanpa auto_increment
             $table->string('nama_barang');
             $table->integer('jumlah_barang');
