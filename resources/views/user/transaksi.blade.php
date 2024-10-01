@@ -37,7 +37,7 @@
                 </div>
             @endif
 
-            <form id="dynamicForm" action="{{ route('transaksi-store') }}" method="POST" class="bg-white p-6 shadow-md rounded w-full">
+            <form id="dynamicForm" action="{{ route('transaksi-store') }}" method="POST" class=" w-full">
                 @csrf
                 <!-- Input Nama Kasir -->
                 <div class="input-group mb-4">

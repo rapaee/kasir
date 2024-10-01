@@ -57,7 +57,7 @@
                             <td class="text-center py-3 border border-gray-300">{{ $loop->iteration }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->nama_barang }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->harga }}</td>
-                            <td class="text-center py-3 border border-gray-300">{{ $item->kategori_barang }}</td>
+                            <td class="text-center py-3 border border-gray-300">{{ $item->kategori->nama_kategori }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->stok_barang }}</td>
                             <td colspan="2" class="text-center py-3 border border-gray-300">
                                    <form action="{{ route('delete-data-barang', $item->id) }}" method="post">

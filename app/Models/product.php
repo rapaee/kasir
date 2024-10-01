@@ -13,4 +13,10 @@ class Product extends Model
 
     // Kolom-kolom yang dapat diisi secara mass assignment
     protected $fillable = ["nama_barang", "harga", "kategori_barang", "stok_barang"];
+    
+    public function kategori()
+{
+    return $this->belongsTo(Kategori::class, 'id_kategori');
+}
+
 }

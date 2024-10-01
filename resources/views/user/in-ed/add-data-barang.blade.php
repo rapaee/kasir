@@ -53,11 +53,17 @@
     
                     <div class="mb-4">
                         <label for="kategori_barang" class="block text-sm font-medium text-gray-700">Kategori:</label>
-                        <input type="text" id="kategori_barang" name="kategori_barang" placeholder="Masukan Kategori Produk" value="{{ old('kategori_barang') }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <select id="kategori_barang" name="kategori_barang" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <option value="">Pilih Kategori Produk</option>
+                            @foreach($kategori as $k)
+                                <option value="{{ $k->id }}" {{ old('kategori_barang') == $k->id ? 'selected' : '' }}>{{ $k->nama_kategori }}</option>
+                            @endforeach
+                        </select>
                         @error('kategori_barang')
                             <span class="text-red-700">{{ $message }}</span>
                         @enderror
                     </div>
+                    
                     
                     <div class="mb-6">
                         <label for="stok_barang" class="block text-sm font-medium text-gray-700">Stok:</label>

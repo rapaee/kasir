@@ -45,12 +45,17 @@
                     </div>
                      
                     <div class="mb-4">
-                        <label for="kategori" class="block text-sm font-medium text-gray-700">Kategori</label>
-                        <input type="text" id="kategori" name="kategori_barang" placeholder="Masukkan kategori" value="{{ old('kategori_barang', $barang->kategori_barang) }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        @error('kategori_barang')
-                            <span class="text-red-700">{{ $message }}</span>
-                        @enderror
+                        <label for="harga" class="block text-sm font-medium text-gray-700">Kategori </label>
+                        <select id="kategori" name="id_kategori" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <option value="">Pilih Kategori</option>
+                            @foreach($kategori as $k)
+                                <option value="{{ $k->id }}" {{ old('id_kategori', $barang->id_kategori) == $k->id ? 'selected' : '' }}>
+                                    {{ $k->nama_kategori }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
+                    
                      
                     <div class="mb-4">
                         <label for="stok" class="block text-sm font-medium text-gray-700">Stok</label>
