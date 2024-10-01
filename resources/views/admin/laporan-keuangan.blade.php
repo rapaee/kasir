@@ -10,22 +10,42 @@
 <body>
     @extends('layouts.navbar-admin.laporan-keuangan')
 
-    @section('nav-admin')
-    <div class="nav-content flex justify-between items-center h-screen">
-        <div class="ml-4">
-            <!-- Tambahkan elemen navbar Anda di sini jika diperlukan -->
-        </div>
-    
-        <div id="content" class="flex flex-col items-center justify-center text-center w-3/4">
-            <h1 class="text-5xl font-bold">WELCOME TO ADMIN</h1>
-            <div class="animasi-teks">
-                SMK NEGERI 1 BANTUL <span class="text-sky-400">CAFETARIA</span>
-                <h1 class="text-5xl font-bold">WELCOME TO ADMIN CANQU</h1>
+    @section('navbar-admin')
+    <div class="nav-content flex">
+
+        <div id="content" class="w-full ml-96">
+            <h1>Laporan Keuangan</h1>
+
+            <!-- Container for Total Overall Revenue -->
+            <div class="flex items-center justify-center mt-8">
+                <div class="p-6 border border-gray-300 rounded-lg text-center w-72">
+                    <h1 class="text-6xl font-bold"></h1>
+                    <small class="block mt-2 text-gray-500">Total Overall Revenue</small>
+                </div>
+            </div>
+
+            <!-- Table for financial report -->
+            <div class="overflow-x-auto">
+                <table class="w-full bg-white mt-[20px] border">
+                    <thead>
+                        <tr>
+                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">S/N</th>
+                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Tanggal</th>
+                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Keterangan</th>
+                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Pendapatan</th>
+                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Laba Kotor</th>
+                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Laba Bersih</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Table content goes here -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+
     @endsection
-    
-   
+
 </body>
 </html>
