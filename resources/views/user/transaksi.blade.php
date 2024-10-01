@@ -27,12 +27,27 @@
         <div id="content" class="ml-96 flex-1 flex flex-col items-start justify-start h-screen text-left p-8">
             <h2 class="text-2xl font-bold mb-4">Form Transaksi</h2>
 
-            <form id="dynamicForm" action="/submit" method="POST" class="bg-white p-6 shadow-md rounded w-full">
-                
+            @if ($errors->any())
+                <div class="bg-red-500 text-white p-4 rounded mb-4">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form id="dynamicForm" action="{{ route('transaksi-store') }}" method="POST" class="bg-white p-6 shadow-md rounded w-full">
+                @csrf
                 <!-- Input Nama Kasir -->
                 <div class="input-group mb-4">
                     <label for="nama_kasir" class="block text-gray-700 font-semibold">Nama Kasir:</label>
-                    <input type="text" id="nama_kasir" name="nama_kasir" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    <select name="id_kasir" id="" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                        <option value="">-- Pilih --</option>
+                        @foreach ($nama_kasir as $item)
+                            <option value="{{ $item->id }}"> {{ $item->nisn }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <!-- Input Barang Section -->
@@ -40,19 +55,24 @@
                     <!-- Input Nama Barang -->
                     <div class="input-group">
                         <label for="nama_barang" class="block text-gray-700 font-semibold">Nama Product:</label>
-                        <input type="text" id="nama_barang" name="nama_barang[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                        <select name="nama_barang[]" id="nama_barang_select" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" onchange="setHargaAndCalculateSubTotal(this)">
+                            <option value="">-- Pilih --</option>
+                            @foreach ($nama_barang as $item)
+                                <option value="{{ $item->id }}" data-harga="{{ $item->harga }}">{{ $item->nama_barang }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     
                     <!-- Input Harga -->
                     <div class="input-group">
                         <label for="harga" class="block text-gray-700 font-semibold">Harga:</label>
-                        <input type="number" id="harga" name="harga[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" oninput="calculateSubTotal(this)">
+                        <input type="number" id="harga" name="harga[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" readonly>
                     </div>
                     
                     <!-- Input Jumlah Barang -->
                     <div class="input-group">
                         <label for="jumlah" class="block text-gray-700 font-semibold">Jumlah:</label>
-                        <input type="number" id="jumlah" name="jumlah[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" oninput="calculateSubTotal(this)">
+                        <input type="number" id="jumlah" name="jumlah_barang[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" oninput="calculateSubTotal(this)">
                     </div>
 
                     <!-- Input Sub Total (readonly) -->
@@ -61,7 +81,7 @@
                         <input type="number" id="sub_total" name="sub_total[]" readonly class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-gray-100">
                     </div>
                 </div>
-        
+
                 <div id="newInputs"></div>
         
                 <!-- Tombol untuk menambah input -->
@@ -72,56 +92,84 @@
             </form>
         
             <script>
-                let inputCount = 1;
-
-                // Fungsi untuk menghitung Sub Total
-                function calculateSubTotal(element) {
-                    const inputGroup = element.closest('.grid'); // Mendapatkan div group input
-                    const harga = inputGroup.querySelector('input[name="harga[]"]').value;
-                    const jumlah = inputGroup.querySelector('input[name="jumlah_barang[]"]').value;
-                    const subTotalInput = inputGroup.querySelector('input[name="sub_total[]"]');
-
-                    if (harga && jumlah) {
-                        subTotalInput.value = harga * jumlah;
-                    } else {
-                        subTotalInput.value = 0;
+                // Fungsi untuk mengatur harga sesuai pilihan produk dan menghitung subtotal
+                function setHargaAndCalculateSubTotal(selectElement) {
+                    const inputGroup = selectElement.closest('.grid'); // Mendapatkan div group input
+                    const hargaInput = inputGroup.querySelector('input[name="harga[]"]'); 
+                    const selectedOption = selectElement.options[selectElement.selectedIndex];
+                    const harga = selectedOption.getAttribute('data-harga');
+            
+                    // Mengatur nilai harga pada input harga
+                    hargaInput.value = harga ? harga : '';
+            
+                    // Panggil fungsi untuk menghitung subtotal jika jumlah sudah diisi
+                    const jumlahInput = inputGroup.querySelector('input[name="jumlah[]"]');
+                    if (jumlahInput.value) {
+                        calculateSubTotal(jumlahInput);
                     }
                 }
-
-                // Fungsi untuk menambah input baru
+            
+                // Fungsi untuk menghitung subtotal (harga * jumlah)
+                function calculateSubTotal(jumlahInput) {
+                    const inputGroup = jumlahInput.closest('.grid'); // Mendapatkan div group input
+                    const hargaInput = inputGroup.querySelector('input[name="harga[]"]');
+                    const subTotalInput = inputGroup.querySelector('input[name="sub_total[]"]');
+            
+                    const harga = hargaInput.value;
+                    const jumlah = jumlahInput.value;
+            
+                    // Pastikan harga dan jumlah memiliki nilai sebelum menghitung subtotal
+                    if (harga && jumlah) {
+                        const subTotal = harga * jumlah;
+                        subTotalInput.value = subTotal;
+                    } else {
+                        subTotalInput.value = ''; // Kosongkan jika tidak ada harga atau jumlah
+                    }
+                }
+            
+                let inputCount = 1;
+            
+                // Fungsi untuk menambah group input baru
                 function addInput() {
-                    inputCount++; // Menambah counter untuk id input baru
-        
-                    const newInputDiv = document.createElement('div');
-                    newInputDiv.classList.add('grid', 'grid-cols-4', 'gap-4', 'mb-4');
-
-                    // Tambahkan input untuk Nama Barang, Harga, Jumlah Barang, dan Sub Total
-                    newInputDiv.innerHTML = `
-                        <div class="input-group">
-                            <label for="nama_barang${inputCount}" class="block text-gray-700 font-semibold">Nama Product:</label>
-                            <input type="text" id="nama_barang${inputCount}" name="nama_barang[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                        </div>
-                        <div class="input-group">
-                            <label for="harga${inputCount}" class="block text-gray-700 font-semibold">Harga:</label>
-                            <input type="number" id="harga${inputCount}" name="harga[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" oninput="calculateSubTotal(this)">
-                        </div>
-                        <div class="input-group">
-                            <label for="jumlah${inputCount}" class="block text-gray-700 font-semibold">Jumlah:</label>
-                            <input type="number" id="jumlah_barang${inputCount}" name="jumlah[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" oninput="calculateSubTotal(this)">
-                        </div>
-                        <div class="input-group">
-                            <label for="sub_total${inputCount}" class="block text-gray-700 font-semibold">Sub Total:</label>
-                            <input type="number" id="sub_total${inputCount}" name="sub_total[]" readonly class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-gray-100">
-                        </div>
-                    `;
-        
-                    document.getElementById('newInputs').appendChild(newInputDiv);
+                    const newInputGroup = `
+                        <div class="grid grid-cols-4 gap-4 mb-4">
+                            <!-- Input Nama Barang -->
+                            <div class="input-group">
+                                <label for="nama_barang" class="block text-gray-700 font-semibold">Nama Product:</label>
+                                <select name="nama_barang[]" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" onchange="setHargaAndCalculateSubTotal(this)">
+                                    <option value="">-- Pilih --</option>
+                                    @foreach ($nama_barang as $item)
+                                        <option value="{{ $item->id }}" data-harga="{{ $item->harga }}">{{ $item->nama_barang }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+            
+                            <!-- Input Harga -->
+                            <div class="input-group">
+                                <label for="harga" class="block text-gray-700 font-semibold">Harga:</label>
+                                <input type="number" name="harga[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" readonly>
+                            </div>
+            
+                            <!-- Input Jumlah Barang -->
+                            <div class="input-group">
+                                <label for="jumlah" class="block text-gray-700 font-semibold">Jumlah:</label>
+                                <input type="number" name="jumlah[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" oninput="calculateSubTotal(this)">
+                            </div>
+            
+                            <!-- Input Sub Total (readonly) -->
+                            <div class="input-group">
+                                <label for="sub_total" class="block text-gray-700 font-semibold">Sub Total:</label>
+                                <input type="number" name="sub_total[]" readonly class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-gray-100">
+                            </div>
+                        </div>`;
+                    
+                    // Tambahkan group input baru ke dalam form
+                    document.getElementById('newInputs').insertAdjacentHTML('beforeend', newInputGroup);
                 }
             </script>
-          
         </div>
     </div>
-    
+
     @endsection
 </body>
 </html>

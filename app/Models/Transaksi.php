@@ -8,10 +8,28 @@ use Illuminate\Database\Eloquent\Model;
 class Transaksi extends Model
 {
     use HasFactory;
-    
-    // Menentukan tabel yang digunakan jika tidak mengikuti konvensi default
-    protected $table = "transaksi";
 
-    // Kolom-kolom yang dapat diisi secara mass assignment
-    protected $fillable = ["nama_barang", "harga", "kategori_barang", "stok_barang"];
+    // Menentukan nama tabel
+    protected $table = 'transaksi';
+
+    protected $fillable = [
+        'id_kasir',
+        'id_barang', // Foreign key to Product (barang) table
+        'harga',
+        'jumlah_barang',
+        'sub_total',
+        'tanggal' // Assuming you have a 'tanggal' field for the transaction date
+    ];
+
+    // Define relationship to Kasir model
+    public function kasir()
+    {
+        return $this->belongsTo(Kasir::class);
+    }
+
+    // Define relationship to Product (Barang) model
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'id_barang');
+    }
 }

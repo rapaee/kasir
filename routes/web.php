@@ -39,13 +39,14 @@ Route::get('/user/home',[UserController::class, 'nav'])->name('user.home');
 Route::get('/user/data-kasir',[KasirController::class, 'index'])->name('data-kasir-user'); 
 Route::get('/user/data-barang',[UserController::class, 'nav1'])->name('data-barang-user'); 
 Route::get('/user/laporan-keuangan',[LaporanKeuanganController::class,'index1'])->name('laporan-keuangan-user'); 
-Route::get('/user/transaksi',[TransaksiController::class,'index1'])->name('transaksi-user'); 
+Route::get('/user/transaksi',[TransaksiController::class,'create'])->name('transaksi-create'); 
 
-// Rute untuk tambah barang dan kasir
+// Rute untuk tambah barang dan kasir dan transaksi
 Route::get('/user/in-ed/add-data-barang',[BarangController::class, 'create'])->name('add-data-barang'); 
 Route::post('/user/in-ed/add-data-barang', [BarangController::class, 'store'])->name('add-data-barang.store'); 
 Route::get('/user/in-ed/add-kasir',[KasirController::class,'create'])->name('add-kasir'); 
 Route::post('/user/in-ed/add-kasir',[KasirController::class,'store'])->name('add-kasir.store');  
+Route::post('/user/transaksi',[TransaksiController::class,'store'])->name('transaksi-store');
 
 // Rute untuk edit dan delete barang
 Route::get('/user/in-ed/edit-data-barang/{id}', [BarangController::class, 'edit'])->name('edit-data-barang-user');
