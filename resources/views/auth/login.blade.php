@@ -50,6 +50,18 @@
                 </script>
             @endif
 
+            @if(session('registerSuccess'))
+    <script>
+        Swal.fire({
+            title: 'Registrasi Berhasil!',
+            text: "{{ session('registerSuccess') }}",
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    </script>
+@endif
+
+
             <!-- Login Form -->
             <x-guest-layout>
                 <h1 class="ml-32 mt-4 text-xl font-bold">LOGIN</h1>
