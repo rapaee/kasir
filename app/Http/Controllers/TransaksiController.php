@@ -25,9 +25,10 @@ class TransaksiController extends Controller
             'jumlah_barang.*' => 'required|integer',
             'sub_total.*' => 'required|numeric',
         ]);
-
-        // Simpan transaksi
+    
+        // Simpan transaksi dan kurangi stok barang
         foreach ($request->nama_barang as $key => $barang) {
+            // Simpan transaksi
             Transaksi::create([
                 'id_kasir' => $request->id_kasir,
                 'id_barang' => $barang,
@@ -35,10 +36,16 @@ class TransaksiController extends Controller
                 'sub_total' => $request->sub_total[$key],
                 'tanggal' => now(), // Menyimpan tanggal transaksi
             ]);
+    
+            // Kurangi stok barang di tabel barang
+            $barangModel = Product::find($barang);
+            $barangModel->stok_barang -= $request->jumlah_barang[$key];
+            $barangModel->save();
         }
-
-        return redirect()->route('transaksi-create')->with('success', 'Transaksi berhasil disimpan!');
+    
+        return redirect()->route('transaksi-create')->with('success', 'Transaksi berhasil disimpan dan stok barang telah diperbarui!');
     }
+    
 
 
 }

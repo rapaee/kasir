@@ -82,14 +82,14 @@
                         <input type="number" id="sub_total" name="sub_total[]" readonly class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-gray-100">
                     </div>
                 </div>
-                 <!-- Total Keseluruhan -->
+                 
        
                 <div id="newInputs"></div>
        
 
                 <!-- Tombol untuk menambah input -->
                 <button type="button" onclick="addInput()" class="bg-blue-500 text-white w-full py-2 rounded hover:bg-blue-600 transition-colors mb-4">Tambah Barang</button>
-        
+                <!-- Total Keseluruhan -->
                 <div class="mt-6 w-full">
                     <label for="total_keseluruhan" class="block text-gray-700 font-semibold">Total Keseluruhan:</label>
                     <input type="number" id="total_keseluruhan" name="total_keseluruhan" readonly
