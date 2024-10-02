@@ -37,7 +37,7 @@
                 </div>
             @endif
 
-            <form id="dynamicForm" action="{{ route('transaksi-store') }}" method="POST" class=" w-full">
+            <form id="dynamicForm" action="{{ route('transaksi-store') }}" method="POST" class="w-full">
                 @csrf
                 <!-- Input Nama Kasir -->
                 <div class="input-group mb-4">
@@ -81,14 +81,22 @@
                         <input type="number" id="sub_total" name="sub_total[]" readonly class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-gray-100">
                     </div>
                 </div>
-
+                 <!-- Total Keseluruhan -->
+       
                 <div id="newInputs"></div>
-        
+       
+
                 <!-- Tombol untuk menambah input -->
                 <button type="button" onclick="addInput()" class="bg-blue-500 text-white w-full py-2 rounded hover:bg-blue-600 transition-colors mb-4">Tambah Barang</button>
         
+                <div class="mt-6 w-full">
+                    <label for="total_keseluruhan" class="block text-gray-700 font-semibold">Total Keseluruhan:</label>
+                    <input type="number" id="total_keseluruhan" name="total_keseluruhan" readonly
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100">
+                </div>
+
                 <!-- Submit -->
-                <input type="submit" value="Submit" class="bg-green-500 text-white w-full py-2 rounded hover:bg-green-600 transition-colors">
+                <input type="submit" value="Submit" class="bg-green-500 text-white w-full py-2 rounded hover:bg-green-600 transition-colors mt-4">
             </form>
         
             <script>
@@ -103,28 +111,46 @@
                     hargaInput.value = harga ? harga : '';
             
                     // Panggil fungsi untuk menghitung subtotal jika jumlah sudah diisi
-                    const jumlahInput = inputGroup.querySelector('input[name="jumlah[]"]');
+                    const jumlahInput = inputGroup.querySelector('input[name="jumlah_barang[]"]');
                     if (jumlahInput.value) {
                         calculateSubTotal(jumlahInput);
                     }
                 }
             
-                // Fungsi untuk menghitung subtotal (harga * jumlah)
+                // Fungsi untuk menghitung subtotal (harga * jumlah) dan total keseluruhan
                 function calculateSubTotal(jumlahInput) {
                     const inputGroup = jumlahInput.closest('.grid'); // Mendapatkan div group input
                     const hargaInput = inputGroup.querySelector('input[name="harga[]"]');
                     const subTotalInput = inputGroup.querySelector('input[name="sub_total[]"]');
             
-                    const harga = hargaInput.value;
-                    const jumlah = jumlahInput.value;
+                    const harga = parseFloat(hargaInput.value);
+                    const jumlah = parseFloat(jumlahInput.value);
             
                     // Pastikan harga dan jumlah memiliki nilai sebelum menghitung subtotal
-                    if (harga && jumlah) {
+                    if (!isNaN(harga) && !isNaN(jumlah)) {
                         const subTotal = harga * jumlah;
                         subTotalInput.value = subTotal;
                     } else {
                         subTotalInput.value = ''; // Kosongkan jika tidak ada harga atau jumlah
                     }
+            
+                    // Setelah menghitung subtotal, hitung total keseluruhan
+                    calculateTotalKeseluruhan();
+                }
+            
+                // Fungsi untuk menghitung total keseluruhan
+                function calculateTotalKeseluruhan() {
+                    const subTotalInputs = document.querySelectorAll('input[name="sub_total[]"]');
+                    let total = 0;
+            
+                    subTotalInputs.forEach(input => {
+                        const nilai = parseFloat(input.value);
+                        if (!isNaN(nilai)) {
+                            total += nilai;
+                        }
+                    });
+            
+                    document.getElementById('total_keseluruhan').value = total;
                 }
             
                 let inputCount = 1;
@@ -153,7 +179,7 @@
                             <!-- Input Jumlah Barang -->
                             <div class="input-group">
                                 <label for="jumlah" class="block text-gray-700 font-semibold">Jumlah:</label>
-                                <input type="number" name="jumlah[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" oninput="calculateSubTotal(this)">
+                                <input type="number" name="jumlah_barang[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" oninput="calculateSubTotal(this)">
                             </div>
             
                             <!-- Input Sub Total (readonly) -->
