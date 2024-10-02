@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(1)->create();
 
         User::factory()->create([
             'name' => 'admin',
@@ -25,6 +24,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('admin123'), // Hashing password
 
         ]);
+
 
         Kategori::firstOrCreate(['nama_kategori' => 'Makanan']);
         Kategori::firstOrCreate(['nama_kategori' => 'Minuman']);
