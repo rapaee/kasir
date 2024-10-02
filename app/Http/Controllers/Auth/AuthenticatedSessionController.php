@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Http\Controllers\Auth;
 
@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Validation\ValidationException;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -24,20 +25,30 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
-    
-        $request->session()->regenerate();
-    
-        if ($request->user()->usertype === 'admin') {
+        try {
+            // Authenticate user
+            $request->authenticate();
+
+            // Regenerate session
+            $request->session()->regenerate();
+
+            // Set flash message for success
+            session()->flash('success', 'Login berhasil!');
+
+            // Redirect based on usertype
+            if ($request->user()->usertype === 'admin') {
+                return redirect('admin/home');
+            } else if ($request->user()->usertype === 'user') {
+                return redirect('/user/home');
+            }
+
             return redirect('admin/home');
-        } else if ($request->user()->usertype === 'user') {
-            return redirect('/user/home');
+        } catch (ValidationException $e) {
+            // Handle login failure
+            session()->flash('error', 'Login gagal! Periksa kembali kredensial Anda.');
+            return redirect()->back();
         }
-    
-        // Optional: handle other usertypes if needed, or default redirection.
-        return redirect('admin/home');
     }
-    
 
     /**
      * Destroy an authenticated session.
