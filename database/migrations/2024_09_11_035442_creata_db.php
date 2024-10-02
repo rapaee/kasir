@@ -41,14 +41,19 @@ return new class extends Migration
             $table->bigInteger('id_kasir')->unsigned(); // Kolom tanpa auto_increment
             $table->bigInteger('id_barang')->unsigned(); // Kolom tanpa auto_increment
             $table->integer('jumlah_barang');
-            $table->decimal('sub_total', 10, 2); // Tambahkan kolom sub_total
-            $table->date('tanggal'); // Tambahkan kolom sub_total
+            $table->decimal('sub_total', 10, 2); // Kolom untuk subtotal
+            $table->decimal('total_harga', 15, 2); // Kolom untuk total keseluruhan
+            $table->date('tanggal'); // Kolom untuk tanggal transaksi
+            
             $table->timestamps();
-
-            // Buat relasi ke tabel users
+        
+            // Relasi ke tabel kasir
             $table->foreign('id_kasir')->references('id')->on('kasir')->onDelete('cascade');
+            
+            // Relasi ke tabel barang
             $table->foreign('id_barang')->references('id')->on('barang')->onDelete('cascade');
         });
+        
     }
 
     /**
