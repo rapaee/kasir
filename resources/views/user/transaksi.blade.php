@@ -44,7 +44,7 @@
                 <div class="input-group mb-4">
                     <label for="nama_kasir" class="block text-gray-700 font-semibold">Nama Kasir:</label>
                     <select name="id_kasir" id="" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                        <option value="">-- Pilih --</option>
+                        <option value="">Select</option>
                         @foreach ($nama_kasir as $item)
                             <option value="{{ $item->id }}"> {{ $item->nisn }}</option>
                         @endforeach
@@ -57,7 +57,7 @@
                     <div class="input-group">
                         <label for="nama_barang" class="block text-gray-700 font-semibold">Nama Product:</label>
                         <select name="nama_barang[]" id="nama_barang_select" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" onchange="setHargaAndCalculateSubTotal(this)">
-                            <option value="">-- Pilih --</option>
+                            <option value="">Select</option>
                             @foreach ($nama_barang as $item)
                                 <option value="{{ $item->id }}" data-harga="{{ $item->harga }}">{{ $item->nama_barang }}</option>
                             @endforeach
@@ -164,7 +164,7 @@
                             <div class="input-group">
                                 <label for="nama_barang" class="block text-gray-700 font-semibold">Nama Product:</label>
                                 <select name="nama_barang[]" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" onchange="setHargaAndCalculateSubTotal(this)">
-                                    <option value="">-- Pilih --</option>
+                                    <option value="">Select</option>
                                     @foreach ($nama_barang as $item)
                                         <option value="{{ $item->id }}" data-harga="{{ $item->harga }}">{{ $item->nama_barang }}</option>
                                     @endforeach

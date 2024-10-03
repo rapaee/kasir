@@ -18,6 +18,7 @@ class Transaksi extends Model
         'harga',
         'jumlah_barang',
         'sub_total',
+        'total_keseluruhan',
         'tanggal' // Assuming you have a 'tanggal' field for the transaction date
     ];
 
