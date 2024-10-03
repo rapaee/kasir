@@ -44,7 +44,7 @@ class BarangController extends Controller
            return redirect()->route('data-barang-user')->with('success', 'Berhasil menambahkan produk');
        } catch (\Exception $e) {
            // Redirect kembali ke form tambah data dengan pesan error
-           return redirect()->route('add-data-barang')->with('fail', 'Gagal menambahkan produk: ' . $e->getMessage());
+           return redirect()->route('add-data-barang')->with('error', 'Gagal menambahkan produk: ' . $e->getMessage());
        }
    }
    
