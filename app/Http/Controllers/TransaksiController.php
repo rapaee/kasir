@@ -24,6 +24,7 @@ class TransaksiController extends Controller
             'harga.*' => 'required|numeric',
             'jumlah_barang.*' => 'required|integer',
             'sub_total.*' => 'required|numeric',
+            'total_keseluruhan.*' => 'required|numeric',
         ]);
     
         // Simpan transaksi dan kurangi stok barang
@@ -34,6 +35,7 @@ class TransaksiController extends Controller
                 'id_barang' => $barang,
                 'jumlah_barang' => $request->jumlah_barang[$key],
                 'sub_total' => $request->sub_total[$key],
+                'total_keseluruhan' => $request->total_keseluruhan[$key],
                 'tanggal' => now(), // Menyimpan tanggal transaksi
             ]);
     
