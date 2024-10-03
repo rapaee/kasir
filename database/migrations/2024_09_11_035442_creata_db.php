@@ -39,10 +39,6 @@ return new class extends Migration
         Schema::create('transaksi', function (Blueprint $table) {
             $table->bigIncrements('id'); // Kolom dengan auto_increment
             $table->bigInteger('id_kasir')->unsigned(); // Kolom tanpa auto_increment
-            $table->bigInteger('id_barang')->unsigned(); // Kolom tanpa auto_increment
-            $table->integer('jumlah_barang');
-            $table->decimal('sub_total', 10, 2); // Kolom untuk subtotal
-            $table->decimal('total_keseluruhan', 15, 2); // Kolom untuk total keseluruhan
             $table->date('tanggal'); // Kolom untuk tanggal transaksi
             
             $table->timestamps();
@@ -51,6 +47,16 @@ return new class extends Migration
             $table->foreign('id_kasir')->references('id')->on('kasir')->onDelete('cascade');
             
             // Relasi ke tabel barang
+        });
+        
+        Schema::create('detail_transaksi', function (Blueprint $table){
+            $table->bigIncrements('id_transaksi')->unsigned(); // Kolom dengan auto_increment
+            $table->bigInteger('id_barang')->unsigned(); // Kolom tanpa auto_increment
+            $table->integer('jumlah_barang');
+            $table->decimal('sub_total', 10, 2); // Kolom untuk subtotal
+            
+            $table->timestamps();
+            $table->foreign('id_transaksi')->references('id')->on('transaksi')->onDelete('cascade');
             $table->foreign('id_barang')->references('id')->on('barang')->onDelete('cascade');
         });
         
@@ -61,6 +67,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('detail_transaksi'); 
         Schema::dropIfExists('transaksi');
         Schema::dropIfExists('barang');
         Schema::dropIfExists('kategori');
