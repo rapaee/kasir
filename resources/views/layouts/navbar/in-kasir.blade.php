@@ -22,7 +22,7 @@
             </div>
             <ul class="">
                 <div class="flex z-10 items-center  p-10 hover:bg-sky-300 hover-transition">
-                    <img src="https://cdn-icons-png.flaticon.com/128/1828/1828791.png" alt="" class="w-8 h-8 mr-4 filter-white">
+                    <img src="https://cdn-icons-png.flaticon.com/128/25/25694.png" alt="" class="w-8 h-8 mr-4 filter-white">
                     <li><a href="{{ '../../user/home' }}" class="text-white text-xl list-none">Dashboard</a></li>
                 </div>
                 <div class="flex items-center p-10 bg-sky-500 hover:bg-sky-300">
