@@ -7,6 +7,7 @@
     <title>Data Product</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         * {
@@ -61,23 +62,22 @@
                             <td class="text-center py-3 border border-gray-300">{{ $item->harga }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->kategori->nama_kategori }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->stok_barang }}</td>
-                            <td colspan="2" class="text-center py-3 border border-gray-300">
-                                   <form action="{{ route('delete-data-barang', $item->id) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit">
-                                        Hapus
-                                    </button>
-                                   </form>
-                                   <a href="{{ route('edit-data-barang-user', $item->id) }}" class="action-btn">
-                                    Edit
+                            <td class="text-center py-3 border border-gray-300">
+                                <div class="flex justify-center space-x-2">
+                                    <form action="{{ route('delete-data-barang', $item->id) }}" method="post" class="inline-flex items-center">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-500 hover:text-red-700 flex items-center">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                    <a href="{{ route('edit-data-barang-user', $item->id) }}" class="text-green-500 hover:text-blue-700 flex items-center">
+                                        <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                
-                                 
                                 </div>
-                                
-                                
                             </td>
+                            
+                            
                         </tr>
                         @endforeach
                         @else
