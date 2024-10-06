@@ -3,33 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Laporan Keuangan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-        .filter-white {
-            filter: brightness(0) invert(1);
-        }
-        .animasi-teks {
-            font-size: 30px;
-            width: 100%;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 2px solid white; /* Optional: Add a cursor effect */
-            animation: animasi-teks 5s steps(70, end);
-        }
-
-        @keyframes animasi-teks {
-            from {
-                width: 0;
-            }
-            to {
-                width: 100%;
-            }
-        }
+         .filter-black {
+            filter: grayscale(100%); /* Mengubah gambar menjadi grayscale */
+        }   
     </style>
 </head>
 <body>
@@ -37,50 +16,69 @@
     @extends('layouts.navbar.laporan-keuangan')
 
     @section('navbar')
-    <div class="nav-content flex">
-
-        <div id="content" class="w-full ml-96">
-            <h1>Laporan Keuangan</h1>
-
+    <div class="nav-content flex flex-col min-h-screen">
+        <div class="absolute list-none" style="right: 0; margin-right: 20px;">
+            <li>
+                <form method="POST" action="{{ route('logout') }}" class="inline-block">
+                    @csrf
+                    <x-responsive-nav-link :href="route('logout')"
+                        onclick="event.preventDefault();
+                        this.closest('form').submit();" class="text-lg text-black">
+                        <img src="https://cdn-icons-png.flaticon.com/128/4400/4400629.png" alt="" class="w-8 h-8 mr-4 filter-black flex">
+                    </x-responsive-nav-link>
+                </form>
+            </li>
+        </div>
+    
+        <div id="content" class="w-full flex-1 ml-0 ">
             <!-- Container for Total Overall Revenue -->
-            <div class="flex items-center justify-center mt-8">
+            <div class="flex items-center justify-center mt-20 ml-72">
                 <div class="p-6 border border-gray-300 rounded-lg text-center w-72">
-                    <h1 class="text-6xl font-bold"></h1>
-                    <small class="block mt-2 text-gray-500">Total Overall Revenue</small>
+                    <p class="text-4xl font-bold">
+                        {{ $report->sum('sub_total') ? number_format($report->sum('sub_total'), 0, ',', '.') : '0' }}
+                    </p>
+                    <small class="block mt-2 text-gray-500">Total Pendapatan</small>
                 </div>
             </div>
-
-            <!-- Button to add data -->
-            <button class="bg-blue-500 p-2 rounded ml-auto mt-[20px] text-white hover:bg-blue-600 block">
-                <a href="{{ route('add-kasir') }}">Add Data</a>
-            </button>
-
+    
+            <!-- Date Picker with Auto Submit -->
+            <div class="flex justify-center mt-8">
+                <form id="filterForm" action="{{ route('laporan-keuangan') }}" method="GET" class="flex w-full">
+                    <input type="date" name="tanggal" 
+                        class="border border-gray-300 p-2 rounded-md ml-96 w-full bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out" 
+                        onchange="this.form.submit()">
+                </form>
+            </div>
+    
             <!-- Success message -->
             @if (Session::has('Success'))
                 <span class="text-red-500">{{ Session::get('success') }}</span>
             @endif
-
+           
             <!-- Table for financial report -->
-            <div class="overflow-x-auto">
-                <table class="w-full bg-white mt-[20px] border">
-                    <thead>
-                        <tr>
-                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">S/N</th>
-                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Tanggal</th>
-                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Keterangan</th>
-                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Pendapatan</th>
-                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Laba Kotor</th>
-                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Laba Bersih</th>
-                        </tr>
-                    </thead>
+            <div class="overflow-x-auto mt-8">
+              
+                <table class="w-[1430px] bg-white mt-10 ml-96">
                     <tbody>
-                        <!-- Table content goes here -->
+                        <h2 class="text-center ml-72 mt-9 font-semibold text-lg">Transaksi</h2>
+                        @foreach ($report as $data)
+                        
+                        <tr>
+                            <td class="text-center py-3">{{ $loop->iteration }}</td>
+                            <td class="text-center py-3">{{ $data->transaksi->users->name }}</td>
+                            <td class="text-center py-3">{{ $data->transaksi->tanggal }}</td>
+                            <td class="text-center py-3">{{ $data->id_transaksi }}</td>
+                            <td class="text-center py-3">{{ $data->jumlah_barang }}</td>
+                            <td class="text-center py-3">{{ $data->product->nama_barang }}</td>
+                            <td class="text-center py-3">{{ $data->sub_total}}</td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
+    
     @endsection
 
 </body>

@@ -21,6 +21,18 @@
 
     @section('navbar')
     <div class="nav-content flex">
+        <div class="absolute list-none" style="right: 0; margin-right: 20px;">
+            <li>
+                <form method="POST" action="{{ route('logout') }}" class="inline-block">
+                    @csrf
+                    <x-responsive-nav-link :href="route('logout')"
+                        onclick="event.preventDefault();
+                        this.closest('form').submit();" class="text-lg text-black">
+                        <img src="https://cdn-icons-png.flaticon.com/128/4400/4400629.png" alt="" class="w-8 h-8 mr-4 filter-black flex">
+                    </x-responsive-nav-link>
+                </form>
+            </li>
+        </div>
         {{-- Sidebar Navbar --}}
 
         {{-- Main content section --}}
@@ -36,20 +48,10 @@
                     </ul>
                 </div>
             @endif
-
+            {{-- <p>Selamat datang, {{ auth()->user()->id }}!</p> --}}
             <form id="dynamicForm" action="{{ route('transaksi-store') }}" method="POST" class="w-full">
 
                 @csrf
-                <!-- Input Nama Kasir -->
-                <div class="input-group mb-4">
-                    <label for="nama_kasir" class="block text-gray-700 font-semibold">Nama Kasir:</label>
-                    <select name="id_kasir" id="" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                        <option value="">Select</option>
-                        @foreach ($nama_kasir as $item)
-                            <option value="{{ $item->id }}"> {{ $item->nama }}</option>
-                        @endforeach
-                    </select>
-                </div>
 
                 <!-- Input Barang Section -->
                 <div class="grid grid-cols-4 gap-4 mb-4">
@@ -89,17 +91,20 @@
 
                 <!-- Tombol untuk menambah input -->
                 <button type="button" onclick="addInput()" class="bg-blue-500 text-white w-full py-2 rounded hover:bg-blue-600 transition-colors mb-4">Tambah Barang</button>
-                <!-- Total Keseluruhan -->
-                <div class="mt-6 w-full">
-                    <label for="total_keseluruhan" class="block text-gray-700 font-semibold">Total Keseluruhan:</label>
-                    <input type="number" id="total_keseluruhan" name="total_keseluruhan" readonly
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100">
-                </div>
+               
 
                 <!-- Submit -->
                 <input type="submit" value="Submit" class="bg-green-500 text-white w-full py-2 rounded hover:bg-green-600 transition-colors mt-4">
             </form>
-        
+             <!-- Total Keseluruhan -->
+             <div class="mt-6 flex ml-[1160px]">
+                <div>
+                    <label for="total_keseluruhan" class="block text-gray-700 font-semibold">Total Keseluruhan:</label>
+                    <input type="number" id="total_keseluruhan" name="total_keseluruhan" readonly
+                        class="mt-1 block px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100">
+                </div>
+            </div>
+            
             <script>
                 // Fungsi untuk mengatur harga sesuai pilihan produk dan menghitung subtotal
                 function setHargaAndCalculateSubTotal(selectElement) {

@@ -2,51 +2,54 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kasir;
+use App\Models\detail_transaksi;
 use App\Models\Product;
-use App\Models\Transaksi;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\Transaksi;
 
 class TransaksiController extends Controller
 {
     public function create()
     {
-        $nama_kasir = Kasir::all();
         $nama_barang = Product::all();
-        return view('user.transaksi', compact('nama_kasir', 'nama_barang'));
+        return view('user.transaksi', compact( 'nama_barang'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'id_kasir' => 'required|exists:kasir,id',
-            'nama_barang.*' => 'required|exists:barang,id', // Pastikan id_barang ada
-            'harga.*' => 'required|numeric',
-            'jumlah_barang.*' => 'required|integer',
-            'sub_total.*' => 'required|numeric',
-            'total_keseluruhan.*' => 'required|numeric',
+        $request->validate([ 
+            'tanggal.*' => 'required|date',
+            'nama_barang' => 'required|array', // Pastikan ada array barang
+            'jumlah_barang' => 'required|array',
+            'sub_total' => 'required|array',
         ]);
     
-        // Simpan transaksi dan kurangi stok barang
+        // Buat transaksi baru sekali saja
+        $transaksi = Transaksi::create([
+            'id_users' => Auth::id(),
+            'tanggal' => now(), // Tanggal transaksi
+        ]);
+    
+        // Simpan detail barang terkait transaksi yang sama
         foreach ($request->nama_barang as $key => $barang) {
-            // Simpan transaksi
-            Transaksi::create([
-                'id_kasir' => $request->id_kasir,
-                'id_barang' => $barang,
-                'jumlah_barang' => $request->jumlah_barang[$key],
-                'sub_total' => $request->sub_total[$key],
-                'total_keseluruhan' => $request->total_keseluruhan[$key],
-                'tanggal' => now(), // Menyimpan tanggal transaksi
+            // Simpan detail transaksi dengan menggunakan satu id_transaksi
+            detail_transaksi::create([
+                'id_transaksi' => $transaksi->id, // Gunakan satu id_transaksi untuk semua barang
+                'id_barang' => $barang, // ID barang dari form
+                'jumlah_barang' => $request->jumlah_barang[$key], // Jumlah barang dari form
+                'sub_total' => $request->sub_total[$key], // Sub total dari form
             ]);
     
-            // Kurangi stok barang di tabel barang
+            // Update stok barang
             $barangModel = Product::find($barang);
             $barangModel->stok_barang -= $request->jumlah_barang[$key];
             $barangModel->save();
         }
     
-        return redirect()->route('transaksi-create')->with('success', 'Transaksi berhasil disimpan dan stok barang telah diperbarui!');
+        return redirect()->route('transaksi-user')->with('success', 'Transaksi berhasil disimpan dan stok barang telah diperbarui!');
     }
+    
     
 
 

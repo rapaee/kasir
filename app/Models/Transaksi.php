@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,24 +12,14 @@ class Transaksi extends Model
     protected $table = 'transaksi';
 
     protected $fillable = [
-        'id_kasir',
-        'id_barang', // Foreign key to Product (barang) table
-        'harga',
-        'jumlah_barang',
-        'sub_total',
-        'total_keseluruhan',
-        'tanggal' // Assuming you have a 'tanggal' field for the transaction date
+        'id_users',
+        'tanggal',
     ];
 
-    // Define relationship to Kasir model
-    public function kasir()
+    public function users()
     {
-        return $this->belongsTo(Kasir::class);
+        return $this->belongsTo(User::class, 'id_users'); // id_kasir adalah foreign key di tabel transaksi
     }
-
-    // Define relationship to Product (Barang) model
-    public function product()
-    {
-        return $this->belongsTo(Product::class, 'id_barang');
-    }
+    
 }
+

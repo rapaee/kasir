@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('laporan_keuangan', function (Blueprint $table) {
             $table->id('id');
+            $table->bigInteger('id_detail')->unsigned();
             $table->date('tanggal_laporan');
             $table->decimal('total_pendapatan');
             $table->timestamps();
+
+            $table->foreign('id_detail')->references('id')->on('detail_transaksi')->onDelete('cascade');
         });
     }
 

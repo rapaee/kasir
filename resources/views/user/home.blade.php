@@ -13,9 +13,10 @@
             padding: 0;
         }
 
-        .filter-white {
-            filter: brightness(0) invert(1);
+        .filter-black {
+            filter: grayscale(100%); /* Mengubah gambar menjadi grayscale */
         }
+
 
         .animasi-teks {
             font-size: 30px;
@@ -43,14 +44,34 @@
 
     @section('navbar')
     <div class="nav-content flex">
-        <img src="{{ asset('SMK_Negeri_1_Bantul_logo.png') }}" alt="" srcset="">
+        <div class="absolute list-none" style="right: 0; margin-right: 20px;">
+            <li>
+                <form method="POST" action="{{ route('logout') }}" class="inline-block">
+                    @csrf
+                    <x-responsive-nav-link :href="route('logout')"
+                    onclick="event.preventDefault();
+                                        this.closest('form').submit();" class="text-lg text-black">
+                    <img src="https://cdn-icons-png.flaticon.com/128/4400/4400629.png" alt="" class="w-8 h-8 mr-4 filter-black flex">
+                    </x-responsive-nav-link>
+                </form>
+            </li>
+        </div>
+        
         
         <!-- Main content section -->
-        <div id="content" class="ml-32 flex flex-col items-center justify-center h-screen text-center w-3/4">
+        <div id="content" class="ml-96 mt-80 flex flex-col items-center justify-center text-center w-3/4">
             <h1 class="text-5xl font-bold">WELCOME TO USER</h1>
             <div class="animasi-teks">
                 SMK NEGERI 1 BANTUL <span class="text-sky-400">CAFETARIA</span>
             </div>
+             
+
+            {{-- Menampilkan pesan flash jika ada --}}
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
         </div>
     </div>
 
