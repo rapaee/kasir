@@ -6,7 +6,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NavController; 
 use App\Http\Controllers\Auth\AuthenticatedSessionController; 
 use App\Http\Controllers\KasirController; 
-use App\Http\Controllers\ProfileController; 
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TransaksiAdminController;
 use App\Http\Controllers\TransaksiController; 
 use App\Http\Controllers\UserController;
 use App\Models\LaporanKeuangan;
@@ -33,7 +34,7 @@ require __DIR__.'/auth.php';
 Route::get('/admin/home',[LoginController::class,'index'])->name('admin.home'); 
 Route::get('/admin/data-kasir',[KasirController::class,'viewAdminkasir'])->name('kasir-admin'); 
 Route::get('/admin/data-barang', [NavController::class, 'index'])->name('data-barang-admin'); 
-Route::get('/admin/transaksi', [TransaksiController::class, 'index'])->name('transaksi-admin'); 
+Route::get('/admin/transaksi', [TransaksiAdminController::class, 'index1'])->name('transaksi-admin'); 
 Route::get('/admin/laporan-keuangan', [LaporanKeuanganController::class, 'index'])->name('laporan-keuangan-admin'); 
 
 // Navbar halaman user

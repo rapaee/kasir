@@ -15,7 +15,7 @@
         </div>
     
         <div class="ml-96 w-3/4 p-10 fixed">
-            <h1 class="text-xl font-bold mb-6 mt-0">List Product</h1>
+            <h1 class="text-center text-xl font-bold mb-6 mt-0">List Product</h1>
             <div  class="overflow-x-auto">
                 <table class="w-full bg-white border">
                     <thead>
