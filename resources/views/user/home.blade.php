@@ -82,7 +82,7 @@
             icon: 'success',
             title: 'Login Berhasil',
             text: '{{ session('success') }}',
-            timer: 3000,
+            timer: 1000,
             showConfirmButton: false
         });
     </script>
@@ -94,7 +94,7 @@
             icon: 'error',
             title: 'Login Gagal',
             text: '{{ session('error') }}',
-            timer: 3000,
+            timer: 1000,
             showConfirmButton: false
         });
     </script>
