@@ -15,12 +15,21 @@
     @extends('layouts.navbar-admin.dashboard')
 
     @section('navbar-admin')
-    <div class="nav-content flex justify-between items-center h-screen">
-        <div class="ml-4">
-            <!-- Tambahkan elemen navbar Anda di sini jika diperlukan -->
+    <div class="nav-content flex">
+        <div class="absolute list-none" style="right: 0; margin-right: 20px;">
+            <li>
+                <form method="POST" action="{{ route('logout') }}" class="inline-block">
+                    @csrf
+                    <x-responsive-nav-link :href="route('logout')"
+                    onclick="event.preventDefault();
+                                        this.closest('form').submit();" class="text-lg text-black">
+                    <img src="https://cdn-icons-png.flaticon.com/128/4400/4400629.png" alt="" class="w-8 h-8 mr-4 filter-black flex">
+                    </x-responsive-nav-link>
+                </form>
+            </li>
         </div>
 
-        <div id="content" class="flex flex-col items-center justify-center text-center w-3/4">
+        <div id="content" class="flex items-center justify-center text-center ml-[600px] mt-80">
             <h1 class="text-5xl font-bold"></h1>
             <div class="animasi-teks">
                 SMK NEGERI 1 BANTUL <span class="text-sky-400">CAFETARIA</span>
