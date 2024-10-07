@@ -59,10 +59,20 @@
             <div class="overflow-x-auto mt-8">
               
                 <table class="w-[1430px] bg-white mt-10 ml-96">
+                    <thead>
+                        <tr>
+                            <td class="text-center py-3 font-semibold">No</td>
+                            <td class="text-center py-3 font-semibold">Kasir</td>
+                            <td class="text-center py-3 font-semibold">Tanggal</td>
+                            <td class="text-center py-3 font-semibold">ID Transaksi</td>
+                            <td class="text-center py-3 font-semibold">Jumlah</td>
+                            <td class="text-center py-3 font-semibold">Product</td>
+                            <td class="text-center py-3 font-semibold">Sub Total</td>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <h2 class="text-center ml-72 mt-9 font-semibold text-lg">Transaksi</h2>
+                        <h2 class="text-center ml-72 mt-9 font-bold text-lg">Transaksi</h2>
                         @foreach ($report as $data)
-                        
                         <tr>
                             <td class="text-center py-3">{{ $loop->iteration }}</td>
                             <td class="text-center py-3">{{ $data->transaksi->users->name }}</td>

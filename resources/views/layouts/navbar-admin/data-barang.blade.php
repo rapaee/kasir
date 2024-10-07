@@ -25,13 +25,13 @@
                 </div>
             </div>
             <ul class="">
-                <div class="flex z-10 items-center p-10 hover:bg-sky-300 hover-transition">
+                <div class="flex z-10 items-center p-10 -500 hover:bg-sky-300 hover-transition cursor-pointer" onclick="window.location='{{ route('admin.home') }}'">
                     <img src="https://cdn-icons-png.flaticon.com/128/25/25694.png" alt="" class="w-8 h-8 mr-4 filter-white">
-                    <li><a href="{{ 'home' }}" class="text-white text-xl list-none">Dashboard</a></li>
+                    <span class="text-white text-xl">Dashboard</span>
                 </div>
-                <div class="flex items-center p-10 hover:bg-sky-300">
-                    <img src="https://cdn-icons-png.flaticon.com/128/456/456212.png" alt="" class="w-8 h-8 mr-4 filter-white">
-                    <li><a href="{{ 'data-kasir' }}" class="text-white text-xl list-none">Kasir</a></li>
+                <div class="flex items-center p-10 bg-sky-500 hover:bg-sky-300 cursor-pointer" onclick="window.location='{{ route('data-barang-user') }}'">
+                    <img src="https://cdn-icons-png.flaticon.com/128/8633/8633559.png" alt="" class="w-8 h-8 mr-4 filter-white">
+                    <span class="text-white text-xl">Product</span>
                 </div>
                 <div class="flex items-center  bg-sky-500 p-10 hover:bg-sky-300">
                     <img src="https://cdn-icons-png.flaticon.com/128/8633/8633559.png" alt="" class="w-8 h-8 mr-4 filter-white">

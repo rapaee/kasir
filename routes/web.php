@@ -31,7 +31,6 @@ require __DIR__.'/auth.php';
 
 // Navbar halaman admin
 Route::get('/admin/home',[LoginController::class,'index'])->name('admin.home'); 
-Route::get('/admin/data-kasir',[KasirController::class,'viewAdminkasir'])->name('kasir-admin'); 
 Route::get('/admin/data-barang', [NavController::class, 'index'])->name('data-barang-admin'); 
 Route::get('/admin/transaksi', [TransaksiController::class, 'index'])->name('transaksi-admin'); 
 Route::get('/admin/laporan-keuangan', [LaporanKeuanganController::class, 'index'])->name('laporan-keuangan-admin'); 
