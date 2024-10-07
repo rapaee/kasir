@@ -16,21 +16,37 @@
         </div>
     
         <div class="ml-96 w-4/5 p-10 fixed">
-            <h1 class="text-5xl font-bold mb-6 mt-0">List Transaksi</h1>
-
-           
-           
-
-            <div class="">
-                <table class="min-w-full bg-white border">
+            <h1 class="text-center text-xl font-bold mb-6 mt-0">List Transaksi</h1>
+            <div class="overflow-x-auto">
+                <table class="w-full bg-white border">
                     <thead>
+
                         <tr>
-                            <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Nama Product</th>
-                            <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Jumlah Product</th>
-                            <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Sub Total</th>
-                            
+                            <td class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">No</td>
+                            <td class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Nama</td>
+                            <td class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Tanggal</td>
+                            <td class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Id transaksi</td>
+                            <td class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Jumalah Barang</td>
+                            <td class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Nama Barang</td>
+                            <td class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Sub Total</td>
                         </tr>
-                        </thead>
+                    </thead>
+                    <tbody>
+                       
+                        @foreach ($report as $data)
+                        
+                        <tr>
+                            <td class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">{{ $loop->iteration }}</td>
+                            <td class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">{{ $data->transaksi->users->name }}</td>
+                            <td class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">{{ $data->transaksi->tanggal }}</td>
+                            <td class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">{{ $data->id_transaksi }}</td>
+                            <td class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">{{ $data->jumlah_barang }}</td>
+                            <td class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">{{ $data->product->nama_barang }}</td>
+                            <td class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">{{ $data->sub_total}}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
         </div>
     </div>
     @endsection
