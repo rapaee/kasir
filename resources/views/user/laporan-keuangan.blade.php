@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laporan Keuangan</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
          .filter-black {
             filter: grayscale(100%); /* Mengubah gambar menjadi grayscale */
@@ -88,7 +89,25 @@
             </div>
         </div>
     </div>
-    
+    <script>
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Sukses!',
+                text: '{{ session('success') }}',
+                timer: 1000,
+                showConfirmButton: false
+            });
+        @elseif(session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                text: '{{ session('error') }}',
+                timer: 1000,
+                showConfirmButton: false
+            });
+        @endif
+    </script>
     @endsection
 
 </body>

@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Observers\ProductObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,6 +18,11 @@ class Product extends Model
     public function kategori()
 {
     return $this->belongsTo(Kategori::class, 'id_kategori');
+}
+protected static function boot()
+{
+    parent::boot();
+    static::observe(ProductObserver::class);
 }
 
 }
