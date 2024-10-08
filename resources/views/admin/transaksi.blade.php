@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    @extends('layouts.navbar-admin.transaksi')
+    @extends('navbar-admin.transaksi')
     @section('navbar-admin')
     <div class="flex">
         <div class="w-1/5 p-5 text-white">

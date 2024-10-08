@@ -8,7 +8,7 @@
     <title>Report</title>
 </head>
 <body>
-    @extends('layouts.navbar-admin.laporan-keuangan')
+    @extends('navbar-admin.laporan-keuangan')
 
     @section('navbar-admin')
     <div class="nav-content flex">

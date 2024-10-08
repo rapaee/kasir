@@ -16,7 +16,7 @@
     </style>
 </head>
 <body>
-    @extends('layouts.navbar.in-product')
+    @extends('navbar.in-product')
 
     @section('navbar')
     <div class="nav-content flex justify-between">

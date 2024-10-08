@@ -40,7 +40,7 @@
 </head>
 <body>
 
-    @extends('layouts.navbar.dashboard')
+    @extends('navbar.dashboard')
 
     @section('navbar')
     <div class="nav-content flex">

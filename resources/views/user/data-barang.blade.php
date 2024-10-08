@@ -26,7 +26,7 @@
 </head>
 
 <body>
-    @extends('layouts.navbar.product')
+    @extends('navbar.product')
 
     @section('navbar')
     <div class="nav-content flex">

@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    @extends('layouts.navbar.laporan-keuangan')
+    @extends('navbar.laporan-keuangan')
 
     @section('navbar')
     <div class="nav-content flex flex-col min-h-screen">

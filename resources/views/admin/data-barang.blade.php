@@ -8,7 +8,7 @@
     <title>Data Product</title>
 </head>
 <body>
-    @extends('layouts.navbar-admin.data-barang')
+    @extends('navbar-admin.data-barang')
 
     @section('navbar-admin')
     <div class="flex nav-content">

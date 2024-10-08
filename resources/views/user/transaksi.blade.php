@@ -18,7 +18,7 @@
 </head>
 <body>
 
-    @extends('layouts.navbar.transaksi')
+    @extends('navbar.transaksi')
 
     @section('navbar')
     <div class="nav-content flex">
