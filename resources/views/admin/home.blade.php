@@ -16,7 +16,6 @@
 
     @section('navbar-admin')
     <div class="nav-content flex">
-      
 
         <div id="content" class="flex items-center justify-center text-center ml-[600px] mt-80">
             <h1 class="text-5xl font-bold"></h1>
