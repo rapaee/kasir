@@ -61,5 +61,8 @@ Route::delete('/user/delete/{id}', [BarangController::class,'destroy'])->name('d
 //laporan keuangan
 Route::get('/laporan-keuangan/harian', [LaporanKeuanganController::class, 'totalPendapatanHarian'])->name('laporan-keuangan-harian');
 Route::get('/laporan-keuangan', [LaporanKeuanganController::class, 'filterPendapatan'])->name('laporan-keuangan');
+Route::post('/simpan-total-pendapatan', [LaporanKeuanganController::class, 'simpanTotalPendapatan'])->name('simpan-total-pendapatan');
+Route::get('/admin/laporan-keuangan', [LaporanKeuanganController::class, 'filter'])->name('laporan-keuangan-admin');
+
 
 ?>

@@ -37,6 +37,17 @@
                     <img src="https://cdn-icons-png.flaticon.com/128/1450/1450932.png" alt="" class="w-8 h-8 mr-4 filter-white">
                     <span class="text-white text-xl">Report</span>
                 </div>
+                <form method="POST" action="{{ route('logout') }}" class="inline-block">
+                    @csrf
+                    <div class="flex items-center p-10 hover:bg-sky-300 cursor-pointer w-96" onclick="this.closest('form').submit();">
+                        <li>
+                            <button type="submit" class="flex items-center text-lg text-white" style="pointer-events: none;">
+                                <img src="https://cdn-icons-png.flaticon.com/128/4400/4400629.png" alt="" class="w-8 h-8 mr-4 filter-white">
+                                Logout
+                            </button>
+                        </li>
+                    </div>
+                </form>
             </ul>
         </nav>
 

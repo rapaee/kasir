@@ -30,19 +30,6 @@
 
     @section('navbar')
     <div class="nav-content flex">
-        <div class="absolute list-none" style="right: 0; margin-right: 20px;">
-            <li>
-                <form method="POST" action="{{ route('logout') }}" class="inline-block">
-                    @csrf
-                    <x-responsive-nav-link :href="route('logout')"
-                        onclick="event.preventDefault();
-                        this.closest('form').submit();" class="text-lg text-black">
-                        <img src="https://cdn-icons-png.flaticon.com/128/4400/4400629.png" alt=""
-                            class="w-8 h-8 mr-4 filter-black flex">
-                    </x-responsive-nav-link>
-                </form>
-            </li>
-        </div>
 
         <div id="content" class="w-full ml-96 mt-20">
             <h1>Product</h1>

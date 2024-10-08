@@ -17,18 +17,6 @@
 
     @section('navbar')
     <div class="nav-content flex flex-col min-h-screen">
-        <div class="absolute list-none" style="right: 0; margin-right: 20px;">
-            <li>
-                <form method="POST" action="{{ route('logout') }}" class="inline-block">
-                    @csrf
-                    <x-responsive-nav-link :href="route('logout')"
-                        onclick="event.preventDefault();
-                        this.closest('form').submit();" class="text-lg text-black">
-                        <img src="https://cdn-icons-png.flaticon.com/128/4400/4400629.png" alt="" class="w-8 h-8 mr-4 filter-black flex">
-                    </x-responsive-nav-link>
-                </form>
-            </li>
-        </div>
     
         <div id="content" class="w-full flex-1 ml-0 ">
             <!-- Container for Total Overall Revenue -->
@@ -38,8 +26,20 @@
                         {{ $report->sum('sub_total') ? number_format($report->sum('sub_total'), 0, ',', '.') : '0' }}
                     </p>
                     <small class="block mt-2 text-gray-500">Total Pendapatan</small>
+            
+                  <!-- Form untuk menyimpan total pendapatan sesuai dengan tanggal yang dipilih -->
+                <form action="{{ route('simpan-total-pendapatan') }}" method="POST" class="mt-4">
+                    @csrf
+                    <input type="hidden" name="tanggal" value="{{ request('tanggal', now()->toDateString()) }}">
+                    <input type="hidden" name="total_pendapatan" value="{{ $report->sum('sub_total') }}">
+                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                        Simpan Total Pendapatan
+                    </button>
+                </form>
+
                 </div>
             </div>
+            
     
             <!-- Date Picker with Auto Submit -->
             <div class="flex justify-center mt-8">
