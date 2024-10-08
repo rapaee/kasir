@@ -19,9 +19,9 @@ class ProductObserver
      */
     public function updated(Product $product): void
     {
-        if ($product->stok_barang === 0) {
-            $product->delete(); // Hapus produk jika stok mencapai 0
-        }
+        // if ($product->stok_barang === 0) {
+        //     $product->delete(); // Hapus produk jika stok mencapai 0
+        // }
     }
 
     /**
