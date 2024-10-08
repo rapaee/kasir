@@ -18,7 +18,10 @@ Route::get('/', function () {
 });
 // Rute autentikasi login
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
-
+ 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 // Rute yang membutuhkan autentikasi
 Route::middleware('auth')->group(function () {     
