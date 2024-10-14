@@ -19,10 +19,10 @@
     @section('navbar')
     <div class="nav-content flex flex-col min-h-screen">
     
-        <div id="content" class="w-full flex-1 ml-0 ">
+        <div id="content" class="w-full flex-1 ">
             <!-- Container for Total Overall Revenue -->
-            <div class="flex items-center justify-center mt-20 ml-72">
-                <div class="p-6 border border-gray-300 rounded-lg text-center w-72">
+            <div class="flex items-center justify-center mt-10 ml-96">
+                <div class="p-6 border border-gray-300 rounded-lg text-center">
                     <p class="text-4xl font-bold">
                         {{ $report->sum('sub_total') ? number_format($report->sum('sub_total'), 0, ',', '.') : '0' }}
                     </p>
@@ -59,7 +59,7 @@
             <!-- Table for financial report -->
             <div class="overflow-x-auto mt-8">
               
-                <table class="w-[1430px] bg-white mt-10 ml-96">
+                <table class="w-[1050px] bg-white mt-10 ml-96">
                     <thead>
                         <tr>
                             <td class="text-center py-3 font-semibold">No</td>
@@ -72,7 +72,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <h2 class="text-center ml-72 mt-9 font-bold text-lg">Transaksi</h2>
+                        <h2 class="text-center ml-96 mt-9 font-bold text-lg">Transaksi</h2>
                         @foreach ($report as $data)
                         <tr>
                             <td class="text-center py-3">{{ $loop->iteration }}</td>

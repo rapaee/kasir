@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Document</title>
     <style>
         .filter-white {
@@ -41,11 +42,11 @@
                     <img src="https://cdn-icons-png.flaticon.com/128/1450/1450932.png" alt="" class="w-8 h-8 mr-4 filter-white">
                     <span class="text-white text-xl">Report</span>
                 </div>
-                <form method="POST" action="{{ route('logout') }}" class="inline-block">
+                <form method="POST" action="{{ route('logout') }}" id="logout-form" class="inline-block">
                     @csrf
-                    <div class="flex items-center p-10 hover:bg-sky-300 cursor-pointer w-96" onclick="this.closest('form').submit();">
+                    <div class="flex items-center p-10 hover:bg-sky-300 cursor-pointer w-96" onclick="confirmLogout();">
                         <li>
-                            <button type="submit" class="flex items-center text-lg text-white" style="pointer-events: none;">
+                            <button type="button" class="flex items-center text-lg text-white" style="pointer-events: none;">
                                 <img src="https://cdn-icons-png.flaticon.com/128/4400/4400629.png" alt="" class="w-8 h-8 mr-4 filter-white">
                                 Logout
                             </button>
@@ -63,3 +64,27 @@
     </div>
 </body>
 </html>
+
+<script>
+    function confirmLogout() {
+        Swal.fire({
+            title: "Logout",
+            text: "Apakah anda yakin untuk logout?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                icon: "success",
+                title: "Berhasil logout",
+                showConfirmButton: false,
+                timer: 4200
+                });
+                document.getElementById('logout-form').submit();
+            }
+        });
+    }
+</script>

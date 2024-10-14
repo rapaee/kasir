@@ -21,8 +21,8 @@
 
         <!-- Right Container -->
         <div class="flex-1 bg-gray-100 flex justify-center items-center p-8">
-            <div class="regis">
-                <a href="{{ route('register') }}" class="border border-slate-900 rounded-lg p-4 hover:border-slate-400">Sign Up</a>
+            <div class="absolute top-0 right-0 mt-8 mr-4">
+                <a href="{{ route('register') }}" class="border border-slate-900 rounded-lg p-4  hover:border-slate-400">Sign Up</a>
             </div>
 
             <!-- SweetAlert Notifications -->

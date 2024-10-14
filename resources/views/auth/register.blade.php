@@ -23,7 +23,7 @@
             <div class="w-full max-w-md">
                 <!-- Link ke Halaman Login -->
                 <div class="flex-1 bg-gray-100 flex justify-center items-center p-8">
-                    <div class="regis">
+                    <div class="absolute top-0 right-0 mt-8 mr-4">
                         <a href="{{ route('login') }}" class="border border-slate-900 rounded-lg p-4 hover:border-slate-400">Login</a>
                     </div>
 
