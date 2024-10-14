@@ -8,6 +8,22 @@ use Illuminate\Http\Request;
 
 class BarangController extends Controller
 {
+     public function index()
+    {   
+        $new_product = Product::all();
+        return view('admin.data-barang', [
+            'new_product' => $new_product,
+        ]);
+        
+    }
+
+    public function nav1()
+    {
+        $new_product = Product::all();
+        return view('user.data-barang', [
+            'new_product' => $new_product,
+        ]);
+    }
    // Menampilkan form untuk tambah data
    public function create()
    {

@@ -3,14 +3,11 @@
 use App\Http\Controllers\BarangController; 
 use App\Http\Controllers\LaporanKeuanganController; 
 use App\Http\Controllers\LoginController; 
-use App\Http\Controllers\NavController; 
 use App\Http\Controllers\Auth\AuthenticatedSessionController; 
-use App\Http\Controllers\KasirController; 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransaksiAdminController;
-use App\Http\Controllers\TransaksiController; 
-use App\Http\Controllers\UserController;
-use App\Models\LaporanKeuangan;
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\transaksiv2Controller;
 use Illuminate\Support\Facades\Route;  
 
 Route::get('/', function () {
@@ -35,15 +32,16 @@ require __DIR__.'/auth.php';
 
 // Navbar halaman admin
 Route::get('/admin/home',[LoginController::class,'index'])->name('admin.home'); 
-Route::get('/admin/data-barang', [NavController::class, 'index'])->name('data-barang-admin'); 
+Route::get('/admin/data-barang', [BarangController::class, 'index'])->name('data-barang-admin'); 
 Route::get('/admin/transaksi', [TransaksiAdminController::class, 'index1'])->name('transaksi-admin'); 
 Route::get('/admin/laporan-keuangan', [LaporanKeuanganController::class, 'index'])->name('laporan-keuangan-admin'); 
 
 // Navbar halaman user
-Route::get('/user/home',[UserController::class, 'nav'])->name('user.home'); 
-Route::get('/user/data-barang',[UserController::class, 'nav1'])->name('data-barang-user'); 
+Route::get('/user/home',[LoginController::class, 'index1'])->name('user.home'); 
+Route::get('/user/data-barang',[BarangController::class, 'nav1'])->name('data-barang-user'); 
 Route::get('/user/laporan-keuangan',[LaporanKeuanganController::class,'index1'])->name('laporan-keuangan-user'); 
 Route::get('/user/transaksi',[TransaksiController::class,'create'])->name('transaksi-user'); 
+Route::get('/user/transaksiv2',[transaksiv2Controller::class,'index'])->name('transaksiv2-user'); 
 
 // Rute untuk tambah barang dan transaksi
 Route::get('/user/in-ed/add-data-barang',[BarangController::class, 'create'])->name('add-data-barang'); 

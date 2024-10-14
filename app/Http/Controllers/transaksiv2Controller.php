@@ -5,19 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class NavController extends Controller
+class transaksiv2Controller extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {   
-        $new_product = Product::all();
-        return view('admin.data-barang', [
-            'new_product' => $new_product,
-        ]);
-        
+    {
+        $nama_barang = Product::all();
+        return view('user.transaksiv2', compact( 'nama_barang'));
     }
+
     /**
      * Show the form for creating a new resource.
      */
