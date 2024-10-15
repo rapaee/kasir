@@ -116,4 +116,15 @@ class LaporanKeuanganUserController extends Controller
         return Excel::download(new LaporanKeuanganExport, 'laporan_keuangan.xlsx');
     }
 
+    public function laporanKeuangan(Request $request)
+{
+    $tanggal = $request->input('tanggal');
+    if ($tanggal) {
+        $report = Transaksi::whereDate('tanggal', $tanggal)->get();
+    } else {
+        $report = collect(); // atau Transaksi::all() jika ingin menampilkan semua data
+    }
+    return view('laporan-keuangan', compact('report'));
+}
+
 }

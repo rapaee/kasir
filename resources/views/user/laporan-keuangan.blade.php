@@ -29,14 +29,15 @@
                     <small class="block mt-2 text-gray-500">Total Pendapatan</small>
             
                   <!-- Form untuk menyimpan total pendapatan sesuai dengan tanggal yang dipilih -->
-                <form action="{{ route('simpan-total-pendapatan') }}" method="POST" class="mt-4">
+                  <form action="{{ route('simpan-total-pendapatan') }}" method="POST" class="mt-4">
                     @csrf
-                    <input type="hidden" name="tanggal" value="{{ request('tanggal', now()->toDateString()) }}">
+                    <input type="hidden" name="tanggal" value="{{ request('tanggal') }}">
                     <input type="hidden" name="total_pendapatan" value="{{ $report->sum('sub_total') }}">
                     <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
                         Simpan Total Pendapatan
                     </button>
                 </form>
+                
 
                 </div>
             </div>
@@ -54,7 +55,7 @@
             </div>
             
             
-            <script>
+            {{-- <script>
                 document.addEventListener('DOMContentLoaded', function() {
                     var tanggalInput = document.getElementById('tanggalInput');
                     // Cek apakah input sudah memiliki nilai
@@ -63,7 +64,7 @@
                         tanggalInput.value = today;
                     }
                 });
-            </script>
+            </script> --}}
             
             
             
