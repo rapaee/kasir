@@ -6,6 +6,8 @@ use App\Models\detail_transaksi;
 use App\Models\LaporanKeuangan;
 use App\Models\Product;
 use App\Models\Transaksi;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\LaporanKeuanganExport;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -30,14 +32,6 @@ class LaporanKeuanganController extends Controller
         $report = $query->get();
         return view('admin.laporan-keuangan', compact('report'));
     }
-    
-
-
-
-
-
-
-
     public function index1()
     {
         // Menampilkan semua laporan tanpa filter
@@ -116,6 +110,9 @@ class LaporanKeuanganController extends Controller
         // Redirect dengan pesan sukses
         return redirect()->back()->with('success', 'Total pendapatan untuk tanggal tersebut berhasil disimpan');
     }
-    
+    public function export()
+    {
+        return Excel::download(new LaporanKeuanganExport, 'laporan_keuangan.xlsx');
+    }
 
 }
