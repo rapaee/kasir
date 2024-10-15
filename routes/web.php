@@ -3,11 +3,13 @@
 use App\Http\Controllers\BarangController; 
 use App\Http\Controllers\LaporanKeuanganController; 
 use App\Http\Controllers\LoginController; 
-use App\Http\Controllers\Auth\AuthenticatedSessionController; 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\LaporanKeuanganUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransaksiAdminController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\transaksiv2Controller;
+use App\Models\LaporanKeuangan;
 use Illuminate\Support\Facades\Route;  
 
 Route::get('/', function () {
@@ -39,7 +41,7 @@ Route::get('/admin/laporan-keuangan', [LaporanKeuanganController::class, 'index'
 // Navbar halaman user
 Route::get('/user/home',[LoginController::class, 'index1'])->name('user.home'); 
 Route::get('/user/data-barang',[BarangController::class, 'nav1'])->name('data-barang-user'); 
-Route::get('/user/laporan-keuangan',[LaporanKeuanganController::class,'index1'])->name('laporan-keuangan-user'); 
+Route::get('/user/laporan-keuangan',[LaporanKeuanganUserController  ::class,'index1'])->name('laporan-keuangan-user'); 
 Route::get('/user/transaksi',[TransaksiController::class,'create'])->name('transaksi-user'); 
 Route::get('/user/transaksiv2',[transaksiv2Controller::class,'index'])->name('transaksiv2-user'); 
 
