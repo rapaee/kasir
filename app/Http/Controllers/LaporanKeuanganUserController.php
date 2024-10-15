@@ -117,14 +117,21 @@ class LaporanKeuanganUserController extends Controller
     }
 
     public function laporanKeuangan(Request $request)
-{
-    $tanggal = $request->input('tanggal');
-    if ($tanggal) {
-        $report = Transaksi::whereDate('tanggal', $tanggal)->get();
-    } else {
-        $report = collect(); // atau Transaksi::all() jika ingin menampilkan semua data
+    {
+        $tanggal = $request->input('tanggal');
+    
+        if ($tanggal) {
+            // Ambil data laporan berdasarkan tanggal
+            $report = Transaksi::whereDate('tanggal', $tanggal)
+                               ->with(['transaksi.users', 'product'])
+                               ->get();
+        } else {
+            // Jika tidak ada tanggal yang dipilih, kirimkan data kosong atau default
+            $report = collect(); // Koleksi kosong
+        }
+    
+        return view('laporan-keuangan', compact('report'));
     }
-    return view('laporan-keuangan', compact('report'));
-}
+    
 
 }
