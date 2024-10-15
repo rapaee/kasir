@@ -65,5 +65,7 @@ Route::get('/laporan-keuangan', [LaporanKeuanganController::class, 'filterPendap
 Route::post('/simpan-total-pendapatan', [LaporanKeuanganController::class, 'simpanTotalPendapatan'])->name('simpan-total-pendapatan');
 Route::get('/admin/laporan-keuangan', [LaporanKeuanganController::class, 'filter'])->name('laporan-keuangan-admin');
 
+//excel
+Route::get('/export-laporan-keuangan', [LaporanKeuanganController::class, 'export'])->name('export-laporan-keuangan');
 
 ?>

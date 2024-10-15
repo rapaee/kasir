@@ -20,7 +20,19 @@
                     <input type="date" name="tanggal" 
                         class="border border-gray-300 p-2 rounded-md  w-full bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out" 
                         onchange="this.form.submit()">
+                    <div class="flex space-x-2">
+                            <input type="date" name="tanggal" 
+                                class="border border-gray-300 p-2 rounded-md w-full bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out" 
+                                onchange="this.form.submit()">
+                        
+                            <!-- Tombol Ekspor -->
+                            <button type="button" onclick="window.location.href='{{ route('export-laporan-keuangan') }}'" 
+                                class="bg-green-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300">
+                                Ekspor ke Excel
+                            </button>
+                    </div>
                 </form>
+            
             </div>
             <!-- Table for financial report -->
             <div class="overflow-x-auto">
