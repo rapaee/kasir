@@ -12,8 +12,9 @@ class transaksiv2Controller extends Controller
      */
     public function index()
     {
-        $nama_barang = Product::all();
-        return view('user.transaksiv2', compact( 'nama_barang'));
+        // Ambil data produk beserta kategori
+        $nama_barang = Product::with('kategori')->get();
+        return view('user.transaksiv2', compact('nama_barang'));
     }
 
     /**
