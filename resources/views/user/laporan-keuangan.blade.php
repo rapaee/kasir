@@ -47,10 +47,27 @@
                 <form id="filterForm" action="{{ route('laporan-keuangan') }}" method="GET" class="flex w-full">
                     <input type="date" name="tanggal" 
                         class="border border-gray-300 p-2 rounded-md ml-96 w-full bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out" 
-                        onchange="this.form.submit()">
+                        onchange="this.form.submit()" 
+                        id="tanggalInput"
+                        value="{{ request('tanggal', date('Y-m-d')) }}">
                 </form>
             </div>
-    
+            
+            
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var tanggalInput = document.getElementById('tanggalInput');
+                    // Cek apakah input sudah memiliki nilai
+                    if (!tanggalInput.value) {
+                        var today = new Date().toISOString().split('T')[0];
+                        tanggalInput.value = today;
+                    }
+                });
+            </script>
+            
+            
+            
+            
             <!-- Success message -->
             @if (Session::has('Success'))
                 <span class="text-red-500">{{ Session::get('success') }}</span>
