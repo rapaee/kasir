@@ -50,7 +50,7 @@
                         class="border border-gray-300 p-2 rounded-md ml-96 w-full bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out" 
                         onchange="this.form.submit()" 
                         id="tanggalInput"
-                        value="{{ request('tanggal', date('Y-m-d')) }}">
+                        value="{{ request('tanggal') }}">
                 </form>
             </div>
             
@@ -76,7 +76,7 @@
            
             <!-- Table for financial report -->
             <div class="overflow-x-auto mt-8">
-              
+                @if(request('tanggal'))
                 <table class="w-[1050px] bg-white mt-10 ml-96">
                     <thead>
                         <tr>
@@ -105,6 +105,7 @@
                     </tbody>
                 </table>
             </div>
+            @endif
         </div>
     </div>
     <script>
