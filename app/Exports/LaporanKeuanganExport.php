@@ -6,7 +6,7 @@ use App\Models\LaporanKeuangan;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class LaporanKeuanganExport implements FromCollection
+class LaporanKeuanganExport implements FromCollection,WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection
