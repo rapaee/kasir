@@ -36,43 +36,77 @@
                 </button>
             </div>
 
-          <!-- Barang -->
-            <div id="product-container" class="flex flex-wrap space-x-4 p-3">
-                @if (!empty($nama_barang) && $nama_barang->count() > 0)
-                @foreach ($nama_barang as $item)
-                <div class="flex space-x-4 p-3" data-kategori="{{ $item->kategori->nama_kategori }}">
-                    <div class="border p-4">
-                        <img alt="{{ $item->nama_barang }}" class="mb-2" height="100" src="https://storage.googleapis.com/a1aa/image/wKSVTKupiVr0GBMwjnvWE1AJesgYnsgstZgXsq9YW8wNUUzJA.jpg" width="100"/>
-                        <div class="text-center">
-                            <button class="tambah-btn bg-blue-500 text-white py-1 px-2 rounded" data-harga="{{ $item->harga }}" data-nama="{{ $item->nama_barang }}">
-                                Tambah
-                            </button>
-                            <div class="font-bold">{{ $item->nama_barang }}</div>
-                            <div>{{ $item->harga }}</div>
-                            <div>{{ $item->kategori->nama_kategori }}</div>
+            <form action="" method="POST">
+                @csrf
+                <!-- Barang -->
+                <div id="product-container" class="flex flex-wrap space-x-4 p-3">
+                    @if (!empty($nama_barang) && $nama_barang->count() > 0)
+                    @foreach ($nama_barang as $item)
+                    <div class="flex space-x-4 p-3" data-kategori="{{ $item->kategori->nama_kategori }}">
+                        <div class="border p-4">
+                        
+                            <div class="text-center">
+                                <div class="font-bold">{{ $item->nama_barang }}</div>
+                                <div>{{ $item->harga }}</div>
+                                <div>{{ $item->kategori->nama_kategori }}</div>
+                                <button type="button" class="tambah-btn bg-blue-500 text-white py-1 px-2 rounded" data-harga="{{ $item->harga }}" data-nama="{{ $item->nama_barang }}">
+                                    Tambah
+                                </button> 
+                            </div>
                         </div>
                     </div>
+                    @endforeach
+                    @else
+                    <p>Tidak ada barang yang tersedia.</p>
+                    @endif
                 </div>
-                @endforeach
-                @else
-                <p>Tidak ada barang yang tersedia.</p>
-                @endif
-            </div>
-
-
-            <!-- Total -->
-            <div class="mt-8">
-                <label for="total">Nama</label>
-                <input type="text" id="total" class="bg-gray-400 w-full" value="0" readonly>
-            </div>
-            <div class="mt-8">
-                <label for="total">Total</label>
-                <input type="text" id="total" class="bg-gray-400 w-full" value="0" readonly>
-            </div>
+            
+                <!-- Hidden input untuk barang yang dipilih -->
+                <input type="hidden" name="selected_items" id="selected_items">
+            
+                <!-- Total -->
+                <div class="mt-8">
+                    <label for="total_nama">Nama</label><br>
+                    <input type="text" id="total_nama" class=" bg-gray-400 w-full" name="total_nama" value="Pilih" readonly>
+                </div>
+                <div class="mt-8">
+                    <label for="total">Total</label>
+                    <input type="text" id="total" class="bg-gray-400 w-full" name="total" value="0" readonly>
+                </div>
+            
+                <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded mt-4">Simpan</button>
+            </form>
+            
         </div>
     </div>
 
     <script>
+         document.addEventListener('DOMContentLoaded', function() {
+        const selectedItemsInput = document.getElementById('selected_items');
+        const totalInput = document.getElementById('total');
+        const totalNamaInput = document.getElementById('total_nama');
+        let selectedItems = [];
+        let totalHarga = 0;
+
+        document.querySelectorAll('.tambah-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const namaBarang = this.getAttribute('data-nama');
+                const hargaBarang = parseInt(this.getAttribute('data-harga'));
+
+                // Update barang yang dipilih
+                selectedItems.push({ nama: namaBarang, harga: hargaBarang });
+
+                // Update total harga
+                totalHarga += hargaBarang;
+
+                // Update input hidden dan total
+                selectedItemsInput.value = JSON.stringify(selectedItems);
+                totalInput.value = totalHarga;
+                totalNamaInput.value = selectedItems.map(item => item.nama).join(', ');
+            });
+        });
+    });
+
         // Ambil semua tombol dengan class 'tambah-btn'
         const buttons = document.querySelectorAll('.tambah-btn');
         const totalInput = document.getElementById('total');
@@ -98,6 +132,60 @@
                 totalInput.value = daftarBarang.join(', ') + " | Total: " + total;
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+        const selectedItemsInput = document.getElementById('selected_items');
+        const totalInput = document.getElementById('total');
+        const totalNamaInput = document.getElementById('total_nama');
+        let selectedItems = [];
+        let totalHarga = 0;
+
+        document.querySelectorAll('.tambah-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const namaBarang = this.getAttribute('data-nama');
+                const hargaBarang = parseInt(this.getAttribute('data-harga'));
+
+                // Update barang yang dipilih
+                selectedItems.push({ nama: namaBarang, harga: hargaBarang });
+
+                // Update total harga
+                totalHarga += hargaBarang;
+
+                // Update input hidden dan total
+                selectedItemsInput.value = JSON.stringify(selectedItems);
+                totalInput.value = totalHarga;
+                totalNamaInput.value = selectedItems.map(item => item.nama).join(', ');
+            });
+        });
+
+        // Filter produk berdasarkan kategori
+        const productContainer = document.getElementById('product-container');
+        const buttons = document.querySelectorAll('.tambah-btn');
+
+        document.getElementById('filter-semua').addEventListener('click', function() {
+            filterProduct('SEMUA');
+        });
+
+        document.getElementById('filter-makanan').addEventListener('click', function() {
+            filterProduct('MAKANAN');
+        });
+
+        document.getElementById('filter-minuman').addEventListener('click', function() {
+            filterProduct('MINUMAN');
+        });
+
+        function filterProduct(kategori) {
+            const products = productContainer.querySelectorAll('div[data-kategori]');
+            products.forEach(product => {
+                const productKategori = product.getAttribute('data-kategori').toUpperCase();
+                if (kategori === 'SEMUA' || productKategori === kategori) {
+                    product.style.display = 'flex'; // Tampilkan produk yang sesuai
+                } else {
+                    product.style.display = 'none'; // Sembunyikan produk yang tidak sesuai
+                }
+            });
+        }
+    });
     </script>
 
     @endsection
