@@ -107,6 +107,8 @@ class LaporanKeuanganUserController extends Controller
                 'id_detail' => $idDetail // Tambahkan id_detail ke dalam query
             ]
         );
+
+        
         
         // Redirect dengan pesan sukses
         return redirect()->back()->with('success', 'Total pendapatan untuk tanggal tersebut berhasil disimpan');
@@ -132,6 +134,9 @@ class LaporanKeuanganUserController extends Controller
     
         return view('laporan-keuangan', compact('report'));
     }
+
+    
+
     
 
 }
