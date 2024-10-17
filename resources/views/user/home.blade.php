@@ -32,7 +32,23 @@
 <body>
 
 @extends('navbar.dashboard')
-
+@section('navbar')
+<div class="nav-content mb-5">
+            <div id="header" class="ml-96 flex ">
+                <h1 class="font-bold text-xl">DASHBOARD</h1>
+                <div class="relative justify-end ml-auto">
+                    <!-- Tampilkan nama pengguna -->
+                    <button onclick="toggleDropdown()" class="flex items-center text-black font-semibold py-2 px-4 rounded">
+                        <span>{{ auth()->user()->name }}</span>     
+                        <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                
+                    <!-- Dropdown menu -->
+                    <ul id="dropdownMenu" class="absolute hidden bg-white text-gray-700 pt-1 right-0 w-40 shadow-lg rounded z-50">
+                        <li>
+                            <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm hover:bg-gray-200">Lihat Profil</a>
 
         
             <!-- Dropdown menu -->
