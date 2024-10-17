@@ -19,6 +19,17 @@ class LaporanKeuanganUserController extends Controller
         $report = LaporanKeuangan::all();
         return view('admin.laporan-keuangan',compact('report'));
     }
+    public function index2(Request $request)
+{
+    if ($request->input('tanggal') == 'all') {
+        $report = Transaksi::all(); // Ambil semua transaksi
+    } else {
+        $report = Transaksi::whereDate('tanggal', $request->input('tanggal'))->get(); // Ambil berdasarkan tanggal
+    }
+
+    return view('user.laporan-keuangan', compact('report'));
+}
+
     public function filter(Request $request)
     {
         $query = LaporanKeuangan::query();
@@ -120,6 +131,7 @@ class LaporanKeuanganUserController extends Controller
 
     public function laporanKeuangan(Request $request)
     {
+        
         $tanggal = $request->input('tanggal');
     
         if ($tanggal) {
@@ -135,7 +147,20 @@ class LaporanKeuanganUserController extends Controller
         return view('laporan-keuangan', compact('report'));
     }
 
-    
+    public function laporanKeuangan1(Request $request)
+    {
+        if ($request->tanggal == 'all') {
+            // Ambil semua data transaksi tanpa filter
+            $report = Transaksi::with(['user', 'product'])->get();
+        } else {
+            // Filter berdasarkan tanggal jika tidak 'all'
+            $report = Transaksi::with(['user', 'product'])
+                ->whereDate('tanggal', $request->tanggal)
+                ->get();
+        }
+
+        return view('laporan-keuangan', compact('report'));
+    }
 
     
 
