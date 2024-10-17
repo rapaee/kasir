@@ -23,13 +23,13 @@
                     
                     <!-- Tombol Ekspor dengan ikon -->
                     <button type="button" onclick="window.location.href='{{ route('export-laporan-keuangan') }}'" 
-                        class="flex items-center bg-blue-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300 transition duration-150 ease-in-out">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-black" fill="currentColor" viewBox="0 0 24 24" stroke="none">
-                            <path d="M12 2l6 6h-4v8h-4V8H6z" />
-                            <rect x="4" y="16" width="16" height="4" />
+                            class="flex flex-col items-center bg-blue-500 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300 transition duration-150 ease-in-out">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mb-1">
+                            <path fill-rule="evenodd" d="M11.47 2.47a.75.75 0 0 1 1.06 0l4.5 4.5a.75.75 0 0 1-1.06 1.06l-3.22-3.22V16.5a.75.75 0 0 1-1.5 0V4.81L8.03 8.03a.75.75 0 0 1-1.06-1.06l4.5-4.5ZM3 15.75a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" />
                         </svg>
-                        Ekspor
+                        <span>Eksport</span>
                     </button>
+
 
 
                 </form>
