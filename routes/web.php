@@ -63,9 +63,10 @@ Route::delete('/user/delete/{id}', [BarangController::class,'destroy'])->name('d
 
 //laporan keuangan
 Route::get('/laporan-keuangan/harian', [LaporanKeuanganController::class, 'totalPendapatanHarian'])->name('laporan-keuangan-harian');
-Route::get('/laporan-keuangan', [LaporanKeuanganController::class, 'filterPendapatan'])->name('laporan-keuangan');
+Route::get('/laporan-keuangan/filter', [LaporanKeuanganUserController::class, 'filterPendapatan'])->name('laporan-keuangan-filter');
 Route::post('/simpan-total-pendapatan', [LaporanKeuanganController::class, 'simpanTotalPendapatan'])->name('simpan-total-pendapatan');
 Route::get('/admin/laporan-keuangan', [LaporanKeuanganController::class, 'filter'])->name('laporan-keuangan-admin');
+Route::get('/laporan-keuangan', [LaporanKeuanganUserController::class, 'index2'])->name('laporan-keuangan-index2');
 
 //excel
 Route::get('/export-laporan-keuangan', [LaporanKeuanganController::class, 'export'])->name('export-laporan-keuangan');

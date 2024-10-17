@@ -67,7 +67,7 @@
 
         <!-- Date Picker dengan Auto Submit dan Tombol "Tampilkan Semua Transaksi" -->
         <div class="flex justify-center mt-8 space-x-4">
-            <form id="filterForm" action="{{ route('laporan-keuangan') }}" method="GET" class="flex w-full">
+            <form id="filterForm" action="{{ route('laporan-keuangan-filter') }}" method="GET" class="flex w-full">
                 <input type="date" name="tanggal" 
                     class="border border-gray-300 p-2 rounded-md ml-96 w-full bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out" 
                     onchange="this.form.submit()" 
@@ -75,12 +75,13 @@
                     value="{{ request('tanggal') && request('tanggal') != 'all' ? request('tanggal') : '' }}">
             </form>
             <!-- Tombol untuk Menampilkan Semua Transaksi -->
-            <form action="{{ route('laporan-keuangan') }}" method="GET">
+            <form action="{{ route('laporan-keuangan-user') }}" method="GET">
                 <input type="hidden" name="tanggal" value="all">
                 <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
                     Tampilkan Semua Transaksi
                 </button>
             </form>
+            
         </div>
         
         <!-- Pesan Sukses -->
@@ -113,10 +114,10 @@
                         <td class="text-center py-3">{{ $data->id_transaksi }}</td>
                         <td class="text-center py-3">{{ $data->jumlah_barang }}</td>
                         <td class="text-center py-3">{{ $data->product->nama_barang }}</td>
-                        <td class="text-center py-3">{{ $data->sub_total }}</td>
+                        <td class="text-center py-3">{{ number_format($data->sub_total, 0, ',', '.') }}</td>
                     </tr>
                     @endforeach
-                </tbody>
+                </tbody>                
             </table>
             @endif
         </div>
