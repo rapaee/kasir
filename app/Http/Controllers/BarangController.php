@@ -19,11 +19,12 @@ class BarangController extends Controller
 
     public function nav1()
     {
-        $new_product = Product::all();
+        $new_product = Product::paginate(10);
         return view('user.data-barang', [
             'new_product' => $new_product,
         ]);
     }
+    
    // Menampilkan form untuk tambah data
    public function create()
    {

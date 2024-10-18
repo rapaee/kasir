@@ -38,16 +38,30 @@
 
             <form action="" method="POST">
                 @csrf
+                 <!-- Total -->
+               <div class="flex">
+                <div class="mt-8">
+                    <label for="total_nama">Nama</label><br>
+                    <input type="text" id="total_nama" class=" bg-gray-400 w-full" name="total_nama" value="Pilih" readonly>
+                </div>
+                <div class="mt-8">
+                    <label for="total">Total</label>
+                    <input type="text" id="total" class="bg-gray-400 w-full" name="total" value="0" readonly>
+                </div>
+            
+                <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded mt-4">Simpan</button>
+               </div>
                 <!-- Barang -->
                 <div id="product-container" class="flex flex-wrap space-x-4 p-3">
                     @if (!empty($nama_barang) && $nama_barang->count() > 0)
                     @foreach ($nama_barang as $item)
                     <div class="flex space-x-4 p-3" data-kategori="{{ $item->kategori->nama_kategori }}">
-                        <div class="border p-4">
+                        <div class="border p-6">
                         
                             <div class="text-center">
                                 <div class="font-bold">{{ $item->nama_barang }}</div>
-                                <div>{{ $item->harga }}</div>
+                                <div>Rp. {{ $item->harga }}</div>
+                                <div>Stok {{ $item->stok_barang }}</div>
                                 <div>{{ $item->kategori->nama_kategori }}</div>
                                 <button type="button" class="tambah-btn bg-blue-500 text-white py-1 px-2 rounded" data-harga="{{ $item->harga }}" data-nama="{{ $item->nama_barang }}">
                                     Tambah
@@ -64,17 +78,7 @@
                 <!-- Hidden input untuk barang yang dipilih -->
                 <input type="hidden" name="selected_items" id="selected_items">
             
-                <!-- Total -->
-                <div class="mt-8">
-                    <label for="total_nama">Nama</label><br>
-                    <input type="text" id="total_nama" class=" bg-gray-400 w-full" name="total_nama" value="Pilih" readonly>
-                </div>
-                <div class="mt-8">
-                    <label for="total">Total</label>
-                    <input type="text" id="total" class="bg-gray-400 w-full" name="total" value="0" readonly>
-                </div>
-            
-                <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded mt-4">Simpan</button>
+               
             </form>
             
         </div>

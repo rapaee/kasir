@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -11,12 +12,14 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
         
+        return view('admin.home');
     }
     public function index1()
     {
-        return view('user.home');
+        $productCount = Product::count();
+        $product = Product::all();
+        return view('user.home', compact('product', 'productCount'));
     }
     /**
      * Show the form for creating a new resource.

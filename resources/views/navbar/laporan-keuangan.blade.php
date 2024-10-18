@@ -25,28 +25,28 @@
                 </div>
             </div>
             <ul>
-                <div class="flex z-10 items-center p-10 hover:bg-sky-300 hover-transition cursor-pointer" onclick="window.location='{{ route('user.home') }}'">
-                    <img src="https://cdn-icons-png.flaticon.com/128/25/25694.png" alt="" class="w-8 h-8 mr-4 filter-white">
-                    <span class="text-white text-xl">Dashboard</span>
+                <div class="flex z-10 items-center p-5 hover:bg-sky-300 hover-transition cursor-pointer" onclick="window.location='{{ route('user.home') }}'">
+                    <img src="https://cdn-icons-png.flaticon.com/128/25/25694.png" alt="" class="w-6 h-6 mr-4 filter-white">
+                    <span class="text-white text-lg">Dashboard</span>
                 </div>
-                <div class="flex items-center p-10 hover:bg-sky-300 cursor-pointer" onclick="javascript:void(0); window.location='{{ route('data-barang-user') }}'">
-                    <img src="https://cdn-icons-png.flaticon.com/128/8633/8633559.png" alt="" class="w-8 h-8 mr-4 filter-white">
-                    <span class="text-white text-xl">Product</span>
+                <div class="flex items-center p-5 hover:bg-sky-300 cursor-pointer" onclick="javascript:void(0); window.location='{{ route('data-barang-user') }}'">
+                    <img src="https://cdn-icons-png.flaticon.com/128/8633/8633559.png" alt="" class="w-6 h-6 mr-4 filter-white">
+                    <span class="text-white text-lg">Product</span>
                 </div>                
-                <div class="flex items-center p-10 hover:bg-sky-300 cursor-pointer" onclick="javascript:void(0); window.location='{{ route('transaksi-user') }}'">
-                    <img src="https://cdn-icons-png.flaticon.com/128/2541/2541369.png" alt="" class="w-8 h-8 mr-4 filter-white">
-                    <span class="text-white text-xl">Transaksi</span>
+                <div class="flex items-center p-5 hover:bg-sky-300 cursor-pointer" onclick="javascript:void(0); window.location='{{ route('transaksi-user') }}'">
+                    <img src="https://cdn-icons-png.flaticon.com/128/2541/2541369.png" alt="" class="w-6 h-6 mr-4 filter-white">
+                    <span class="text-white text-lg">Transaksi</span>
                 </div>     
-                <div class="flex items-center p-10 bg-sky-500 hover:bg-sky-300 cursor-pointer" onclick="javascript:void(0); window.location='{{ route('laporan-keuangan-user') }}'">
-                    <img src="https://cdn-icons-png.flaticon.com/128/1450/1450932.png" alt="" class="w-8 h-8 mr-4 filter-white">
-                    <span class="text-white text-xl">Report</span>
+                <div class="flex items-center p-5 bg-sky-500 hover:bg-sky-300 cursor-pointer" onclick="javascript:void(0); window.location='{{ route('laporan-keuangan-user') }}'">
+                    <img src="https://cdn-icons-png.flaticon.com/128/1450/1450932.png" alt="" class="w-6 h-6 mr-4 filter-white">
+                    <span class="text-white text-lg">Report</span>
                 </div>     
                 <form method="POST" action="{{ route('logout') }}" class="inline-block">
                     @csrf
-                    <div class="flex items-center p-10 hover:bg-sky-300 cursor-pointer w-96" onclick="this.closest('form').submit();">
+                    <div class="flex items-center p-5 hover:bg-sky-300 cursor-pointer w-96" onclick="this.closest('form').submit();">
                         <li>
                             <button type="submit" class="flex items-center text-lg text-white" style="pointer-events: none;">
-                                <img src="https://cdn-icons-png.flaticon.com/128/4400/4400629.png" alt="" class="w-8 h-8 mr-4 filter-white">
+                                <img src="https://cdn-icons-png.flaticon.com/128/4400/4400629.png" alt="" class="w-6 h-6 mr-4 filter-white">
                                 Logout
                             </button>
                         </li>

@@ -25,15 +25,16 @@
     </style>
 </head>
 
-<body>
+<body class="bg-blue-50">
     @extends('navbar.product')
 
     @section('navbar')
-    <div class="nav-content flex">
+    <div class="nav-content flex"></div>
 
-        <div id="content" class="w-full ml-96 mt-20">
-            <h1>Product</h1>
-            <button class="bg-blue-500 p-2 rounded ml-auto mt-[20px] text-white hover:bg-blue-600 block">
+    <div class="container mx-auto flex justify-end">
+        <div id="content" class="bg-white rounded-lg shadow-lg p-5 w-3/4">
+            <h1 class="text-center text-4xl font-bold text-blue-700">Product</h1>
+            <button class="bg-blue-500 p-2 rounded ml-auto mt-[20px] text-white hover:bg-blue-600 block mb-2">
                 <a href="{{ route('add-data-barang') }}">Add Product</a>
             </button>
             @if (Session::has('Success'))
@@ -42,29 +43,23 @@
             @if (Session::has('Fail'))
             <span class="text-red-500">{{ Session::get('fail') }}</span>
             @endif
+
             <div class="overflow-x-auto">
-                <table class=" w-full bg-white mt-[20px] border">
-                    <thead>
+                <table class="max-w-full w-full bg-white border border-gray-300 rounded-lg shadow-sm">
+                    <thead class="bg-blue-300 text-blue-900">
                         <tr>
-                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">S/N
-                            </th>
-                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Nama
-                                barang</th>
-                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Harga
-                            </th>
-                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">
-                                Kategori</th>
-                            <th class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">Stok
-                            </th>
-                            <th colspan="2"
-                                class="px-2 py-3 border border-gray-300 text-center text-sm font-semibold text-gray-600">
-                                Action</th>
+                            <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">S/N</th>
+                            <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Nama barang</th>
+                            <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Harga</th>
+                            <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Kategori</th>
+                            <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Stok</th>
+                            <th colspan="2" class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if (!empty($new_product) && $new_product->count() > 0)
+                        @if ($new_product->count() > 0)
                         @foreach ($new_product as $item)
-                        <tr>
+                        <tr class="hover:bg-blue-50 transition duration-300 ease-in-out">
                             <td class="text-center py-3 border border-gray-300">{{ $loop->iteration }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->nama_barang }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->harga }}</td>
@@ -93,9 +88,15 @@
                         @endif
                     </tbody>
                 </table>
+
+                <!-- Pagination -->
+                <div class="mt-4">
+                    {{ $new_product->links() }}
+                </div>
             </div>
         </div>
     </div>
+
     <script>
         document.querySelectorAll('.delete-button').forEach(button => {
             button.addEventListener('click', function (e) {

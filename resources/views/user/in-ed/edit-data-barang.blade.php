@@ -18,7 +18,7 @@
         </div>
     
         {{-- Main content section (Form berada di kanan) --}}
-        <div id="content" class="flex flex-col h-screen w-9/12 fixed ml-96">
+        <div id="content" class="flex flex-col h-screen w-8/12 fixed ml-96">
             <div class="p-2">
                 @if (session('fail'))
                     <span class="text-red-500">{{ session('fail') }}</span>
