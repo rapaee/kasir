@@ -33,7 +33,7 @@
                     <!-- Dropdown menu -->
                     <ul id="dropdownMenu" class="absolute hidden bg-white text-gray-700 pt-1 right-0 w-40 shadow-lg rounded z-50">
                         <li>
-                            <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm hover:bg-gray-200">Lihat Profil</a>
+                            <a href="{{ route('edit-profile') }}" class="block px-4 py-2 text-sm hover:bg-gray-200">Lihat Profil</a>
 
         
             <!-- Dropdown menu -->
@@ -49,7 +49,7 @@
 <!-- Dashboard Cards Section -->
 <div class="ml-96 grid grid-cols-4 gap-4 mb-5">
     <!-- Food and Drink Card -->
-   <a href="">
+   <a href="{{ route('detail-f&d') }}">
     <div class="flex items-center bg-blue-200 text-black rounded-lg p-4 shadow-md">
         <!-- Container for SVG with red square background -->
         <div class="bg-blue-500 p-2 mr-3">

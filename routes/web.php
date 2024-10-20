@@ -4,12 +4,12 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LaporanKeuanganController; 
 use App\Http\Controllers\LoginController; 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\DetailFoodAndDrinkController;
 use App\Http\Controllers\LaporanKeuanganUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransaksiAdminController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\transaksiv2Controller;
-use App\Models\LaporanKeuangan;
 use Illuminate\Support\Facades\Route;  
 
 Route::get('/', function () {
@@ -57,9 +57,12 @@ Route::middleware(['auth'])->group(function () {
 
 // Rute untuk edit dan delete barang
 Route::get('/user/in-ed/edit-data-barang/{id}', [BarangController::class, 'edit'])->name('edit-data-barang-user');
+Route::get('/user/in-ed/edit-profile/',[ProfileController::class,'editProfile'])->name('edit-profile');
 Route::put('/user/update/{id}', [BarangController::class, 'update'])->name('update-data-barang');
 Route::delete('/user/delete/{id}', [BarangController::class,'destroy'])->name('delete-data-barang');
 
+//detail halaman dashboard user
+Route::get('user/detail-food&drink/',[DetailFoodAndDrinkController::class,'index'])->name('detail-f&d');
 
 //laporan keuangan
 Route::get('/laporan-keuangan/harian', [LaporanKeuanganController::class, 'totalPendapatanHarian'])->name('laporan-keuangan-harian');
