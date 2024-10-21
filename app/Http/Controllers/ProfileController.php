@@ -49,7 +49,7 @@ class ProfileController extends Controller
     // Simpan perubahan
     $request->user()->save();
 
-    return Redirect::route('User.home')->with('status', 'profile-updated');
+    return Redirect::route('user.home')->with('status', 'profile-updated');
 }
 
     /**
@@ -70,6 +70,6 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return Redirect::to('login');
     }
 }
