@@ -2,34 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\detail_transaksi;
-use App\Models\LaporanKeuangan;
-use App\Models\Product;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
-class LoginController extends Controller
+class DetailTransaksiDashboard extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        
-        return view('admin.home');
-    }
-    public function index1()
-    {
-        $productCount = Product::count();
-        $product = Product::all();
-
-        // Ambil data detail_transaksi beserta pengguna dan transaksi
-        $detailTransaksi = detail_transaksi::with(['transaksi.users'])->get();
-        // Hitung jumlah detail transaksi
-        $detailTransaksiCount = detail_transaksi::count();
-
-        $reportCount = LaporanKeuangan::count();
-        $report = LaporanKeuangan::all();
-        return view('user.home', compact('product', 'productCount', 'detailTransaksi', 'detailTransaksiCount','reportCount','report'));
+        $transaksi = Transaksi::all();
+        $count = Transaksi::paginate(10);
+        return view('user.detail-transaksi-dashboard', compact('transaksi','count'));
     }
 
     /**

@@ -5,6 +5,8 @@ use App\Http\Controllers\LaporanKeuanganController;
 use App\Http\Controllers\LoginController; 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\DetailFoodAndDrinkController;
+use App\Http\Controllers\DetailReportDashboard;
+use App\Http\Controllers\DetailTransaksiDashboard;
 use App\Http\Controllers\LaporanKeuanganUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransaksiAdminController;
@@ -64,6 +66,8 @@ Route::delete('/admin/delete/{id}', [TransaksiAdminController::class,'destroy'])
 
 //detail halaman dashboard user
 Route::get('user/detail-food&drink/',[DetailFoodAndDrinkController::class,'index'])->name('detail-f&d');
+Route::get('user/detail-transaksi-dashboard/',[DetailTransaksiDashboard::class,'index'])->name('detail-transaksi-dashboard');
+Route::get('user/detail-report-dashboard/',[DetailReportDashboard::class,'index'])->name('detail-report-dashboard');
 
 //laporan keuangan
 Route::get('/laporan-keuangan/harian', [LaporanKeuanganController::class, 'totalPendapatanHarian'])->name('laporan-keuangan-harian');
