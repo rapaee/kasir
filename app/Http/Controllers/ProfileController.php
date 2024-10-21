@@ -49,7 +49,7 @@ class ProfileController extends Controller
     // Simpan perubahan
     $request->user()->save();
 
-    return Redirect::route('admin.home')->with('status', 'profile-updated');
+    return Redirect::route('User.home')->with('status', 'profile-updated');
 }
 
     /**
