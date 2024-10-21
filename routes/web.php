@@ -75,4 +75,7 @@ Route::get('/laporan-keuangan', [LaporanKeuanganUserController::class, 'index2']
 //excel
 Route::get('/export-laporan-keuangan', [LaporanKeuanganController::class, 'export'])->name('export-laporan-keuangan');
 
+Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+
 ?>
