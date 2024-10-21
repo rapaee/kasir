@@ -119,6 +119,10 @@
                     @endforeach
                 </tbody>                
             </table>
+              {{-- <!-- Pagination -->
+              <div class="mt-4">
+                {{ $report->links() }}
+            </div> --}}
             @endif
         </div>
     </div>

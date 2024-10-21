@@ -16,7 +16,7 @@
     <div class="flex nav-content"></div>
 
     <div class="container mx-auto flex justify-end">
-        <div class="bg-white rounded-lg shadow-lg p-8 w-3/4">
+        <div class="bg-white rounded-lg shadow-lg p-5 w-3/4">
             <h1 class="text-center text-4xl font-bold text-blue-700 mb-6">List Transaksi</h1>
             <div class="overflow-x-auto">
                 <table class="max-w-full w-full bg-white border border-gray-300 rounded-lg shadow-sm">
