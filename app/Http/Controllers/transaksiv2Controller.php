@@ -16,7 +16,7 @@ class transaksiv2Controller extends Controller
         $nama_barang = Product::with('kategori')->get();
         return view('user.transaksiv2', compact('nama_barang'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */

@@ -15,7 +15,7 @@
     @section('navbar-admin')
     <div class="flex nav-content"></div>
 
-    <div class="container mx-auto mt-10 flex justify-end">
+    <div class="container mx-auto flex justify-end">
         <div class="bg-white rounded-lg shadow-lg p-8 w-3/4">
             <h1 class="text-center text-4xl font-bold text-blue-700 mb-6">List Transaksi</h1>
             <div class="overflow-x-auto">
@@ -44,13 +44,22 @@
                             <td class="px-4 py-3 border border-gray-300 text-center">{{ $data->sub_total }}</td>
                             <td class="px-4 py-3 border border-gray-300 text-center">
                                 <div class="flex justify-center space-x-2">
-                                    <form action="" method="post" class="inline-flex items-center delete-form">
+                                    <form action="{{ route('delete-transaksi-admin',$data->id) }}" method="post" class="inline-flex items-center delete-form">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" class="text-red-500 hover:text-red-700 flex items-center delete-button">
+                                        <button type="button" class="text-red-500 hover:text-red-700 flex items-center delete-button" onclick="confirmDeletion(this)">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
+                                    
+                                    <script>
+                                        function confirmDeletion(button) {
+                                            if (confirm('Apakah Anda yakin ingin menghapus transaksi ini?')) {
+                                                button.closest('form').submit();
+                                            }
+                                        }
+                                    </script>
+                                    
                                 </div>
                               
                             </td>
@@ -58,6 +67,10 @@
                         @endforeach
                     </tbody>
                 </table>
+                   <!-- Pagination -->
+                   <div class="mt-4">
+                    {{ $report->links() }}
+                </div>
             </div>
         </div>
     </div>

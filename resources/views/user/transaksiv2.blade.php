@@ -35,21 +35,21 @@
                     MINUMAN
                 </button>
             </div>
-
+             
             <form action="" method="POST">
                 @csrf
                  <!-- Total -->
-               <div class="flex">
+               <div class="">
                 <div class="mt-8">
                     <label for="total_nama">Nama</label><br>
-                    <input type="text" id="total_nama" class=" bg-gray-400 w-full" name="total_nama" value="Pilih" readonly>
+                    <input type="text" id="total_nama" class="mt-3 bg-gray-400 p-2 rounded-lg w-full" name="total_nama" value="Belum memilih menu" readonly>
                 </div>
-                <div class="mt-8">
-                    <label for="total">Total</label>
-                    <input type="text" id="total" class="bg-gray-400 w-full" name="total" value="0" readonly>
+               <div class="mt-8">
+                    {{-- <label for="total">Total</label> --}}
+                    <input type="hidden" id="total" class="bg-gray-400 w-full" name="total" value="0" readonly>
                 </div>
             
-                <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded mt-4">Simpan</button>
+                <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded mt-4">Next</button>
                </div>
                 <!-- Barang -->
                 <div id="product-container" class="flex flex-wrap space-x-4 p-3">
@@ -74,9 +74,6 @@
                     <p>Tidak ada barang yang tersedia.</p>
                     @endif
                 </div>
-            
-                <!-- Hidden input untuk barang yang dipilih -->
-                <input type="hidden" name="selected_items" id="selected_items">
             
                
             </form>

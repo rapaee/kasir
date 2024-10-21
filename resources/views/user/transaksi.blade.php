@@ -201,7 +201,7 @@
             </script>
         </div>
     </div>
-    <script>
+    <scriptpt>
         @if(session('success'))
             Swal.fire({
                 icon: 'success',
@@ -219,7 +219,7 @@
                 showConfirmButton: false
             });
         @endif
-    </script>
+    </scriptpt>
         </div>
     </div>
 

@@ -55,11 +55,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/transaksi/store', [TransaksiController::class, 'store'])->name('transaksi-store');
 });
 
-// Rute untuk edit dan delete barang
+// Rute untuk edit dan delete barang transaksi
 Route::get('/user/in-ed/edit-data-barang/{id}', [BarangController::class, 'edit'])->name('edit-data-barang-user');
 Route::get('/user/in-ed/edit-profile/',[ProfileController::class,'editProfile'])->name('edit-profile');
 Route::put('/user/update/{id}', [BarangController::class, 'update'])->name('update-data-barang');
 Route::delete('/user/delete/{id}', [BarangController::class,'destroy'])->name('delete-data-barang');
+Route::delete('/admin/delete/{id}', [TransaksiAdminController::class,'destroy'])->name('delete-transaksi-admin');
 
 //detail halaman dashboard user
 Route::get('user/detail-food&drink/',[DetailFoodAndDrinkController::class,'index'])->name('detail-f&d');
