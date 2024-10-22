@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .icon {
             filter: invert(100%) brightness(100%); /* Membuat ikon menjadi putih */
@@ -111,10 +112,36 @@
     
     </div>
     </div>
+    <div style="width: 80%; margin: auto;">
+        <canvas id="barChart">
+        </canvas>
+    </div>
 
 </div>
 
-
+<script>
+    var ctx = document.getElementById('barChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: @json($data['labels']),
+            datasets: [{
+                label: 'Data',
+                data: @json($data['data']),
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 <!-- SweetAlert Notifications -->
 @if(session('success'))
 <script>

@@ -4,6 +4,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LaporanKeuanganController; 
 use App\Http\Controllers\LoginController; 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\DetailFoodAndDrinkController;
 use App\Http\Controllers\DetailReportDashboard;
 use App\Http\Controllers\DetailTransaksiDashboard;
@@ -80,6 +81,8 @@ Route::get('/laporan-keuangan', [LaporanKeuanganUserController::class, 'index2']
 Route::get('/export-laporan-keuangan', [LaporanKeuanganController::class, 'export'])->name('export-laporan-keuangan');
 
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+Route::get('/bar-chart', [LoginController::class, 'barChart'])->name('bar-chart');
+
 
 
 ?>
