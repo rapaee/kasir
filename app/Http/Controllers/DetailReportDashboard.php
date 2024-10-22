@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LaporanKeuangan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DetailReportDashboard extends Controller
@@ -14,9 +15,56 @@ class DetailReportDashboard extends Controller
     {
         $report = LaporanKeuangan::all();
         $count = LaporanKeuangan::paginate(10);
-        return view('user.detail-report-dashboard', compact('report','count'));
+        return view('user.detail-report-dashboard', compact('report', 'count'));
     }
 
+    // Filter detail dasboard user
+    public function filterBulanan(Request $request)
+    {
+        // Ambil tanggal dari input form
+        $tanggal = $request->get('tanggal_laporan');
+        
+        // Jika tanggal tidak ada, set ke bulan ini
+        $tanggal = $tanggal ? Carbon::parse($tanggal) : Carbon::today();
+        
+        // Mengambil awal dan akhir bulan dari tanggal yang dipilih
+        $startOfMonth = $tanggal->copy()->startOfMonth();
+        $endOfMonth = $tanggal->copy()->endOfMonth();
+        
+        // Mengambil laporan dari tabel laporan_keuangan untuk bulan yang dipilih
+        $report = LaporanKeuangan::with('detail_transaksi') // Jika ada relasi ke detail
+            ->whereBetween('tanggal_laporan', [$startOfMonth, $endOfMonth])
+            ->get();
+        
+        // Menghitung total pendapatan (total_pendapatan) untuk bulan yang dipilih
+        $totalPendapatan = $report->sum('total_pendapatan');
+
+        return view('user.detail-report-dashboard', [
+            'totalPendapatanBulanIni' => $totalPendapatan,
+            'report' => $report,
+            'tanggal_laporan' => $tanggal->format('Y-m'), // Mengirimkan bulan yang difilter ke view
+        ]);
+    }
+
+    /**
+     * Get financial report for a specific month.
+     */
+    public function filterBulan(Request $request)
+    {
+        $bulan = $request->input('bulan');
+        
+        if ($bulan) {
+            // Ambil data sesuai bulan yang dipilih
+            $data = LaporanKeuangan::whereMonth('tanggal_laporan', $bulan)->get();
+        } else {
+            // Tampilkan pesan atau data kosong
+            $data = collect(); // atau bisa juga menggunakan null
+        }
+    
+        return view('user.detail-report-dashboard', compact('data'));
+    }
+    
+    
     /**
      * Show the form for creating a new resource.
      */

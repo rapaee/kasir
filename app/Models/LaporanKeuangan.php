@@ -14,5 +14,9 @@ class LaporanKeuangan extends Model
     // Kolom-kolom yang dapat diisi secara mass assignment
     protected $fillable = ["id_detail","tanggal_laporan", "total_pendapatan"];
 
-  
+    public function detail_transaksi()
+    {
+        return $this->belongsTo(detail_transaksi::class, 'id_detail', 'id');
+    }
+
 }

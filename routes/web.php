@@ -73,6 +73,8 @@ Route::get('user/detail-report-dashboard/',[DetailReportDashboard::class,'index'
 //laporan keuangan
 Route::get('/laporan-keuangan/harian', [LaporanKeuanganController::class, 'totalPendapatanHarian'])->name('laporan-keuangan-harian');
 Route::get('/laporan-keuangan/filter', [LaporanKeuanganUserController::class, 'filterPendapatan'])->name('laporan-keuangan-filter');
+Route::get('/laporan-keuangan/bulan', [DetailReportDashboard::class, 'filterBulanan'])->name('laporan-keuangan-bulan');
+Route::get('/laporan-keuangan/bulann', [DetailReportDashboard::class, 'laporanKeuanganBulan'])->name('laporan-keuangan.bulan');
 Route::post('/simpan-total-pendapatan', [LaporanKeuanganController::class, 'simpanTotalPendapatan'])->name('simpan-total-pendapatan');
 Route::get('/admin/laporan-keuangan', [LaporanKeuanganController::class, 'filter'])->name('laporan-keuangan-admin');
 Route::get('/laporan-keuangan', [LaporanKeuanganUserController::class, 'index2'])->name('laporan-keuangan-index2');
