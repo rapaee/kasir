@@ -112,7 +112,7 @@
     
     </div>
     </div>
-    <div style="width: 80%; margin: auto;">
+    {{-- <div style="width: 80%; margin: auto;">
         <canvas id="barChart">
         </canvas>
     </div>
@@ -141,7 +141,7 @@
             }
         }
     });
-</script>
+</script> --}}
 <!-- SweetAlert Notifications -->
 @if(session('success'))
 <script>
