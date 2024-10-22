@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaksi;
+use App\Models\detail_transaksi;
 use Illuminate\Http\Request;
 
 class DetailTransaksiDashboard extends Controller
@@ -12,56 +12,11 @@ class DetailTransaksiDashboard extends Controller
      */
     public function index()
     {
-        $transaksi = Transaksi::all();
-        $count = Transaksi::paginate(10);
-        return view('user.detail-transaksi-dashboard', compact('transaksi','count'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        // Mengambil data transaksi detail beserta relasi user, transaksi, dan produk dengan pagination
+        $report = detail_transaksi::with(['transaksi.users', 'product']) // Menggunakan eager loading
+                                ->paginate(10); // 10 transaksi per halaman
+        
+        // Mengirim data ke view
+        return view('user.detail-transaksi-dashboard', compact('report'));
     }
 }
