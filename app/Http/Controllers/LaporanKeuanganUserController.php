@@ -162,6 +162,40 @@ class LaporanKeuanganUserController extends Controller
         return view('laporan-keuangan', compact('report'));
     }
 
-    
 
+    //filter detail dasboard user
+    public function filterBulanan(Request $request)
+    {
+        // Ambil tanggal dari input form
+        $tanggal = $request->get('tanggal_laporan');
+        
+        // Jika tanggal tidak ada, set ke bulan ini
+        $tanggal = $tanggal ? Carbon::parse($tanggal) : Carbon::today();
+        
+        // Mengambil awal dan akhir bulan dari tanggal yang dipilih
+        $startOfMonth = $tanggal->copy()->startOfMonth();
+        $endOfMonth = $tanggal->copy()->endOfMonth();
+        
+        // Mengambil laporan dari tabel laporan_keuangan untuk bulan yang dipilih
+        $report = LaporanKeuangan::with('detail_transaksi') // Jika ada relasi ke detail
+                ->whereBetween('tanggal_laporan', [$startOfMonth, $endOfMonth])
+                ->get();
+        
+        // Menghitung total pendapatan (total_pendapatan) untuk bulan yang dipilih
+        $totalPendapatan = $report->sum('total_pendapatan');
+    
+        // Jika laporan kosong, Anda bisa menambahkan logika untuk menampilkan pesan
+        if ($report->isEmpty()) {
+            // Bisa menambahkan pesan atau logika lain
+        }
+    
+        return view('user.detail-report-dashboard', [
+            'totalPendapatanBulanIni' => $totalPendapatan,
+            'report' => $report,
+            'tanggal_laporan' => $tanggal->format('Y-m'), // Mengirimkan bulan yang difilter ke view
+        ]);
+    }
+    
+    
+    
 }
