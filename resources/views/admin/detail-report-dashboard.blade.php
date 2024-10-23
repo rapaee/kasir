@@ -6,6 +6,7 @@
     <title>Laporan Keuangan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         .filter-black {
             filter: grayscale(100%);
@@ -16,10 +17,10 @@
     </style>
 </head>
 <body>
-    @extends('navbar.dashboard')
-    @section('navbar')
+    @extends('navbar-admin.dashboard')
+    @section('navbar-admin')
     <div class="nav-content flex flex-col min-h-screen">
-
+        <a href="{{ route('admin.home') }}"><i class="fa-solid fa-arrow-left-long ml-96"> </i></a>
         <div class="flex justify-end mb-4">
             
             <button id="filterBulanButton" class="px-4 py-2 bg-green-800 text-white rounded hover:bg-green-800 mr-4">
