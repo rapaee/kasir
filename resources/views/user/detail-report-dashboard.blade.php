@@ -22,29 +22,34 @@
 @section('navbar')
 <div class="nav-content flex flex-col min-h-screen">
 
-    <div id="content" class="w-full flex-1 ">
-        <div class="flex justify-center mt-8 space-x-4">
-            <div class="relative">
-                <button id="filterBulanButton" class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">
-                    Filter Bulan
-                </button>
-
-                <div id="dropdownBulan" class="absolute mt-2 hidden bg-white border border-gray-300 rounded shadow-lg">
-                    <ul>
-                        @for ($i = 1; $i <= 12; $i++)
-                            <li>
-                                <form action="{{ route('laporan-keuangan-bulan') }}" method="GET">
-                                    <input type="hidden" name="bulan" value="{{ $i }}">
-                                    <button type="submit" class="block px-4 py-2 text-gray-700 hover:bg-gray-200 w-full text-left">
-                                        {{ DateTime::createFromFormat('!m', $i)->format('F') }}
-                                    </button>
-                                </form>
-                            </li>
-                        @endfor
-                    </ul>
-                </div>
-            </div>
+    <div class="flex justify-end mb-4">
+        
+        <button id="filterBulanButton" class="px-4 py-2 bg-green-800 text-white rounded hover:bg-green-800 mr-4">
+            Pilih Bulan
+        </button>
+        
+        {{-- Tombol Cancel --}}
+        <a href="{{ route('user.home') }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+            Cancel
+        </a>
+        
+    
+        <div id="dropdownBulan" class="absolute mt-2 hidden bg-white border border-gray-300 rounded shadow-lg">
+            <ul>
+                @for ($i = 1; $i <= 12; $i++)
+                    <li>
+                        <form action="{{ route('laporan-keuangan-bulan') }}" method="GET">
+                            <input type="hidden" name="bulan" value="{{ $i }}">
+                            <button type="submit" class="block px-4 py-2 text-gray-700 hover:bg-gray-200 w-full text-left">
+                                {{ DateTime::createFromFormat('!m', $i)->format('F') }}
+                            </button>
+                        </form>
+                    </li>
+                @endfor
+            </ul>
         </div>
+    </div>
+    
 
         <!-- Pesan Sukses -->
         @if (Session::has('success'))
@@ -53,9 +58,8 @@
 
         <!-- Tabel untuk laporan keuangan -->
         <div class="overflow-x-auto mt-8">
-            @if(request('bulan') || request('bulan') == 'all')
-            <table class="w-[1050px] bg-white mt-10 ml-96">
-                <thead>
+            <table class="w-[1050px] mt-10 ml-96 max-w-full  bg-white border border-gray-300 rounded-lg shadow-sm">
+                <thead class="bg-blue-300 text-blue-900">
                     <tr>
                         <td class="text-center py-3 font-semibold">No</td>
                         <td class="text-center py-3 font-semibold">Id Detail Transaksi</td>
@@ -65,22 +69,23 @@
                 </thead>
                 <tbody id="reportBody">
                     <h2 class="text-center ml-96 mt-9 font-bold text-lg">Transaksi</h2>
-                    @foreach ($report as $data)
-                    <tr>
-                        <td class="text-center py-3">{{ $loop->iteration }}</td>
-                        <td class="text-center py-3">{{ $data->id_detail }}</td>
-                        <td class="text-center py-3">{{ $data->tanggal_laporan }}</td>
-                        <td class="text-center py-3">{{ number_format($data->total_pendapatan, 0, ',', '.') }}</td>
-                    </tr>
-                    @endforeach
+                    @if($report->isEmpty())
+                        <tr>
+                            <td colspan="4" class="text-center py-3">Tidak ada data yang ditemukan.</td>
+                        </tr>
+                    @else
+                        @foreach ($report as $data)
+                        <tr>
+                            <td class="text-center py-3">{{ $loop->iteration }}</td>
+                            <td class="text-center py-3">{{ $data->id_detail }}</td>
+                            <td class="text-center py-3">{{ $data->tanggal_laporan }}</td>
+                            <td class="text-center py-3">{{ number_format($data->total_pendapatan, 0, ',', '.') }}</td>
+                        </tr>
+                        @endforeach
+                    @endif
                 </tbody>                
             </table>
-            @else
-                <div class="text-center py-3">Tidak ada data untuk bulan ini.</div>
-            @endif
-        </div>
-    </div>
-</div>
+        </div>        
 
 <!-- Script untuk Memunculkan Dropdown Bulan -->
 <script>
