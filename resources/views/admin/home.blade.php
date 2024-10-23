@@ -45,7 +45,7 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-semibold text-sm sm:text-base">FOOD AND DRINK</p>
+                        <p class="font-semibold text-sm sm:text-base">PRODUCT</p>
                         <p class="text-lg sm:text-xl font-bold">{{ $productCount }}</p>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="font-semibold text-sm sm:text-base">TOTAL PENDAPATAN</p>
+                    <p class="font-semibold text-sm sm:text-base">PENDAPATAN</p>
                     @if ($report->count() > 0)
                     <p class="text-lg sm:text-xl font-bold">
                         {{ $report->sum('total_pendapatan') }}
