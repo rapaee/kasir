@@ -1,5 +1,9 @@
-<?php 
+<?php
 
+use App\Http\Controllers\admin\detailfoodAnddrinkController as AdminDetailfoodAnddrinkController;
+use App\Http\Controllers\admin\detailreportController;
+use App\Http\Controllers\admin\detailtransaksiController;
+use App\Http\Controllers\admin\detailUserController;
 use App\Http\Controllers\BarangController; 
 use App\Http\Controllers\LaporanKeuanganController; 
 use App\Http\Controllers\LoginController; 
@@ -67,8 +71,13 @@ Route::delete('/admin/delete/{id}', [TransaksiAdminController::class,'destroy'])
 
 //detail halaman dashboard user
 Route::get('user/detail-food&drink/',[DetailFoodAndDrinkController::class,'index'])->name('detail-f&d');
+Route::get('admin/detail-food&drink/',[AdminDetailfoodAnddrinkController::class,'index'])->name('detail-f&d-admin');
 Route::get('user/detail-transaksi-dashboard/',[DetailTransaksiDashboard::class,'index'])->name('detail-transaksi-dashboard');
+Route::get('admin/detail-transaksi-dashboard/',[detailtransaksiController::class,'index'])->name('detail-transaksi-dashboard-admin');
 Route::get('user/detail-report-dashboard/',[DetailReportDashboard::class,'index'])->name('detail-report-dashboard');
+Route::get('admin/detail-report-dashboard/',[detailreportController::class,'index'])->name('detail-report-dashboard-admin');
+Route::get('admin/detail-user-dashboard/',[detailUserController::class,'index'])->name('detail-user-dashboard-admin');
+
 
 //laporan keuangan
 Route::get('/laporan-keuangan/harian', [LaporanKeuanganController::class, 'totalPendapatanHarian'])->name('laporan-keuangan-harian');
@@ -83,7 +92,6 @@ Route::get('/laporan-keuangan', [LaporanKeuanganUserController::class, 'index2']
 Route::get('/export-laporan-keuangan', [LaporanKeuanganController::class, 'export'])->name('export-laporan-keuangan');
 
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
-Route::get('/bar-chart', [LoginController::class, 'barChart'])->name('bar-chart');
 
 
 

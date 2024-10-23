@@ -25,7 +25,7 @@
         <!-- Dashboard Cards Section -->
         <div class="ml-96 grid grid-cols-5 gap-4 mb-5 mt-14">
             <!-- User Card -->
-            <a href="">
+            <a href="{{ route('detail-user-dashboard-admin') }}">
                 <div class="flex items-center bg-purple-200 text-black rounded-lg p-4 shadow-md">
                     <div class="bg-purple-500 p-2 mr-3">
                         <img src="https://cdn-icons-png.flaticon.com/128/615/615075.png" alt="" class="h-8 w-8 mr-3 icon">
@@ -38,7 +38,7 @@
             </a>
     
             <!-- Food and Drink Card -->
-            <a href="{{ route('detail-f&d') }}">
+            <a href="{{ route('detail-f&d-admin') }}">
                 <div class="flex items-center bg-blue-200 text-black rounded-lg p-4 shadow-md">
                     <div class="bg-blue-500 p-2 mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-8 w-8 text-white">
@@ -53,7 +53,7 @@
             </a>
     
             <!-- Transaksi Card -->
-            <a href="{{ route('detail-transaksi-dashboard') }}">
+            <a href="{{ route('detail-transaksi-dashboard-admin') }}">
                 <div class="flex items-center bg-green-200 text-black rounded-lg p-4 shadow-md">
                     <div class="bg-green-500 p-2 mr-3">
                         <img src="https://cdn-icons-png.flaticon.com/128/4492/4492321.png" alt="" class="h-8 w-8 mr-3 icon">
@@ -66,7 +66,7 @@
             </a>
     
             <!-- Report Card -->
-            <a href="{{ route('detail-report-dashboard') }}">
+            <a href="{{ route('detail-report-dashboard-admin') }}">
                 <div class="flex items-center bg-red-200 text-black rounded-lg p-4 shadow-md">
                     <div class="bg-red-500 p-2 mr-3">
                         <img src="https://cdn-icons-png.flaticon.com/128/478/478544.png" alt="" class="h-8 w-8 mr-3 icon">
