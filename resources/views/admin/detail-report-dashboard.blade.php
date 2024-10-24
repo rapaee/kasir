@@ -35,7 +35,7 @@
                 <ul>
                     @for ($i = 1; $i <= 12; $i++)
                         <li>
-                            <form action="{{ route('laporan-keuangan-bulan') }}" method="GET">
+                            <form action="{{ route('laporan-keuangan-bulan-admin') }}" method="GET">
                                 <input type="hidden" name="bulan" value="{{ $i }}">
                                 <button type="submit" class="block px-4 py-2 text-gray-700 hover:bg-gray-200 w-full text-left">
                                     {{ DateTime::createFromFormat('!m', $i)->format('F') }}
