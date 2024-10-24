@@ -42,7 +42,7 @@
                     <img src="https://cdn-icons-png.flaticon.com/128/1450/1450932.png" alt="" class="w-6 h-6 mr-4 filter-white">
                     <span class="text-white text-lg">Report</span>
                 </div>     
-                <form method="POST" action="{{ route('logout') }}" class="inline-block">
+                <form method="POST" action="{{ route('logout') }}" id="logout-form" class="inline-block">
                     @csrf
                     <div class="flex items-center p-5 hover:bg-sky-300 cursor-pointer w-96" onclick="confirmLogout();">
                         <li>

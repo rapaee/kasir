@@ -93,6 +93,8 @@ Route::get('/export-laporan-keuangan', [LaporanKeuanganController::class, 'expor
 
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
+//bar chart
+Route::get('/laporan-keuangan', [LoginController::class, 'showLaporanKeuangan'])->name('bar-chart');
 
 
 ?>

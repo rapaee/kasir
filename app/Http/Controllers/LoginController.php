@@ -45,15 +45,15 @@ class LoginController extends Controller
         $report = LaporanKeuangan::all();
         return view('user.home', compact('product', 'productCount', 'detailTransaksi', 'detailTransaksiCount','reportCount','report'));
     }
-    public function barChart()
+    public function showLaporanKeuangan()
     {
-        // Gantilah dengan logika pengambilan data yang sesuai
-        $data = [
-            'labels' => ['January', 'February', 'March', 'April', 'May'],
-            'data' => [65, 59, 80, 81, 56],
-        ];
-        return view('user.data-barang', compact('data'));
+        // Mengambil data laporan keuangan
+        $laporanKeuangan = LaporanKeuangan::all();
+        
+        // Mengirim data ke view
+        return view('user.home', compact('laporanKeuangan'));
     }
+    
     
     /**
      * Show the form for creating a new resource.
