@@ -28,9 +28,7 @@
             </button>
             
             {{-- Tombol Cancel --}}
-            <a href="{{ route('admin.home') }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                Cancel
-            </a>
+           
             
         
             <div id="dropdownBulan" class="absolute mt-2 hidden bg-white border border-gray-300 rounded shadow-lg">

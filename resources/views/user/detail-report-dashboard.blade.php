@@ -6,6 +6,7 @@
     <title>Laporan Keuangan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         .filter-black {
             filter: grayscale(100%);
@@ -20,18 +21,18 @@
 @extends('navbar.dashboard')
 
 @section('navbar')
-<div class="nav-content flex flex-col min-h-screen p-4">
 
+<div class="nav-content flex flex-col min-h-screen p-4">
+    <a href="{{ route('user.home') }}"><i class="fa-solid fa-arrow-left-long ml-96"> </i></a>
     <div class="flex justify-end mb-4">
+        
         
         <button id="filterBulanButton" class="px-4 py-2 bg-green-800 text-white rounded hover:bg-green-800 mr-4">
             Pilih Bulan
         </button>
         
         {{-- Tombol Cancel --}}
-        <a href="{{ route('user.home') }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-            Cancel
-        </a>
+        
         
     
         <div id="dropdownBulan" class="absolute mt-2 hidden bg-white border border-gray-300 rounded shadow-lg">
@@ -56,38 +57,35 @@
     @endif
 
     <!-- Tabel untuk laporan keuangan -->
-    <div class="flex flex-col items-center mt-8 w-full">
-        <h2 class="text-center font-bold text-lg mb-4">Transaksi</h2>
-        <div class="overflow-x-auto w-full flex justify-center">
-            <table class="w-[90%] md:w-[70%] lg:w-[50%] bg-white border border-gray-300 rounded-lg shadow-sm mx-auto">
-                <thead class="bg-blue-300 text-blue-900">
+    <div class="overflow-x-auto mt-8">
+        <table class="w-[1050px] mt-10 ml-96 max-w-full  bg-white border border-gray-300 rounded-lg shadow-sm">
+            <thead class="bg-blue-300 text-blue-900">
+                <tr>
+                    <td class="text-center py-3 font-semibold">No</td>
+                    <td class="text-center py-3 font-semibold">Id Detail Transaksi</td>
+                    <td class="text-center py-3 font-semibold">Tanggal</td>
+                    <td class="text-center py-3 font-semibold">Total Pendapatan</td>
+                </tr>
+            </thead>
+            <tbody id="reportBody">
+                <h2 class="text-center ml-96 mt-9 font-bold text-lg">Transaksi</h2>
+                @if($report->isEmpty())
                     <tr>
-                        <td class="text-center py-3 font-semibold">No</td>
-                        <td class="text-center py-3 font-semibold">Id Detail Transaksi</td>
-                        <td class="text-center py-3 font-semibold">Tanggal</td>
-                        <td class="text-center py-3 font-semibold">Total Pendapatan</td>
+                        <td colspan="4" class="text-center py-3">Tidak ada data yang ditemukan.</td>
                     </tr>
-                </thead>
-                <tbody id="reportBody">
-                    @if($report->isEmpty())
-                        <tr>
-                            <td colspan="4" class="text-center py-3">Tidak ada data yang ditemukan.</td>
-                        </tr>
-                    @else
-                        @foreach ($report as $data)
-                        <tr>
-                            <td class="text-center py-3">{{ $loop->iteration }}</td>
-                            <td class="text-center py-3">{{ $data->id_detail }}</td>
-                            <td class="text-center py-3">{{ $data->tanggal_laporan }}</td>
-                            <td class="text-center py-3">{{ number_format($data->total_pendapatan, 0, ',', '.') }}</td>
-                        </tr>
-                        @endforeach
-                    @endif
-                </tbody>                
-            </table>
-        </div>
-    </div>
-</div>
+                @else
+                    @foreach ($report as $data)
+                    <tr>
+                        <td class="text-center py-3">{{ $loop->iteration }}</td>
+                        <td class="text-center py-3">{{ $data->id_detail }}</td>
+                        <td class="text-center py-3">{{ $data->tanggal_laporan }}</td>
+                        <td class="text-center py-3">{{ number_format($data->total_pendapatan, 0, ',', '.') }}</td>
+                    </tr>
+                    @endforeach
+                @endif
+            </tbody>                
+        </table>
+    </div>        
 
 <!-- Script untuk Memunculkan Dropdown Bulan -->
 <script>
