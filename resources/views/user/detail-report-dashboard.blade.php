@@ -26,22 +26,20 @@
     <a href="{{ route('user.home') }}"><i class="fa-solid fa-arrow-left-long ml-96"> </i></a>
     <div class="flex justify-end mb-4">
         
-        
+        <!-- Tombol Pilih Bulan -->
+        <!-- Tombol Pilih Bulan -->
         <button id="filterBulanButton" class="px-4 py-2 bg-green-800 text-white rounded hover:bg-green-800 mr-4">
-            Pilih Bulan
-        </button>
-        
-        {{-- Tombol Cancel --}}
-        
-        
-    
+            {{ session('selected_bulan') ? DateTime::createFromFormat('!m', session('selected_bulan'))->format('F') : 'Pilih Bulan' }}
+        </button>        
+        <!-- Dropdown bulan -->
         <div id="dropdownBulan" class="absolute mt-2 hidden bg-white border border-gray-300 rounded shadow-lg">
             <ul>
                 @for ($i = 1; $i <= 12; $i++)
                     <li>
-                        <form action="{{ route('laporan-keuangan-bulan') }}" method="GET">
+                        <form action="{{ route('laporan-keuangan-bulan') }}" method="GET" class="bulanForm">
                             <input type="hidden" name="bulan" value="{{ $i }}">
-                            <button type="submit" class="block px-4 py-2 text-gray-700 hover:bg-gray-200 w-full text-left">
+                            <button type="submit" class="block px-4 py-2 text-gray-700 hover:bg-gray-200 w-full text-left"
+                                    data-bulan="{{ DateTime::createFromFormat('!m', $i)->format('F') }}">
                                 {{ DateTime::createFromFormat('!m', $i)->format('F') }}
                             </button>
                         </form>
@@ -58,7 +56,7 @@
 
     <!-- Tabel untuk laporan keuangan -->
     <div class="overflow-x-auto mt-8">
-        <table class="w-[1050px] mt-10 ml-96 max-w-full  bg-white border border-gray-300 rounded-lg shadow-sm">
+        <table class="w-[1050px] mt-10 ml-96 max-w-full bg-white border border-gray-300 rounded-lg shadow-sm">
             <thead class="bg-blue-300 text-blue-900">
                 <tr>
                     <td class="text-center py-3 font-semibold">No</td>
@@ -87,7 +85,7 @@
         </table>
     </div>        
 
-<!-- Script untuk Memunculkan Dropdown Bulan -->
+<!-- Script untuk Memunculkan Dropdown Bulan dan Ganti Teks Tombol -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var filterBulanButton = document.getElementById('filterBulanButton');
@@ -99,6 +97,16 @@
             dropdownBulan.classList.toggle('hidden');
         });
 
+        // Update the button text when a month is selected
+        document.querySelectorAll('.bulanForm button').forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                var selectedBulan = event.target.dataset.bulan;
+                filterBulanButton.textContent = selectedBulan; // Update button text
+                dropdownBulan.classList.add('hidden'); // Hide dropdown
+                button.closest('form').submit(); // Submit the form
+            });
+        });
+
         // Hide the dropdown if clicked outside
         document.addEventListener('click', function(event) {
             if (!filterBulanButton.contains(event.target) && !dropdownBulan.contains(event.target)) {
@@ -107,6 +115,7 @@
         });
     });
 </script>
+
 
 <script>
     @if(session('success'))
