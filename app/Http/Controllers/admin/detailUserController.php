@@ -13,10 +13,16 @@ class detailUserController extends Controller
      */
     public function index()
     {
-        $count = User::paginate(10);
-        $user = User::all();
-        return view('admin.detail-user-dashboard',compact('count','user'));
+        // Ambil hanya pengguna dengan usertype 'user' dan paginate hasilnya
+        $count = User::where('usertype', 'user')->paginate(10);
+        
+        // Jika kamu juga ingin mengambil semua pengguna, kamu bisa mempertahankan ini,
+        // tetapi jika tidak, kamu bisa menghapusnya
+        // $user = User::all(); 
+        
+        return view('admin.detail-user-dashboard', compact('count'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
