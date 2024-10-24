@@ -20,7 +20,7 @@
 @extends('navbar.dashboard')
 
 @section('navbar')
-<div class="nav-content flex flex-col min-h-screen">
+<div class="nav-content flex flex-col min-h-screen p-4">
 
     <div class="flex justify-end mb-4">
         
@@ -50,15 +50,16 @@
         </div>
     </div>
     
+    <!-- Pesan Sukses -->
+    @if (Session::has('success'))
+        <span class="text-green-500">{{ Session::get('success') }}</span>
+    @endif
 
-        <!-- Pesan Sukses -->
-        @if (Session::has('success'))
-            <span class="text-green-500">{{ Session::get('success') }}</span>
-        @endif
-
-        <!-- Tabel untuk laporan keuangan -->
-        <div class="overflow-x-auto mt-8">
-            <table class="w-[1050px] mt-10 ml-96 max-w-full  bg-white border border-gray-300 rounded-lg shadow-sm">
+    <!-- Tabel untuk laporan keuangan -->
+    <div class="flex flex-col items-center mt-8 w-full">
+        <h2 class="text-center font-bold text-lg mb-4">Transaksi</h2>
+        <div class="overflow-x-auto w-full flex justify-center">
+            <table class="w-[90%] md:w-[70%] lg:w-[50%] bg-white border border-gray-300 rounded-lg shadow-sm mx-auto">
                 <thead class="bg-blue-300 text-blue-900">
                     <tr>
                         <td class="text-center py-3 font-semibold">No</td>
@@ -68,7 +69,6 @@
                     </tr>
                 </thead>
                 <tbody id="reportBody">
-                    <h2 class="text-center ml-96 mt-9 font-bold text-lg">Transaksi</h2>
                     @if($report->isEmpty())
                         <tr>
                             <td colspan="4" class="text-center py-3">Tidak ada data yang ditemukan.</td>
@@ -85,7 +85,9 @@
                     @endif
                 </tbody>                
             </table>
-        </div>        
+        </div>
+    </div>
+</div>
 
 <!-- Script untuk Memunculkan Dropdown Bulan -->
 <script>
