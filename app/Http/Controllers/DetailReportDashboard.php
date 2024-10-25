@@ -16,26 +16,34 @@ class DetailReportDashboard extends Controller
     {
         $report = LaporanKeuangan::all();
         $count = LaporanKeuangan::paginate(10);
+
+        // Reset session bulan jika halaman diakses tanpa filter
+        session()->forget('selected_bulan');
+
         return view('user.detail-report-dashboard', compact('report', 'count'));
     }
-    public function filterBulanan(Request $request)
-{
-    $bulan = $request->input('bulan');
-    
-    if ($bulan) {
-        // Filter berdasarkan bulan dan tahun saat ini
-        $data = LaporanKeuangan::whereMonth('tanggal_laporan', $bulan)
-            ->whereYear('tanggal_laporan', Carbon::now()->year)
-            ->get();
-    } else {
-        // Tampilkan pesan atau data kosong jika tidak ada bulan yang dipilih
-        $report = transaksi::all(); // Jika tidak ada data, return koleksi kosong
-    }
 
-    return view('user.detail-report-dashboard', [
-        'report' => $data,
-    ]);
-}
+    public function filterBulanan(Request $request)
+    {
+        $bulan = $request->input('bulan');
+
+        if ($bulan) {
+            // Filter berdasarkan bulan dan tahun saat ini
+            $data = LaporanKeuangan::whereMonth('tanggal_laporan', $bulan)
+                ->whereYear('tanggal_laporan', Carbon::now()->year)
+                ->get();
+
+            // Simpan bulan yang dipilih ke dalam session
+            session(['selected_bulan' => $bulan]);
+        } else {
+            // Jika tidak ada bulan yang dipilih, ambil semua data
+            $data = LaporanKeuangan::all();
+        }
+
+        return view('user.detail-report-dashboard', [
+            'report' => $data,
+        ]);
+    }
 
 
     // Filter detail dasboard user
