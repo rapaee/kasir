@@ -22,7 +22,7 @@
                 <div class="mt-5 text-2xl font-bold text-white">
                     <h1>SMK NEGERI</h1>
                     <h1>1 BANTUL</h1>
-                    <h1>CAFETARIA</h1>
+                    <h1>KASIR APP</h1>
                 </div>
             </div>
             <ul>
