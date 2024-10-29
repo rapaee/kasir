@@ -53,6 +53,14 @@ class LoginController extends Controller
         // Mengirim data ke view
         return view('user.home', compact('laporanKeuangan'));
     }
+    public function showLaporanKeuanganAdmin()
+    {
+        // Mengambil data laporan keuangan
+        $laporanKeuangan = LaporanKeuangan::all();
+        
+        // Mengirim data ke view
+        return view('admin.home', compact('laporanKeuangan'));
+    }
     
     
     /**

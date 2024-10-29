@@ -13,9 +13,23 @@
     @section('navbar-admin')
     <div class="flex nav-content"></div>
 
-    <div class="container mx-auto mt-10 flex justify-end">
+    <div class="container mx-auto flex justify-end">
         <div class="bg-white rounded-lg shadow-lg p-8 w-3/4">
             <h1 class="text-center text-4xl font-bold text-blue-700 mb-6">List Product</h1>
+            <div class="flex justify-end space-x-4 mb-4">
+               
+               <!-- Filter Buttons -->
+               
+                   <button id="filter-makanan" class="bg-green-500 text-white p-2 rounded hover:bg-green-600">
+                    Makanan
+                   </button>
+                   <button id="filter-minuman" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+                    Minuman
+                   </button>
+                   <button id="reset-filter" class="bg-gray-500 text-white p-2 rounded hover:bg-gray-600">
+                    Semua
+                   </button>
+           </div>
             <div class="overflow-x-auto">
                 <table class=" max-w-full w-full bg-white border border-gray-300 rounded-lg shadow-sm">
                     <thead class="bg-blue-300 text-blue-900">
@@ -49,5 +63,42 @@
         </div>
     </div>
     @endsection
+    <script>
+     // Filtering logic
+     document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById('filter-makanan').addEventListener('click', function () {
+        filterTable('Makanan');
+    });
+
+    document.getElementById('filter-minuman').addEventListener('click', function () {
+        filterTable('Minuman');
+    });
+
+    document.getElementById('reset-filter').addEventListener('click', function () {
+        resetFilter();
+    });
+});
+
+
+        function filterTable(kategori) {
+            let rows = document.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                let kategoriCell = row.cells[3].innerText; // Kolom kategori ada di indeks 3
+                if (kategoriCell === kategori) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function resetFilter() {
+            let rows = document.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                row.style.display = '';
+            });
+        }
+</script>
+
 </body>
 </html>

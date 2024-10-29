@@ -10,15 +10,10 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\LaporanKeuanganExport;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 class LaporanKeuanganUserController extends Controller
 {
-    public function index()
-    {
-        $report = LaporanKeuangan::all();
-        return view('admin.laporan-keuangan',compact('report'));
-    }
     public function index2(Request $request)
 {
     if ($request->input('tanggal') == 'all') {
@@ -26,6 +21,22 @@ class LaporanKeuanganUserController extends Controller
     } else {
         $report = Transaksi::whereDate('tanggal', $request->input('tanggal'))->get(); // Ambil berdasarkan tanggal
     }
+
+    return view('user.laporan-keuangan', compact('report'));
+}
+
+public function pendapatanbulan(Request $request)
+{
+    $bulan = $request->input('bulan');
+
+    $report = DB::table('laporan_keuangan');
+
+    // Check if a specific month is selected
+    if ($bulan && $bulan != 'all') {
+        $report = $report->whereMonth('created_at', $bulan);
+    }
+
+    $report = $report->get();
 
     return view('user.laporan-keuangan', compact('report'));
 }

@@ -96,6 +96,9 @@ Route::put('/profile', [ProfileController::class, 'update'])->name('profile.upda
 
 //bar chart
 Route::get('/laporan-keuangan', [LoginController::class, 'showLaporanKeuangan'])->name('bar-chart');
+Route::get('/laporan-keuangan/admin', [LoginController::class, 'showLaporanKeuanganAdmin'])->name('bar-chart-admin');
+
+
 
 
 ?>

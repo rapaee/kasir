@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <title>Dashboard</title>
 
     <!-- Tambahkan SweetAlert2 CDN -->
@@ -97,8 +99,48 @@
                 </div>
             </div>
 
+            <canvas id="barChart" width="500" height="200" class="">
+                
+            </canvas>
         </div>
     </div>
+    
+    <script>
+      var ctx = document.getElementById('barChart').getContext('2d');
+        var barChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    @if(isset($laporanKeuangan) && $laporanKeuangan->count() > 0)
+                        @foreach($laporanKeuangan as $laporan)
+                            '{{ $laporan->tanggal_laporan }}'{{ !$loop->last ? ',' : '' }}
+                        @endforeach
+                    @endif
+                ],
+                datasets: [{
+                    label: 'Total Pendapatan',
+                    data: [
+                        @if(isset($laporanKeuangan) && $laporanKeuangan->count() > 0)
+                            @foreach($laporanKeuangan as $laporan)
+                                {{ $laporan->total_pendapatan }}{{ !$loop->last ? ',' : '' }}
+                            @endforeach
+                        @endif
+                    ],
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    
+    </script>
 
 <!-- SweetAlert Notifications -->
 @if(session('success'))

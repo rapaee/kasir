@@ -57,7 +57,7 @@
         </nav>
 
         <!-- Content on the right -->
-        <div class="flex-1 p-10">
+        <div class="flex-1">
             @yield('navbar-admin')
         </div>
         

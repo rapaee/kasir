@@ -29,7 +29,6 @@
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Jumlah Barang</th>
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Nama Barang</th>
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Sub Total</th>
-                            <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,27 +41,6 @@
                             <td class="px-4 py-3 border border-gray-300 text-center">{{ $data->jumlah_barang }}</td>
                             <td class="px-4 py-3 border border-gray-300 text-center">{{ $data->product->nama_barang }}</td>
                             <td class="px-4 py-3 border border-gray-300 text-center">{{ $data->sub_total }}</td>
-                            <td class="px-4 py-3 border border-gray-300 text-center">
-                                <div class="flex justify-center space-x-2">
-                                    <form action="{{ route('delete-transaksi-admin',$data->id) }}" method="post" class="inline-flex items-center delete-form">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="button" class="text-red-500 hover:text-red-700 flex items-center delete-button" onclick="confirmDeletion(this)">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
-                                    
-                                    <script>
-                                        function confirmDeletion(button) {
-                                            if (confirm('Apakah Anda yakin ingin menghapus transaksi ini?')) {
-                                                button.closest('form').submit();
-                                            }
-                                        }
-                                    </script>
-                                    
-                                </div>
-                              
-                            </td>
                         </tr>
                         @endforeach
                     </tbody>

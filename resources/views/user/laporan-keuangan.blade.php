@@ -35,7 +35,9 @@
                     <small class="block mt-2 text-gray-500">Total Pendapatan</small>
             
                   <!-- Form untuk menyimpan total pendapatan sesuai dengan tanggal yang dipilih -->
-                  <form action="{{ route('simpan-total-pendapatan') }}" method="POST" class="mt-4">
+                 <!-- Button for Saving Total Pendapatan -->
+                @if(request('tanggal') != 'all')
+                <form action="{{ route('simpan-total-pendapatan') }}" method="POST" class="mt-4">
                     @csrf
                     <input type="hidden" name="tanggal" value="{{ request('tanggal') }}">
                     <input type="hidden" name="total_pendapatan" value="
@@ -51,6 +53,8 @@
                         Simpan Total Pendapatan
                     </button>
                 </form>
+                @endif
+
             </div>
         </div>
         

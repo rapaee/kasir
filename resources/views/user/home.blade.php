@@ -111,44 +111,44 @@
     @endif
     </div>
     </div>
-    <canvas id="barChart" width="400" height="200">
-        <p>Laporan Keuangan</p>
+    <canvas id="barChart" width="400" height="200" class="">
+        
     </canvas>
 
 <script>
- var ctx = document.getElementById('barChart').getContext('2d');
-var barChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: [
-            @if(isset($laporanKeuangan))
-                @foreach($laporanKeuangan as $laporan)
-                    '{{ $laporan->tanggal_laporan }}',
-                @endforeach
-            @endif
-        ],
-        datasets: [{
-            label: 'Total Pendapatan',
-            data: [
-                @if(isset($laporanKeuangan))
+  var ctx = document.getElementById('barChart').getContext('2d');
+    var barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [
+                @if(isset($laporanKeuangan) && $laporanKeuangan->count() > 0)
                     @foreach($laporanKeuangan as $laporan)
-                        {{ $laporan->total_pendapatan }},
+                        '{{ $laporan->tanggal_laporan }}'{{ !$loop->last ? ',' : '' }}
                     @endforeach
                 @endif
             ],
-            backgroundColor: 'rgba(54, 162, 235, 0.6)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
+            datasets: [{
+                label: 'Total Pendapatan',
+                data: [
+                    @if(isset($laporanKeuangan) && $laporanKeuangan->count() > 0)
+                        @foreach($laporanKeuangan as $laporan)
+                            {{ $laporan->total_pendapatan }}{{ !$loop->last ? ',' : '' }}
+                        @endforeach
+                    @endif
+                ],
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
             }
         }
-    }
-});
+    });
 
 </script>
 

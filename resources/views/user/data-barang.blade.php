@@ -45,7 +45,7 @@
                      Minuman
                     </button>
                     <button id="reset-filter" class="bg-gray-500 text-white p-2 rounded hover:bg-gray-600">
-                     Reset
+                     Semua
                     </button>
                     <button class="bg-blue-500 p-2 rounded ml-auto text-white hover:bg-blue-600  ">
                         <a href="{{ route('add-data-barang') }}">Add Product</a>
