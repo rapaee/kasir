@@ -18,12 +18,12 @@
 </head>
 <body>
 
-@extends('navbar.dashboard')
+@extends('navbar-admin.dashboard')
 
-@section('navbar')
+@section('navbar-admin')
 
 <div class="nav-content flex flex-col min-h-screen p-4">
-    <a href="{{ route('user.home') }}"><i class="fa-solid fa-arrow-left-long ml-96"> </i></a>
+    <a href="{{ route('admin.home') }}"><i class="fa-solid fa-arrow-left-long ml-96"> </i></a>
     <div class="flex justify-end mb-4">
         
         <!-- Tombol Pilih Bulan -->
@@ -36,7 +36,7 @@
             <ul>
                 @for ($i = 1; $i <= 12; $i++)
                     <li>
-                        <form action="{{ route('laporan-keuangan-bulan') }}" method="GET" class="bulanForm">
+                        <form action="{{ route('laporan-keuangan-bulan-admin') }}" method="GET" class="bulanForm">
                             <input type="hidden" name="bulan" value="{{ $i }}">
                             <button type="submit" class="block px-4 py-2 text-gray-700 hover:bg-gray-200 w-full text-left"
                                     data-bulan="{{ DateTime::createFromFormat('!m', $i)->format('F') }}">
@@ -122,7 +122,7 @@
         Swal.fire({
             icon: 'success',
             title: 'Sukses!',
-            text: '{{ session('success') }}',
+            text: "{{ session('success') }}",
             timer: 1000,
             showConfirmButton: false
         });
@@ -130,7 +130,7 @@
         Swal.fire({
             icon: 'error',
             title: 'Gagal!',
-            text: '{{ session('error') }}',
+            text: "{{ session('error') }}",
             timer: 1000,
             showConfirmButton: false
         });
