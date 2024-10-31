@@ -22,7 +22,7 @@ return new class extends Migration
             $table->id('id');
             $table->string('nama_barang');
             $table->decimal('harga');
-            // $table->string('kategori_barang');
+            $table->integer('kode_barang');
             $table->bigInteger('id_kategori')->unsigned(); // Kolom tanpa auto_increment
             $table->integer('stok_barang');
             $table->timestamps();

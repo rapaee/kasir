@@ -43,6 +43,7 @@ class BarangController extends Controller
        // Validasi input dari form
        $request->validate([
            'nama_barang' => 'required|string',
+           'kode_barang' => 'required|numeric',
            'harga' => 'required|numeric',
            'kategori_barang' => 'required|exists:kategori,id', // Validasi kategori harus ada di tabel kategori
            'stok_barang' => 'required|numeric',
@@ -52,6 +53,7 @@ class BarangController extends Controller
            // Membuat instance produk baru dan menyimpan data
            $new_product = new Product();
            $new_product->nama_barang = $request->nama_barang;
+           $new_product->kode_barang = $request->kode_barang;
            $new_product->harga = $request->harga;
            $new_product->id_kategori = $request->kategori_barang; // Menyimpan kategori barang yang dipilih
            $new_product->stok_barang = $request->stok_barang;
@@ -90,6 +92,7 @@ public function update(Request $request, $id)
     // Validasi input
     $request->validate([
         'nama_barang' => 'required|string',
+        'kode_barang' => 'required|numeric',
         'harga' => 'required|numeric',
         'id_kategori' => 'required|exists:kategori,id', // Pastikan validasi kolom 'id_kategori'
         'stok_barang' => 'required|numeric',
@@ -101,6 +104,7 @@ public function update(Request $request, $id)
 
         // Update data barang
         $barang->nama_barang = $request->nama_barang;
+        $barang->kode_barang = $request->kode_barang;
         $barang->harga = $request->harga;
         $barang->id_kategori = $request->id_kategori; // Menggunakan id_kategori
         $barang->stok_barang = $request->stok_barang;
@@ -110,7 +114,7 @@ public function update(Request $request, $id)
         return redirect()->route('data-barang-user')->with('success', 'Berhasil mengupdate produk');
     } catch (\Exception $e) {
         // Redirect kembali ke form dengan pesan error
-        return redirect()->route('edit-barang', $id)->with('fail', 'Gagal mengupdate produk: ' . $e->getMessage());
+        return redirect()->route('update-data-barang', $id)->with('fail', 'Gagal mengupdate produk: ' . $e->getMessage());
     }
 }
 

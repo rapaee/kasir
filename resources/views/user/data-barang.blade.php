@@ -62,7 +62,7 @@
                 <table class="max-w-full w-full bg-white border border-gray-300 rounded-lg shadow-sm">
                     <thead class="bg-blue-300 text-blue-900">
                         <tr>
-                            <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">S/N</th>
+                            <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Kode Barang</th>
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Nama barang</th>
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Harga</th>
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Kategori</th>
@@ -74,7 +74,7 @@
                         @if ($new_product->count() > 0)
                         @foreach ($new_product as $item)
                         <tr class="hover:bg-blue-50 transition duration-300 ease-in-out">
-                            <td class="text-center py-3 border border-gray-300">{{ $loop->iteration }}</td>
+                            <td class="text-center py-3 border border-gray-300">{{ $item->kode_barang }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->nama_barang }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->harga }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->kategori->nama_kategori }}</td>
@@ -88,7 +88,7 @@
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
-                                    <a href="{{ route('edit-data-barang-user', $item->id) }}" class="text-green-500 hover:text-blue-700 flex items-center edit-button">
+                                    <a href="{{ route('edit-data-barang-user', $item->id) }}" class="text-gray-500 hover:text-gray-700 flex items-center edit-button">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
                                 </div>
@@ -150,23 +150,23 @@
             });
         });
 
-        @if(session('success'))
+        "@if(session('success'))"
         Swal.fire({
             icon: 'success',
             title: 'Sukses!',
-            text: '{{ session('success') }}',
+            text: "{{ session('success') }}",
             timer: 1000,
             showConfirmButton: false
         });
-        @elseif(session('error'))
+        "@elseif(session('error'))"
         Swal.fire({
             icon: 'error',
             title: 'Gagal!',
-            text: '{{ session('error') }}',
+            text: "{{ session('error') }}",
             timer: 1000,
             showConfirmButton: false
         });
-        @endif
+        "@endif"
 
         // Filtering logic
         document.getElementById('filter-makanan').addEventListener('click', function () {
