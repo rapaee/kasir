@@ -16,7 +16,7 @@
             <img src="{{ asset('SMK_Negeri_1_Bantul_logo.png') }}" alt="">
             <h1 class="text-4xl font-bold">SMK NEGERI</h1>
             <h1 class="text-4xl font-bold">1 BANTUL</h1>
-            <h1 class="text-4xl font-bold">CAFETARIA APP</h1>
+            <h1 class="text-4xl font-bold">KASIR APP</h1>
         </div>
 
         <!-- Right Container -->
