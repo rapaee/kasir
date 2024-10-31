@@ -13,11 +13,27 @@
     @extends('navbar-admin.transaksi')
 
     @section('navbar-admin')
-    <div class="flex nav-content"></div>
-
-    <div class="container mx-auto flex justify-end">
+    <div class="container mx-auto flex justify-end mt-10">
         <div class="bg-white rounded-lg shadow-lg p-5 w-3/4">
-            <h1 class="text-center text-4xl font-bold text-blue-700 mt-5 mb-6">List Transaksi</h1>
+            <h1 class="text-center text-4xl font-bold text-blue-700 mb-6">List Transaksi</h1>
+
+            <!-- Form Filter Tanggal -->
+            <div class="flex justify-end mb-4">
+                <form action="{{ route('transaksi-filter-admin') }}" method="GET" class="flex items-center space-x-2">
+                    <input type="date" name="tanggal" 
+                    class="border border-gray-300 p-2 rounded-md w-full bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out"
+                    onchange="this.form.submit()">
+                </form>
+                <!-- Tombol untuk Menampilkan Semua Transaksi -->
+             <form action="{{  route('transaksi-filter-all') }}" method="GET">
+            <input type="hidden" name="tanggal" value="all">
+                <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+                    Tampilkan Semua Transaksi
+                </button>
+            </form>
+            </div>
+
+            <!-- Table Transaksi -->
             <div class="overflow-x-auto">
                 <table class="max-w-full w-full bg-white border border-gray-300 rounded-lg shadow-sm">
                     <thead class="bg-blue-300 text-blue-900">
@@ -32,21 +48,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($report as $data)
-                        <tr class="hover:bg-blue-50 transition duration-300 ease-in-out">
-                            <td class="px-4 py-3 border border-gray-300 text-center">{{ $loop->iteration }}</td>
-                            <td class="px-4 py-3 border border-gray-300 text-center">{{ $data->transaksi->users->name }}</td>
-                            <td class="px-4 py-3 border border-gray-300 text-center">{{ $data->transaksi->tanggal }}</td>
-                            <td class="px-4 py-3 border border-gray-300 text-center">{{ $data->id_transaksi }}</td>
-                            <td class="px-4 py-3 border border-gray-300 text-center">{{ $data->jumlah_barang }}</td>
-                            <td class="px-4 py-3 border border-gray-300 text-center">{{ $data->product->nama_barang }}</td>
-                            <td class="px-4 py-3 border border-gray-300 text-center">{{ $data->sub_total }}</td>
-                        </tr>
-                        @endforeach
+                        @forelse ($report as $data)
+                            <tr class="hover:bg-blue-50 transition duration-300 ease-in-out">
+                                <td class="px-4 py-3 border border-gray-300 text-center">{{ $loop->iteration }}</td>
+                                <td class="px-4 py-3 border border-gray-300 text-center">{{ $data->transaksi->users->name }}</td>
+                                <td class="px-4 py-3 border border-gray-300 text-center">{{ $data->transaksi->tanggal }}</td>
+                                <td class="px-4 py-3 border border-gray-300 text-center">{{ $data->id_transaksi }}</td>
+                                <td class="px-4 py-3 border border-gray-300 text-center">{{ $data->jumlah_barang }}</td>
+                                <td class="px-4 py-3 border border-gray-300 text-center">{{ $data->product->nama_barang }}</td>
+                                <td class="px-4 py-3 border border-gray-300 text-center">{{ $data->sub_total }}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="7" class="text-center py-4">Tidak ada data transaksi ditemukan.</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
-                   <!-- Pagination -->
-                   <div class="mt-4">
+
+                <!-- Pagination -->
+                <div class="mt-4">
                     {{ $report->links() }}
                 </div>
             </div>
