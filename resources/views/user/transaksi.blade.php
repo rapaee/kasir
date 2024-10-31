@@ -202,24 +202,27 @@
         </div>
     </div>
     <script>
-        @if(session('success'))
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Mencegah form dikirim langsung
+    
             Swal.fire({
-                icon: 'success',
-                title: 'Sukses!',
-                text: '{{ session('success') }}',
-                timer: 1000,
-                showConfirmButton: false
+                title: 'Print Transaksi?',
+                text: "Apakah Anda ingin mencetak nota transaksi?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Tidak'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Kirim form dan redirect ke nota
+                    e.target.submit();
+                }
             });
-        @elseif(session('error'))
-            Swal.fire({
-                icon: 'error',
-                title: 'Gagal!',
-                text: '{{ session('error') }}',
-                timer: 1000,
-                showConfirmButton: false
-            });
-        @endif
+        });
     </script>
+    
         </div>
     </div>
 
