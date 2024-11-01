@@ -6,6 +6,7 @@
     <title>Transaksi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         * {
             margin: 0;
@@ -49,9 +50,13 @@
                     </ul>
                 </div>
             @endif
-            
             <form id="dynamicForm" action="{{ route('transaksi-store') }}" method="POST" class="w-full">
                 @csrf
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
 
                 <!-- Input Barang Section -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
@@ -93,7 +98,8 @@
                 <button type="button" onclick="addInput()" class="bg-blue-500 text-white w-full py-2 rounded hover:bg-blue-600 transition-colors mb-4">Tambah Barang</button>
                
                 <!-- Submit -->
-                <input type="submit" value="Submit" class="bg-green-500 text-white w-full py-2 rounded hover:bg-green-600 transition-colors mt-4">
+                <input type="submit" value="Submit" class=" bg-green-500 text-white w-full py-2 rounded hover:bg-green-600 transition-colors mt-4">
+                
             </form>
             
             <!-- Total Keseluruhan -->
@@ -202,25 +208,42 @@
         </div>
     </div>
     <script>
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault(); // Mencegah form dikirim langsung
-    
-            Swal.fire({
-                title: 'Print Transaksi?',
-                text: "Apakah Anda ingin mencetak nota transaksi?",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya',
-                cancelButtonText: 'Tidak'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Kirim form dan redirect ke nota
-                    e.target.submit();
-                }
+        document.querySelectorAll('dynamicForm').forEach(submit => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Cetak Nota?',
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Tidak'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = button.href;
+                    }
+                });
             });
         });
+
+        "@if(session('success'))"
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses!',
+            text: "{{ session('success') }}",
+            timer: 1000,
+            showConfirmButton: false
+        });
+        "@elseif(session('error'))"
+        Swal.fire({
+            icon: 'error',
+            title: 'Gagal!',
+            text: "{{ session('error') }}",
+            timer: 1000,
+            showConfirmButton: false
+        });
+        "@endif"
     </script>
     
         </div>

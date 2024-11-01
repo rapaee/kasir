@@ -55,7 +55,8 @@ Route::get('/user/transaksiv2',[transaksiv2Controller::class,'index'])->name('tr
 // Rute untuk tambah barang dan transaksi
 Route::get('/user/in-ed/add-data-barang',[BarangController::class, 'create'])->name('add-data-barang'); 
 Route::post('/user/in-ed/add-data-barang', [BarangController::class, 'store'])->name('add-data-barang.store');   
-Route::post('/user/transaksi',[TransaksiController::class,'store'])->name('transaksi-store');
+// Route::post('/user/transaksi',[TransaksiController::class,'store'])->name('transaksi-store');
+Route::get('/user/nota/', [TransaksiController::class, 'store'])->name('user.nota');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/transaksi/create', [TransaksiController::class, 'create'])->name('transaksi-create');
@@ -97,6 +98,7 @@ Route::put('/profile', [ProfileController::class, 'update'])->name('profile.upda
 //bar chart
 Route::get('/laporan-keuangan', [LoginController::class, 'showLaporanKeuangan'])->name('bar-chart');
 Route::get('/laporan-keuangan/admin', [LoginController::class, 'showLaporanKeuanganAdmin'])->name('bar-chart-admin');
+
 
 
 

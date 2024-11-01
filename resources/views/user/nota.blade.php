@@ -12,7 +12,7 @@
     <h1 class="text-center text-2xl font-bold mb-4">Nota Transaksi</h1>
     <div class="text-gray-600 text-sm mb-4">
         <p><strong>Tanggal:</strong> {{ $transaksi->tanggal }}</p>
-        <p><strong>Nama Kasir:</strong> {{ $transaksi->user ? $transaksi->user->name : 'Nama tidak tersedia' }}</p>
+        <p><strong>Nama Kasir:</strong>{{ auth()->user()->name }}</p>
     </div>
 
     <table class="w-full text-left text-sm mb-4">
