@@ -20,6 +20,12 @@ class Transaksi extends Model
     {
         return $this->belongsTo(User::class, 'id_users'); // id_kasir adalah foreign key di tabel transaksi
     }
+    public function details()
+{
+    return $this->hasMany(detail_transaksi::class, 'id_transaksi');
+}
+
+
     
 }
 
