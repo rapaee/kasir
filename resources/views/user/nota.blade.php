@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nota Transaksi</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="bg-gray-100 flex justify-center items-center min-h-screen">
 
 <div class="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
+    <a href="{{ route('transaksi-user') }}"><i class="fa-solid fa-xmark"></i></a>
     <h1 class="text-center text-2xl font-bold mb-4">Nota Transaksi</h1>
     <div class="text-gray-600 text-sm mb-4">
         <p><strong>Tanggal:</strong> {{ $transaksi->tanggal }}</p>

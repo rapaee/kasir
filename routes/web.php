@@ -56,7 +56,7 @@ Route::get('/user/transaksiv2',[transaksiv2Controller::class,'index'])->name('tr
 Route::get('/user/in-ed/add-data-barang',[BarangController::class, 'create'])->name('add-data-barang'); 
 Route::post('/user/in-ed/add-data-barang', [BarangController::class, 'store'])->name('add-data-barang.store');   
 // Route::post('/user/transaksi',[TransaksiController::class,'store'])->name('transaksi-store');
-Route::get('/user/nota/', [TransaksiController::class, 'store'])->name('user.nota');
+Route::get('/user/nota/', [TransaksiController::class, 'nota'])->name('user.nota');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/transaksi/create', [TransaksiController::class, 'create'])->name('transaksi-create');
