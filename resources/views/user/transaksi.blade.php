@@ -23,9 +23,9 @@
             .grid {
                 grid-template-columns: 1fr;
             }
-            .ml-[1160px] {
+            /* .ml-[1160px] {
                 margin-left: 0;
-            }
+            } */
         }
     </style>
 </head>
@@ -92,9 +92,9 @@
                  
                 <div id="newInputs"></div>
                 <div class="mt-6 flex justify-end ">
-                    <div class="w-[240px]">
+                    <div class="">
                         <!-- Tombol untuk menambah input -->
-                        <button type="button" onclick="addInput()" class="bg-blue-500 text-white w-full py-2 rounded hover:bg-blue-600 transition-colors mb-2">Tambah Barang</button>
+                        <button type="button" onclick="addInput()" class="bg-blue-500 text-white w-full px-8 py-2 rounded hover:bg-blue-600 transition-colors mb-2">Tambah Barang</button>
                     
                         <!-- Submit -->
                         <input type="submit" value="Submit" class="bg-green-500 text-white w-full py-2 rounded hover:bg-green-600 transition-colors mt-4">

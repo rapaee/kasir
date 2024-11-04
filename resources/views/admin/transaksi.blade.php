@@ -27,7 +27,7 @@
                 <!-- Tombol untuk Menampilkan Semua Transaksi -->
              <form action="{{  route('transaksi-filter-all') }}" method="GET">
             <input type="hidden" name="tanggal" value="all">
-                <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+                <button type="submit" class="ml-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
                     Tampilkan Semua Transaksi
                 </button>
             </form>

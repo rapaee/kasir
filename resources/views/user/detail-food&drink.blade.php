@@ -48,6 +48,9 @@
                     <button id="reset-filter" class="bg-gray-500 text-white p-2 rounded hover:bg-gray-600">
                      Reset
                     </button>
+                    <button class="bg-blue-500 p-2 rounded ml-auto text-white hover:bg-blue-600  ">
+                        <a href="{{ route('add-data-barang') }}">Add Product</a>
+                    </button>
             </div>
             @if (Session::has('Success'))
             <span class="text-red-500">{{ Session::get('success') }}</span>
@@ -65,6 +68,7 @@
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Harga</th>
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Kategori</th>
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Stok</th>
+                            <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,7 +81,7 @@
                             <td class="text-center py-3 border border-gray-300">{{ $item->kategori->nama_kategori }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->stok_barang }}</td>
                             <td class="text-center py-3 border border-gray-300">
-                                {{-- <div class="flex justify-center space-x-2">
+                                 <div class="flex justify-center space-x-2">
                                     <form action="{{ route('delete-data-barang', $item->id) }}" method="post" class="inline-flex items-center delete-form">
                                         @csrf
                                         @method('DELETE')
@@ -85,10 +89,10 @@
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
-                                    <a href="{{ route('edit-data-barang-user', $item->id) }}" class="text-green-500 hover:text-blue-700 flex items-center edit-button">
+                                    <a href="{{ route('edit-data-barang-user', $item->id) }}" class="text-gray-500 hover:text-gray-700 flex items-center edit-button">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                </div> --}}
+                                </div> 
                             </td>
                         </tr>
                         @endforeach

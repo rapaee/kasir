@@ -16,7 +16,7 @@
     <div class="flex">
 
         <!-- Navbar on the left -->
-        <nav class="bg-sky-400 w-96 h-screen fixed">
+        <nav class="bg-sky-400 w-96 h-screen fixed z-10">
             <div class="flex items-start p-3 bg-sky-600">
                 <img src="{{ asset('SMK_Negeri_1_Bantul_logo.png') }}" alt="" class="w-32 ml-5 mr-4">
                 <div class="mt-5 text-2xl font-bold text-white">

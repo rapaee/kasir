@@ -68,7 +68,8 @@ Route::get('/user/in-ed/edit-data-barang/{id}', [BarangController::class, 'edit'
 Route::get('/user/in-ed/edit-profile/',[ProfileController::class,'editProfile'])->name('edit-profile');
 Route::put('/user/update/{id}', [BarangController::class, 'update'])->name('update-data-barang');
 Route::delete('/user/delete/{id}', [BarangController::class,'destroy'])->name('delete-data-barang');
-Route::delete('/admin/delete/{id}', [TransaksiAdminController::class,'destroy'])->name('delete-transaksi-admin');
+Route::get('/admin/transaksi/filter', [TransaksiAdminController::class, 'filter'])->name('transaksi-filter-admin');
+Route::get('/admin/transaksi/show', [TransaksiAdminController::class, 'show'])->name('transaksi-filter-all');
 
 //detail halaman dashboard user
 Route::get('user/detail-food&drink/',[DetailFoodAndDrinkController::class,'index'])->name('detail-f&d');
