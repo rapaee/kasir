@@ -6,6 +6,8 @@
     <title>Transaksi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 
     <style>
         * {
@@ -153,46 +155,40 @@
                     document.getElementById('total_keseluruhan').value = total.toFixed(2);
                 }
             
-               // Fungsi untuk menambah input baru
-function addInput() {
-    const newInputGroup = `
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4 input-group">
-            <div class="input-group">
-                <label for="nama_barang" class="block text-gray-700 font-semibold">Nama Product:</label>
-                <select name="nama_barang[]" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" onchange="setHargaAndCalculateSubTotal(this)">
-                    <option value="">Select</option>
-                    @foreach ($nama_barang as $item)
-                        @if ($item->stok_barang > 0)
-                            <option value="{{ $item->id }}" data-harga="{{ $item->harga }}">{{ $item->nama_barang }}</option>
-                        @endif
-                    @endforeach
-                </select>
-            </div>
-            <div class="input-group">
-                <label for="harga" class="block text-gray-700 font-semibold">Harga:</label>
-                <input type="number" name="harga[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" readonly>
-            </div>
-            <div class="input-group">
-                <label for="jumlah" class="block text-gray-700 font-semibold">Jumlah:</label>
-                <input type="number" name="jumlah_barang[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" oninput="calculateSubTotal(this)">
-            </div>
-            <div class="input-group">
-                <label for="sub_total" class="block text-gray-700 font-semibold">Sub Total:</label>
-                <input type="number" name="sub_total[]" readonly class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-gray-100">
-            </div>
-            <div class="input-group flex items-end">
-                <button type="button" class="mt-1 ml-2 inline-flex items-center px-3 py-2 border border-red-500 rounded-md text-sm font-semibold text-red-600 hover:bg-red-500 hover:text-white" onclick="removeInput(this)">Hapus</button>
-            </div>
-        </div>`;
-    document.getElementById('newInputs').insertAdjacentHTML('beforeend', newInputGroup);
-}
-
-// Fungsi untuk menghapus input grup
-function removeInput(button) {
-    const inputGroup = button.closest('.input-group').parentElement; // Ambil elemen input-group yang merupakan parent dari tombol
-    inputGroup.remove(); // Hapus elemen input-group tersebut
-}
-
+            // Fungsi untuk menambah input baru
+            function addInput() {
+                const newInputGroup = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4 input-group">
+                        <div class="input-group">
+                            <label for="nama_barang" class="block text-gray-700 font-semibold">Nama Product:</label>
+                            <select name="nama_barang[]" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" onchange="setHargaAndCalculateSubTotal(this)">
+                                <option value="">Select</option>
+                                @foreach ($nama_barang as $item)
+                                    @if ($item->stok_barang > 0)
+                                        <option value="{{ $item->id }}" data-harga="{{ $item->harga }}">{{ $item->nama_barang }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="harga" class="block text-gray-700 font-semibold">Harga:</label>
+                            <input type="number" name="harga[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" readonly>
+                        </div>
+                        <div class="input-group">
+                            <label for="jumlah" class="block text-gray-700 font-semibold">Jumlah:</label>
+                            <input type="number" name="jumlah_barang[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" oninput="calculateSubTotal(this)">
+                        </div>
+                        <div class="input-group">
+                            <label for="sub_total" class="block text-gray-700 font-semibold">Sub Total:</label>
+                            <input type="number" name="sub_total[]" readonly class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-gray-100">
+                        </div>
+                        <div class="col-span-1 md:col-span-2 lg:col-span-4 flex justify-end mt-2"> <!-- Mengatur tombol hapus di bawah sub total -->
+                            <button type="button" class="inline-flex items-center px-3 py-2 border border-red-500 rounded-md text-sm font-semibold text-red-600 hover:bg-red-500 hover:text-white" onclick="removeInput(this)">
+                                <i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>`;
+                document.getElementById('newInputs').insertAdjacentHTML('beforeend', newInputGroup);
+            }
             </script>
 
         </div>
