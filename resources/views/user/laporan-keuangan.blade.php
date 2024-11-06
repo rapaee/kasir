@@ -6,6 +6,7 @@
     <title>Laporan Keuangan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         .filter-black {
             filter: grayscale(100%); /* Mengubah gambar menjadi grayscale */
@@ -109,6 +110,7 @@
                         <td class="text-center py-3 font-semibold">Jumlah</td>
                         <td class="text-center py-3 font-semibold">Product</td>
                         <td class="text-center py-3 font-semibold">Sub Total</td>
+                        <td class="text-center py-3 font-semibold">Detail</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -122,6 +124,9 @@
                         <td class="text-center py-3">{{ $data->jumlah_barang }}</td>
                         <td class="text-center py-3">{{ $data->product->nama_barang }}</td>
                         <td class="text-center py-3">{{ number_format($data->sub_total, 0, ',', '.') }}</td>
+                        <td class="text-center py-3">
+                                <a href=""><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>                

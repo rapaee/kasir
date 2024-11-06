@@ -59,23 +59,38 @@
                 <table class="max-w-full w-full bg-white border border-gray-300 rounded-lg shadow-sm">
                     <thead class="bg-blue-300 text-blue-900">
                         <tr>
-                            <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">S/N</th>
+                        <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">S/N</th>
+                        <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Kode Barang</th>
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Nama barang</th>
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Harga</th>
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Kategori</th>
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Stok</th>
+                            <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if ($product->count() > 0)
                         @foreach ($product as $item)
                         <tr class="hover:bg-blue-50 transition duration-300 ease-in-out">
-                            <td class="text-center py-3 border border-gray-300">{{ $loop->iteration }}</td>
+                        <td class="text-center py-3 border border-gray-300">{{ $loop->iteration }}</td>
+                        <td class="text-center py-3 border border-gray-300">{{ $item->kode_barang }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->nama_barang }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->harga }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->kategori->nama_kategori }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->stok_barang }}</td>
                             <td class="text-center py-3 border border-gray-300">
+                                <div class="flex justify-center space-x-2">
+                                    <form action="" method="post" class="inline-flex items-center delete-form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" class="text-red-500 hover:text-red-700 flex items-center delete-button">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                    <a href="" class="text-gray-500 hover:text-gray-700 flex items-center edit-button">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                         @endforeach
