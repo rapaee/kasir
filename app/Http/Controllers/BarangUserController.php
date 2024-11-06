@@ -6,7 +6,7 @@ use App\Models\Kategori;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class BarangAdminController extends Controller
+class BarangUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +25,7 @@ class BarangAdminController extends Controller
       $new_product = Product::all();
       $kategori = Kategori::all();
       // Mengirim data produk ke view
-      return view('admin.in-ed.add-detail-data-barang',  compact('kategori'),[
+      return view('user.in-ed.add-detail-data-barang',  compact('kategori'),[
          'new_product' => $new_product,
       ]);
    }
