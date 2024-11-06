@@ -104,6 +104,7 @@
                 <thead>
                     <tr>
                         <td class="text-center py-3 font-semibold">No</td>
+                        <td class="text-center py-3 font-semibold">ID Detail Transaksi</td>
                         <td class="text-center py-3 font-semibold">Kasir</td>
                         <td class="text-center py-3 font-semibold">Tanggal</td>
                         <td class="text-center py-3 font-semibold">ID Transaksi</td>
@@ -118,6 +119,7 @@
                     @foreach ($report as $data)
                     <tr>
                         <td class="text-center py-3">{{ $loop->iteration }}</td>
+                        <td class="text-center py-3">{{ $data->id }}</td>
                         <td class="text-center py-3">{{ $data->transaksi->users->name }}</td>
                         <td class="text-center py-3">{{ $data->transaksi->created_at }}</td>
                         <td class="text-center py-3">{{ $data->id_transaksi }}</td>

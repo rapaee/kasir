@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\detail_transaksi;
-use App\Models\Transaksi;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 
 class DetailUserController extends Controller
 {

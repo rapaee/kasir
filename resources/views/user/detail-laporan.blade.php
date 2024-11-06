@@ -26,6 +26,7 @@
             <table class=" border-collapse mt-10 w-full">
                 <thead>
                     <tr class="bg-gray-200 text-gray-700">
+                        <th class="py-3 px-4 ">ID Detail Transaksi</th>
                         <th class="py-3 px-4 ">ID Transaksi</th>
                         <th class="py-3 px-4 ">Nama Produk</th>
                         <th class="py-3 px-4 ">Jumlah</th>
@@ -38,10 +39,11 @@
                     @foreach($transaksi as $detail)
                     <tr class="hover:bg-gray-100 text-center">
                         <td class="py-3 px-4 border-b">{{ $detail->id }}</td>
+                        <td class="py-3 px-4 border-b">{{ $detail->id_transaksi }}</td>
                         <td class="py-3 px-4 border-b">{{ $detail->product->nama_barang }}</td>
                         <td class="py-3 px-4 border-b">{{ $detail->jumlah_barang }}</td>
-                        <td class="py-3 px-4 border-b">{{ number_format($detail->product->harga, 2) }}</td>
-                        <td class="py-3 px-4 border-b">{{ number_format($detail->sub_total, 2) }}</td>
+                        <td class="py-3 px-4 border-b">{{ $detail->product->harga }}</td>
+                        <td class="py-3 px-4 border-b">{{ $detail->sub_total }}</td>
                         <td class="py-3 px-4 border-b">{{ $detail->created_at->format('d-m-Y H:i') }}</td>
                     </tr>
                      @endforeach
