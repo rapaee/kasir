@@ -49,7 +49,7 @@
                      Reset
                     </button>
                     <button class="bg-blue-500 p-2 rounded ml-auto text-white hover:bg-blue-600  ">
-                        <a href="{{ route('add-data-barang') }}">Add Product</a>
+                        <a href="{{ route('add-detail-data-barang') }}">Add Product</a>
                     </button>
             </div>
             @if (Session::has('Success'))
