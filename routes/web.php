@@ -8,6 +8,8 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LaporanKeuanganController; 
 use App\Http\Controllers\LoginController; 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\BarangAdminController;
+use App\Http\Controllers\BarangUserController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\DetailFoodAndDrinkController;
 use App\Http\Controllers\DetailReportDashboard;
@@ -56,6 +58,8 @@ Route::get('/user/transaksiv2',[transaksiv2Controller::class,'index'])->name('tr
 
 // Rute untuk tambah barang dan transaksi
 Route::get('/user/in-ed/add-data-barang',[BarangController::class, 'create'])->name('add-data-barang'); 
+Route::get('/user/in-ed/add-detail-data-barang',[BarangUserController::class, 'create'])->name('add-detail-data-barang');
+Route::post('/user/in-ed/add-detail-data-barang', [BarangUserController::class, 'store'])->name('add-detail-data-barang.store');
 Route::post('/user/in-ed/add-data-barang', [BarangController::class, 'store'])->name('add-data-barang.store');   
 // Route::post('/user/transaksi',[TransaksiController::class,'store'])->name('transaksi-store');
 Route::get('/user/nota/', [TransaksiController::class, 'nota'])->name('user.nota');
