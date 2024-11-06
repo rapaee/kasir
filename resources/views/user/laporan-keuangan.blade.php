@@ -125,8 +125,11 @@
                         <td class="text-center py-3">{{ $data->product->nama_barang }}</td>
                         <td class="text-center py-3">{{ number_format($data->sub_total, 0, ',', '.') }}</td>
                         <td class="text-center py-3">
-                                <a href=""><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="{{ route('detail-laporan', ['id' => $data->id]) }}">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
                         </td>
+                        
                     </tr>
                     @endforeach
                 </tbody>                

@@ -8,15 +8,19 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LaporanKeuanganController; 
 use App\Http\Controllers\LoginController; 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\BarangAdminController;
+use App\Http\Controllers\BarangUserController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\DetailFoodAndDrinkController;
 use App\Http\Controllers\DetailReportDashboard;
 use App\Http\Controllers\DetailTransaksiDashboard;
+use App\Http\Controllers\DetailUserController as ControllersDetailUserController;
 use App\Http\Controllers\LaporanKeuanganUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransaksiAdminController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\transaksiv2Controller;
+use App\Models\detail_transaksi;
 use Illuminate\Support\Facades\Route;  
 
 Route::get('/', function () {
@@ -54,9 +58,12 @@ Route::get('/user/transaksiv2',[transaksiv2Controller::class,'index'])->name('tr
 
 // Rute untuk tambah barang dan transaksi
 Route::get('/user/in-ed/add-data-barang',[BarangController::class, 'create'])->name('add-data-barang'); 
+Route::get('/user/in-ed/add-detail-data-barang',[BarangUserController::class, 'create'])->name('add-detail-data-barang');
+Route::post('/user/in-ed/add-detail-data-barang', [BarangUserController::class, 'store'])->name('add-detail-data-barang.store');
 Route::post('/user/in-ed/add-data-barang', [BarangController::class, 'store'])->name('add-data-barang.store');   
 // Route::post('/user/transaksi',[TransaksiController::class,'store'])->name('transaksi-store');
 Route::get('/user/nota/', [TransaksiController::class, 'nota'])->name('user.nota');
+Route::get('/user/nota/', [DetailUserController::class, 'notaa'])->name('user-notaa');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/transaksi/create', [TransaksiController::class, 'create'])->name('transaksi-create');
@@ -70,6 +77,10 @@ Route::put('/user/update/{id}', [BarangController::class, 'update'])->name('upda
 Route::delete('/user/delete/{id}', [BarangController::class,'destroy'])->name('delete-data-barang');
 Route::get('/admin/transaksi/filter', [TransaksiAdminController::class, 'filter'])->name('transaksi-filter-admin');
 Route::get('/admin/transaksi/show', [TransaksiAdminController::class, 'show'])->name('transaksi-filter-all');
+Route::get('/user/detil-laporan{id}', [ControllersDetailUserController::class, 'show'])->name('detail-laporan');
+
+
+
 
 //detail halaman dashboard user
 Route::get('user/detail-food&drink/',[DetailFoodAndDrinkController::class,'index'])->name('detail-f&d');
