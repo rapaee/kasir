@@ -47,6 +47,9 @@
                     <button id="reset-filter" class="bg-gray-500 text-white p-2 rounded hover:bg-gray-600">
                      Reset
                     </button>
+                    <button class="bg-blue-500 p-2 rounded ml-auto text-white hover:bg-blue-600  ">
+                        <a href="{{ route('add-detail-data-barang-admin') }}">Add Product</a>
+                    </button>
             </div>
             @if (Session::has('Success'))
             <span class="text-red-500">{{ Session::get('success') }}</span>
@@ -80,14 +83,14 @@
                             <td class="text-center py-3 border border-gray-300">{{ $item->stok_barang }}</td>
                             <td class="text-center py-3 border border-gray-300">
                                 <div class="flex justify-center space-x-2">
-                                    <form action="" method="post" class="inline-flex items-center delete-form">
+                                    <form action="{{ route('delete-data-barang-admin', $item->id) }}" method="post" class="inline-flex items-center delete-form">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" class="text-red-500 hover:text-red-700 flex items-center delete-button">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
-                                    <a href="" class="text-gray-500 hover:text-gray-700 flex items-center edit-button">
+                                    <a href="{{ route('edit-detail-data-barang-admin', $item->id) }}" class="text-gray-500 hover:text-gray-700 flex items-center edit-button">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
                                 </div>
@@ -151,23 +154,23 @@
             });
         });
 
-        @if(session('success'))
+        "@if(session('success'))"
         Swal.fire({
             icon: 'success',
             title: 'Sukses!',
-            text: '{{ session('success') }}',
+            text: "{{ session('success') }}",
             timer: 1000,
             showConfirmButton: false
         });
-        @elseif(session('error'))
+        "@elseif(session('error'))"
         Swal.fire({
             icon: 'error',
             title: 'Gagal!',
-            text: '{{ session('error') }}',
+            text: "{{ session('error') }}",
             timer: 1000,
             showConfirmButton: false
         });
-        @endif
+        "@endif"
 
         // Filtering logic
         document.getElementById('filter-makanan').addEventListener('click', function () {
