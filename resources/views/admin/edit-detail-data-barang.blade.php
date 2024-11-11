@@ -23,7 +23,7 @@
                 @if (session('fail'))
                     <span class="text-red-500">{{ session('fail') }}</span>
                 @endif
-                <form action="{{ route('update-data-barang', $barang->id) }}" method="POST">
+                <form action="{{ route('update-data-detail-barang-admin', $barang->id) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <h1 class="text-xl font-bold mb-8">Edit Data Product Admin</h1>

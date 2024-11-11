@@ -7,27 +7,36 @@ use App\Models\Kategori;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class detailfoodAnddrinkController extends Controller
+class BarangController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $product = Product::all();
-        return view('admin.detail-food&drink',compact('product'));
+    {   
+        $new_product = Product::all();
+        return view('admin.data-barang', [
+            'new_product' => $new_product,
+        ]);
+        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */ // Menampilkan form untuk tambah data
+    public function nav1()
+    {
+        $new_product = Product::paginate(10);
+        return view('admin.data-barang', [
+            'new_product' => $new_product,
+        ]);
+    }
+    
+   // Menampilkan form untuk tambah data
    public function create()
    {
       // Mengambil semua produk dari database
       $new_product = Product::all();
       $kategori = Kategori::all();
       // Mengirim data produk ke view
-      return view('admin.add-detail-data-barang',  compact('kategori'),[
+      return view('admin.add-data-barang',  compact('kategori'),[
          'new_product' => $new_product,
       ]);
    }
@@ -55,23 +64,22 @@ class detailfoodAnddrinkController extends Controller
            $new_product->save();
    
            // Redirect ke halaman data-barang dengan pesan sukses
-           return redirect()->route('detail-f&d-admin')->with('success', 'Berhasil menambahkan produk');
+           return redirect()->route('data-barang-admin')->with('success', 'Berhasil menambahkan produk');
        } catch (\Exception $e) {
            // Redirect kembali ke form tambah data dengan pesan error
-           return redirect()->route('add-detail-data-barang-admin')->with('error', 'Gagal menambahkan produk: ' . $e->getMessage());
+           return redirect()->route('add-data-barang-admin')->with('error', 'Gagal menambahkan produk: ' . $e->getMessage());
        }
    }
    
 
-   
    public function destroy($id)
    {
        $dataBarang = Product::find($id);
        if ($dataBarang) {
            $dataBarang->delete();
-           return redirect()->route('detail-f&d-admin')->with('success', 'Data barang berhasil dihapus');
+           return redirect()->route('data-barang-admin')->with('success', 'Data barang berhasil dihapus');
        } else {
-           return redirect()->route('detail-f&d-admin')->with('error', 'Data barang tidak ditemukan');
+           return redirect()->route('data-barang-admin')->with('error', 'Data barang tidak ditemukan');
        }
    }
 
@@ -79,7 +87,7 @@ class detailfoodAnddrinkController extends Controller
 {
     $barang = Product::findOrFail($id); // Mengambil data produk berdasarkan id
     $kategori = Kategori::all(); // Mengambil semua kategori
-    return view('admin/edit-detail-data-barang', compact('barang', 'kategori')); // Mengirim data barang dan kategori ke view
+    return view('admin/edit-data-barang', compact('barang', 'kategori')); // Mengirim data barang dan kategori ke view
 }
 
    
@@ -107,20 +115,10 @@ public function update(Request $request, $id)
         $barang->save();
 
         // Redirect ke halaman data-barang dengan pesan sukses
-        return redirect()->route('detail-f&d-admin')->with('success', 'Berhasil mengupdate produk');
+        return redirect()->route('data-barang-admin')->with('success', 'Berhasil mengupdate produk');
     } catch (\Exception $e) {
         // Redirect kembali ke form dengan pesan error
-        return redirect()->route('update-data-detail-barang-admin', $id)->with('fail', 'Gagal mengupdate produk: ' . $e->getMessage());
+        return redirect()->route('update-data-barang-admin', $id)->with('fail', 'Gagal mengupdate produk: ' . $e->getMessage());
     }
 }
-
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
 }

@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Data Product</title>
 </head>
 <body class="bg-blue-50">
@@ -29,6 +32,9 @@
                    <button id="reset-filter" class="bg-gray-500 text-white p-2 rounded hover:bg-gray-600">
                     Semua
                    </button>
+                   <button class="bg-blue-500 p-2 rounded ml-auto text-white hover:bg-blue-600  ">
+                        <a href="{{ route('add-data-barang-admin') }}">Add Product</a>
+                    </button>
            </div>
             <div class="overflow-x-auto">
                 <table class=" max-w-full w-full bg-white border border-gray-300 rounded-lg shadow-sm">
@@ -39,6 +45,7 @@
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Harga</th>
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Kategori</th>
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Stok</th>
+                            <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,6 +57,20 @@
                             <td class="text-center py-3 border border-gray-300">{{ $item->harga }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->kategori->nama_kategori }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->stok_barang }}</td>
+                            <td class="text-center py-3 border border-gray-300">
+                                <div class="flex justify-center space-x-2">
+                                <form action="{{ route('delete-product-admin', $item->id) }}" method="post" class="inline-flex items-center delete-form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-500 hover:text-red-700 flex items-center delete-button">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                </form>
+                                    <a href="{{ route('edit-data-barang-admin', $item->id) }}" class="text-gray-500 hover:text-gray-700 flex items-center edit-button">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                </div>
+                            </td>
                         </tr>
                         @endforeach
                         @else
@@ -64,6 +85,62 @@
     </div>
     @endsection
     <script>
+          document.querySelectorAll('.delete-button').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Yakin ingin menghapus?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Tidak'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        button.closest('.delete-form').submit();
+                    }
+                });
+            });
+        });
+
+        document.querySelectorAll('.edit-button').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Ingin mengedit data ini?',
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Tidak'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = button.href;
+                    }
+                });
+            });
+        });
+
+"@if(session('success'))"
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses!',
+            text: "{{ session('success') }}",
+            timer: 1000,
+            showConfirmButton: false
+        });
+        "@elseif(session('error'))"
+        Swal.fire({
+            icon: 'error',
+            title: 'Gagal!',
+            text: "{{ session('error') }}",
+            timer: 1000,
+            showConfirmButton: false
+        });
+        "@endif"
+
      // Filtering logic
      document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('filter-makanan').addEventListener('click', function () {
