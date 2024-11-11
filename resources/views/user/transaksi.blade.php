@@ -189,6 +189,13 @@
                     </div>`;
                 document.getElementById('newInputs').insertAdjacentHTML('beforeend', newInputGroup);
             }
+            function removeInput(element) {
+                const inputGroup = element.closest('.input-group');
+                if (inputGroup) {
+                    inputGroup.remove();
+                }
+            }
+
             </script>
 
         </div>

@@ -28,6 +28,7 @@
                     <tr class="bg-gray-200 text-gray-700">
                         <th class="py-3 px-4 ">ID Detail Transaksi</th>
                         <th class="py-3 px-4 ">ID Transaksi</th>
+                        <th class="py-3 px-4 ">Kasir</th>
                         <th class="py-3 px-4 ">Nama Produk</th>
                         <th class="py-3 px-4 ">Jumlah</th>
                         <th class="py-3 px-4 ">Harga</th>
@@ -40,6 +41,7 @@
                     <tr class="hover:bg-gray-100 text-center">
                         <td class="py-3 px-4 border-b">{{ $detail->id }}</td>
                         <td class="py-3 px-4 border-b">{{ $detail->id_transaksi }}</td>
+                        <td class="py-3 px-4 border-b">{{ $detail->transaksi->users->name}}</td>
                         <td class="py-3 px-4 border-b">{{ $detail->product->nama_barang }}</td>
                         <td class="py-3 px-4 border-b">{{ $detail->jumlah_barang }}</td>
                         <td class="py-3 px-4 border-b">{{ $detail->product->harga }}</td>

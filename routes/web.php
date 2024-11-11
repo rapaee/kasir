@@ -87,7 +87,7 @@ Route::delete('/admin/delete-food/{id}', [AdminDetailfoodAnddrinkController::cla
 Route::delete('/admin/delete-product/{id}', [AdminBarangController::class, 'destroy'])->name('delete-product-admin');
 Route::get('/admin/transaksi/filter', [TransaksiAdminController::class, 'filter'])->name('transaksi-filter-admin');
 Route::get('/admin/transaksi/show', [TransaksiAdminController::class, 'show'])->name('transaksi-filter-all');
-Route::get('/user/detil-laporan{id}', [ControllersDetailUserController::class, 'show'])->name('detail-laporan');
+Route::get('/user/detail-laporan{id}', [ControllersDetailUserController::class, 'show'])->name('detail-laporan');
 
 
 

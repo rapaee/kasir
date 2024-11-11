@@ -41,6 +41,7 @@ public function pendapatanbulan(Request $request)
     return view('user.laporan-keuangan', compact('report'));
 }
 
+
     public function filter(Request $request)
     {
         $query = LaporanKeuangan::query();

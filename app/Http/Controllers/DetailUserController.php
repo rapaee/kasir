@@ -10,8 +10,8 @@ class DetailUserController extends Controller
     
     public function show($id)
 {
-    $transaksi = detail_transaksi::with('transaksi', 'product')
-    ->where('id_transaksi', $id) // Mengambil semua detail transaksi dengan ID transaksi yang sama
+    $transaksi = detail_transaksi::with('transaksi.users', 'product')
+    ->where('id', $id) // Mengambil semua detail transaksi dengan ID transaksi yang sama
     ->get();
 
     return view('user.detail-laporan', compact('transaksi'));
