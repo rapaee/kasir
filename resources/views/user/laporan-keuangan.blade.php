@@ -117,28 +117,22 @@
                 <tbody>
                     <h2 class="text-center ml-96 mt-9 font-bold text-lg">Transaksi</h2>
                     @foreach ($report as $data)
-                   [ @foreach ($report as $data)]
-                    @if ($loop->first || $report->where('id_transaksi', $data->id_transaksi)->first()->id_transaksi == $data->id_transaksi)
-                        <tr>
-                            <td class="text-center py-3">{{ $loop->iteration }}</td>
-                            <td class="text-center py-3">{{ $data->id }}</td>
-                            <td class="text-center py-3">{{ $data->transaksi->users->name }}</td>
-                            <td class="text-center py-3">{{ $data->transaksi->created_at }}</td>
-                            <td class="text-center py-3">{{ $data->id_transaksi }}</td>
-                            <td class="text-center py-3">{{ $data->jumlah_barang }}</td>
-                            <td class="text-center py-3">{{ $data->product->nama_barang }}</td>
-                            <td class="text-center py-3">{{ number_format($data->sub_total, 0, ',', '.') }}</td>
-                            <td class="text-center py-3">
-                                @if ($loop->first)
-                                    <a href="{{ route('detail-laporan', ['id' => $data->id]) }}">
-                                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                                    </a>
-                                @endif
-                            </td>
-                        </tr>
-                    @endif
-                @endforeach
-                
+                    <tr>
+                        <td class="text-center py-3">{{ $loop->iteration }}</td>
+                        <td class="text-center py-3">{{ $data->id }}</td>
+                        <td class="text-center py-3">{{ $data->transaksi->users->name }}</td>
+                        <td class="text-center py-3">{{ $data->transaksi->created_at }}</td>
+                        <td class="text-center py-3">{{ $data->id_transaksi }}</td>
+                        <td class="text-center py-3">{{ $data->jumlah_barang }}</td>
+                        <td class="text-center py-3">{{ $data->product->nama_barang }}</td>
+                        <td class="text-center py-3">{{ number_format($data->sub_total, 0, ',', '.') }}</td>
+                        <td class="text-center py-3">
+                            <a href="{{ route('detail-laporan', ['id' => $data->id]) }}">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </td>
+                        
+                    </tr>
                     @endforeach
                 </tbody>                
             </table>
