@@ -69,6 +69,7 @@ Route::post('/admin/add-detail-data-barang', [AdminDetailfoodAnddrinkController:
 Route::get('/user/nota/', [TransaksiController::class, 'nota'])->name('user.nota');
 Route::get('/user/nota/', [DetailUserController::class, 'notaa'])->name('user-notaa');
 
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/transaksi/create', [TransaksiController::class, 'create'])->name('transaksi-create');
     Route::post('/transaksi/store', [TransaksiController::class, 'store'])->name('transaksi-store');

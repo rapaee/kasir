@@ -37,7 +37,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($transaksi as $detail)
+                    @foreach($transaksiDetails as $detail)
                     <tr class="hover:bg-gray-100 text-center">
                         <td class="py-3 px-4 border-b">{{ $detail->id }}</td>
                         <td class="py-3 px-4 border-b">{{ $detail->id_transaksi }}</td>
