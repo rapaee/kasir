@@ -72,6 +72,14 @@
                         @enderror
                     </div>
                     
+                    <div class="mb-4">
+                    <label for="barcodeInput">Scan Barcode:</label>
+                    <input type="text" id="barcodeInput" autofocus autocomplete="off" oninput="autoFillProductData(event)">
+                        @error('barcode')
+                            <span class="text-red-700">{{ $message }}</span>
+                        @enderror
+                    </div>
+
                     
                     <div class="mb-6">
                         <label for="stok_barang" class="block text-sm font-medium text-gray-700">Stok:</label>
@@ -90,5 +98,31 @@
         </div>
     </div>
     @endsection
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    const barcodeInput = document.getElementById("barcodeInput");
+    const resultDiv = document.getElementById("result");
+
+    document.getElementById("barcodeForm").addEventListener("submit", (e) => {
+        e.preventDefault(); // Mencegah reload form
+
+        const barcode = barcodeInput.value.trim();
+        if (barcode) {
+            resultDiv.innerHTML = `<p>Barcode Scanned: <strong>${barcode}</strong></p>`;
+            barcodeInput.value = ""; // Kosongkan input setelah submit
+
+            // Tambahkan logika lain, seperti kirim ke server
+            console.log("Barcode:", barcode);
+        } else {
+            resultDiv.innerHTML = `<p style="color: red;">Please scan a barcode!</p>`;
+        }
+    });
+
+    // Fokus otomatis ke input
+    barcodeInput.focus();
+});
+
+</script>
+
 </body>
 </html>

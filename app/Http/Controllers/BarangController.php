@@ -109,6 +109,22 @@ public function update(Request $request, $id)
         return redirect()->route('update-data-barang', $id)->with('fail', 'Gagal mengupdate produk: ' . $e->getMessage());
     }
 }
+public function getProductByBarcode($barcode)
+{
+    $product = Product::where('barcode', $barcode)->first();
+
+    if ($product) {
+        return response()->json([
+            'nama_barang' => $product->nama_barang,
+            'kode_barang' => $product->kode_barang,
+            'harga' => $product->harga,
+            'kategori_barang' => $product->kategori_id, // Sesuaikan dengan relasi
+            'stok' => $product->stok,
+        ]);
+    }
+
+    return response()->json(['message' => 'Produk tidak ditemukan'], 404);
+}
 
    
 }

@@ -123,6 +123,7 @@ Route::get('/laporan-keuangan', [LoginController::class, 'showLaporanKeuangan'])
 Route::get('/laporan-keuangan/admin', [LoginController::class, 'showLaporanKeuanganAdmin'])->name('bar-chart-admin');
 
 
+Route::get('/api/barcode/{barcode}', [BarangController::class, 'getProductByBarcode']);
 
 
 

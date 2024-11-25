@@ -15,7 +15,7 @@
         <div class="flex-1 bg-sky-500 text-white flex flex-col justify-center items-center p-8">
             <img src="{{ asset('SMK_Negeri_1_Bantul_logo.png') }}" alt="Logo Sekolah" class="">
             <h1 class="text-4xl font-bold">SMK NEGERI 1 BANTUL</h1>
-            <h2 class="text-3xl font-semibold mt-2">KASIR APP</h2>
+            <h2 class="text-4xl font-bold mt-2">KASIR APP</h2>
         </div>
 
         <!-- Right Container -->
