@@ -122,8 +122,10 @@ Route::put('/profile', [ProfileController::class, 'update'])->name('profile.upda
 Route::get('/laporan-keuangan', [LoginController::class, 'showLaporanKeuangan'])->name('bar-chart');
 Route::get('/laporan-keuangan/admin', [LoginController::class, 'showLaporanKeuanganAdmin'])->name('bar-chart-admin');
 
-
-Route::get('/api/barcode/{barcode}', [BarangController::class, 'getProductByBarcode']);
+// Route untuk mendapatkan harga berdasarkan kode_barang
+// web.php (Route)
+Route::get('/get-barang-details/{kode_barang}', [TransaksiController::class, 'getBarangDetails']);
+Route::get('/get-nama-barang/{kode_barang}', [TransaksiController::class, 'getNamaBarang']);
 
 
 

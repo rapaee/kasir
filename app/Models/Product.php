@@ -14,7 +14,7 @@ class Product extends Model
     protected $table = "barang";
 
     // Kolom-kolom yang dapat diisi secara mass assignment
-    protected $fillable = ["nama_barang","kode_barang", "harga", "kategori_barang", "stok_barang","barcode"];
+    protected $fillable = ["nama_barang","kode_barang", "harga", "kategori_barang", "stok_barang",];
     
     public function kategori()
 {

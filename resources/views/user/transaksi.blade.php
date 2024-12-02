@@ -7,8 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-
     <style>
         * {
             margin: 0;
@@ -25,9 +23,6 @@
             .grid {
                 grid-template-columns: 1fr;
             }
-            /* .ml-[1160px] {
-                margin-left: 0;
-            } */
         }
     </style>
 </head>
@@ -57,190 +52,288 @@
                         {{ session('success') }}
                     </div>
                 @endif
-
+                <div class="flex justify-end">
+                    <!-- Tombol untuk menambah input -->
+                    <button type="button" onclick="addInput()" class="bg-blue-500 text-white w-48 px-8 py-2 rounded hover:bg-blue-600 transition-colors mb-2">
+                        Tambah Barang
+                    </button>
+                </div>
+                
                 <!-- Input Barang Section -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-                    <!-- Input Nama Barang -->
+                <div class="grid grid-cols-5 gap-4 mb-4 relative">
+                    <!-- Input Kode Barang -->
                     <div class="input-group">
-                        <label for="nama_barang" class="block text-gray-700 font-semibold">Nama Product:</label>
-                        <select name="nama_barang[]" id="nama_barang_select" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" onchange="setHargaAndCalculateSubTotal(this)">
-                            <option value="">Select</option>
-                            @foreach ($nama_barang as $item)
-                                @if ($item->stok_barang > 0)
-                                    <option value="{{ $item->id }}" data-harga="{{ $item->harga }}">{{ $item->nama_barang }}</option>
-                                @endif
-                            @endforeach
-                        </select>
+                        <label for="kode_barang" class="block text-gray-700 font-semibold">Kode Barang:</label>
+                        <input type="text" id="kode_barang" name="kode_barang[]" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" oninput="getNamaBarangByKode(this)">
                     </div>
                     
+                    <!-- Input Nama Barang -->
+                    <div class="input-group">
+                        <label for="nama_barang" class="block text-gray-700 font-semibold">Nama Barang:</label>
+                        <input type="text" id="nama_barang" name="nama_barang[]" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" readonly>
+                    </div>
+                    
+                
                     <!-- Input Harga -->
                     <div class="input-group">
                         <label for="harga" class="block text-gray-700 font-semibold">Harga:</label>
-                        <input type="number" id="harga" name="harga[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" readonly>
+                        <input type="number" id="harga" name="harga[]" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" readonly>
                     </div>
-                    
-                    <!-- Input Jumlah Barang -->
+                
+                   <!-- Input Jumlah Barang -->
                     <div class="input-group">
                         <label for="jumlah" class="block text-gray-700 font-semibold">Jumlah:</label>
                         <input type="number" id="jumlah" name="jumlah_barang[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" oninput="calculateSubTotal(this)">
                     </div>
 
-                    <!-- Input Sub Total (readonly) -->
+                    <!-- Input Sub Total -->
                     <div class="input-group">
                         <label for="sub_total" class="block text-gray-700 font-semibold">Sub Total:</label>
                         <input type="number" id="sub_total" name="sub_total[]" readonly class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-gray-100">
                     </div>
+                                    
+                    <!-- Tombol Hapus Data -->
+                    <button type="button" class="absolute top-0 right-0 bg-red-500 text-white p-2 rounded-full hover:bg-red-600" onclick="clearInputData(this)">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
                 </div>
-                 
+                <script>
+                                    // Fungsi untuk menghapus data yang telah diisi, termasuk total keseluruhan
+                    function clearInputData(button) {
+                        const inputGroups = button.closest('.grid').querySelectorAll('input'); // Mengambil semua input dalam satu set
+                        inputGroups.forEach(input => {
+                            input.value = ''; // Mengosongkan nilai input
+                        });
+
+                        // Juga menghapus data di input total_keseluruhan
+                        const totalKeseluruhan = document.getElementById('total_keseluruhan');
+                        if (totalKeseluruhan) {
+                            totalKeseluruhan.value = ''; // Mengosongkan total keseluruhan
+                        }
+                    }
+
+    
+                </script>                
                 <div id="newInputs"></div>
+                  <!-- Total Keseluruhan -->
+            <div class="mt-6 flex justify-end w-full">
+                    <div>
+                        <label for="total_keseluruhan" class="block text-gray-700 font-semibold">Total Keseluruhan:</label>
+                        <input type="number" id="total_keseluruhan" name="total_keseluruhan" readonly class="mt-1 block px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100">
+                    </div>                   
+            </div>
+            <div class="mt-6 flex justify-end w-full">
+                <div>
+                    <label for="total_keseluruhan" class="block text-gray-700 font-semibold">Bayar:</label>
+                    <input type="number" id="bayar" name="bayar" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>                   
+        </div>
+            
                 <div class="mt-6 flex justify-end ">
                     <div class="">
-                        <!-- Tombol untuk menambah input -->
-                        <button type="button" onclick="addInput()" class="bg-blue-500 text-white w-full px-8 py-2 rounded hover:bg-blue-600 transition-colors mb-2">Tambah Barang</button>
-                    
+                     
                         <!-- Submit -->
-                        <input type="submit" value="Submit" class="bg-green-500 text-white w-full py-2 rounded hover:bg-green-600 transition-colors mt-4">
+                        <input type="submit" value="Submit" class="bg-green-500 text-white w-56 py-2 rounded hover:bg-green-600 transition-colors mt-4">
                     
                 </div>
                 </div>
                
             </form>
             
-            <!-- Total Keseluruhan -->
-            <div class="mt-6 flex justify-end w-full">
-                <div>
-                    <label for="total_keseluruhan" class="block text-gray-700 font-semibold">Total Keseluruhan:</label>
-                    <input type="number" id="total_keseluruhan" name="total_keseluruhan" readonly class="mt-1 block px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100">
-                </div>
-            </div>
+          
 
             <script>
-                // Fungsi untuk mengatur harga sesuai pilihan produk dan menghitung subtotal
-                function setHargaAndCalculateSubTotal(selectElement) {
-                    const inputGroup = selectElement.closest('.grid'); // Mendapatkan div group input
-                    const hargaInput = inputGroup.querySelector('input[name="harga[]"]'); 
-                    const selectedOption = selectElement.options[selectElement.selectedIndex];
-                    const harga = selectedOption.getAttribute('data-harga');
-            
-                    // Mengatur nilai harga pada input harga
-                    hargaInput.value = harga ? harga : '';
-            
-                    // Panggil fungsi untuk menghitung subtotal jika jumlah sudah diisi
-                    const jumlahInput = inputGroup.querySelector('input[name="jumlah_barang[]"]');
-                    if (jumlahInput.value) {
-                        calculateSubTotal(jumlahInput);
+                
+                function getNamaBarangByKode(input) {
+                    const kodeBarang = input.value;
+
+                    if (kodeBarang.length > 0) {
+                        fetch(`/get-nama-barang/${kodeBarang}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                // Jika kode barang ditemukan
+                                if (data.nama_barang) {
+                                    document.getElementById('nama_barang').value = data.nama_barang;
+                                } else {
+                                    document.getElementById('nama_barang').value = ''; // Kosongkan jika tidak ditemukan
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                    } else {
+                        document.getElementById('nama_barang').value = ''; // Kosongkan jika input kosong
                     }
                 }
-            
-                // Fungsi untuk menghitung subtotal berdasarkan harga dan jumlah
-                function calculateSubTotal(jumlahInput) {
-                    const inputGroup = jumlahInput.closest('.grid'); // Mendapatkan div group input
-                    const hargaInput = inputGroup.querySelector('input[name="harga[]"]');
-                    const subTotalInput = inputGroup.querySelector('input[name="sub_total[]"]');
-                    const jumlah = parseFloat(jumlahInput.value) || 0;
-                    const harga = parseFloat(hargaInput.value) || 0;
-            
-                    // Hitung subtotal
-                    subTotalInput.value = (jumlah * harga).toFixed(2);
-                    updateTotalKeseluruhan();
+
+                function getNamaBarangByKode(input) {
+                    const kodeBarang = input.value;
+
+                    if (kodeBarang.length > 0) {
+                        fetch(`/get-barang-details/${kodeBarang}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                // Jika kode barang ditemukan
+                                if (data.nama_barang && data.harga) {
+                                    document.getElementById('nama_barang').value = data.nama_barang;
+                                    document.getElementById('harga').value = data.harga;
+                                } else {
+                                    document.getElementById('nama_barang').value = ''; // Kosongkan jika tidak ditemukan
+                                    document.getElementById('harga').value = ''; // Kosongkan jika tidak ditemukan
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                    } else {
+                        document.getElementById('nama_barang').value = ''; // Kosongkan jika input kosong
+                        document.getElementById('harga').value = ''; // Kosongkan jika input kosong
+                    }
                 }
-            
-                // Fungsi untuk memperbarui total keseluruhan
-                function updateTotalKeseluruhan() {
-                    const subTotalInputs = document.querySelectorAll('input[name="sub_total[]"]');
-                    let total = 0;
-                    subTotalInputs.forEach(input => {
-                        total += parseFloat(input.value) || 0;
-                    });
-                    document.getElementById('total_keseluruhan').value = total.toFixed(2);
+                // Fungsi untuk menghitung Sub Total
+                    function calculateSubTotal(input) {
+                        const harga = parseFloat(document.getElementById('harga').value) || 0;
+                        const jumlah = parseFloat(input.value) || 0;
+
+                        // Menghitung sub total
+                        const subTotal = harga * jumlah;
+                        input.closest('.input-group').nextElementSibling.querySelector('#sub_total').value = subTotal.toFixed(2);
+
+                        // Menghitung total keseluruhan
+                        calculateTotalKeseluruhan();
+                    }
+
+                    // Fungsi untuk menghitung Total Keseluruhan
+                    function calculateTotalKeseluruhan() {
+                        let totalKeseluruhan = 0;
+
+                        // Loop untuk menghitung jumlah sub total
+                        document.querySelectorAll('input[name="sub_total[]"]').forEach(function(subTotalInput) {
+                            totalKeseluruhan += parseFloat(subTotalInput.value) || 0;
+                        });
+
+                        // Menampilkan total keseluruhan
+                        document.getElementById('total_keseluruhan').value = totalKeseluruhan.toFixed(2);
+                    }
+
+
+
+
+              // Fungsi untuk menambah input barang baru
+function addInput() {
+    const container = document.getElementById('newInputs');
+    const newInput = document.createElement('div');
+    newInput.classList.add('grid', 'grid-cols-5', 'gap-4', 'mb-4', 'relative');
+
+    // HTML untuk input barang baru (Kode Barang, Nama Barang, Harga, Jumlah, Subtotal)
+    newInput.innerHTML = `
+        <div class="input-group">
+            <label for="kode_barang" class="block text-gray-700 font-semibold">Kode Barang:</label>
+            <input type="text" name="kode_barang[]" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" oninput="getHargaByKode(this)">
+        </div>
+        <div class="input-group">
+            <label for="nama_barang" class="block text-gray-700 font-semibold">Nama Barang:</label>
+            <input type="text" name="nama_barang[]" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" readonly>
+        </div>
+        <div class="input-group">
+            <label for="harga" class="block text-gray-700 font-semibold">Harga:</label>
+            <input type="number" name="harga[]" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" readonly>
+        </div>
+        <div class="input-group">
+            <label for="jumlah" class="block text-gray-700 font-semibold">Jumlah:</label>
+            <input type="number" name="jumlah_barang[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" oninput="calculateSubTotal(this)">
+        </div>
+        <div class="input-group">
+            <label for="sub_total" class="block text-gray-700 font-semibold">Sub Total:</label>
+            <input type="number" name="sub_total[]" readonly class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-gray-100">
+        </div>
+
+        <!-- Icon Hapus -->
+        <button type="button" class="absolute top-0 right-0 bg-red-500 text-white p-2 rounded-full hover:bg-red-600" onclick="removeInput(this)">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+        </button>
+    `;
+
+    // Masukkan input baru ke dalam container
+    container.appendChild(newInput);
+}
+
+// Fungsi untuk menghapus inputan
+function removeInput(button) {
+    const inputGroup = button.closest('div');
+    inputGroup.remove();
+}
+
+// Fungsi untuk mendapatkan harga dan nama barang berdasarkan kode barang
+function getHargaByKode(input) {
+    const kodeBarang = input.value;
+
+    if (kodeBarang.length > 0) {
+        fetch(`/get-barang-details/${kodeBarang}`)
+            .then(response => response.json())
+            .then(data => {
+                const parentDiv = input.closest('.grid');
+                const namaBarangInput = parentDiv.querySelector('[name="nama_barang[]"]');
+                const hargaInput = parentDiv.querySelector('[name="harga[]"]');
+
+                if (data.nama_barang && data.harga) {
+                    namaBarangInput.value = data.nama_barang;
+                    hargaInput.value = data.harga;
+                } else {
+                    namaBarangInput.value = ''; // Kosongkan jika tidak ditemukan
+                    hargaInput.value = ''; // Kosongkan jika tidak ditemukan
                 }
-            
-            // Fungsi untuk menambah input baru
-            function addInput() {
-                const newInputGroup = `
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4 input-group">
-                        <div class="input-group">
-                            <label for="nama_barang" class="block text-gray-700 font-semibold">Nama Product:</label>
-                            <select name="nama_barang[]" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" onchange="setHargaAndCalculateSubTotal(this)">
-                                <option value="">Select</option>
-                                @foreach ($nama_barang as $item)
-                                    @if ($item->stok_barang > 0)
-                                        <option value="{{ $item->id }}" data-harga="{{ $item->harga }}">{{ $item->nama_barang }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label for="harga" class="block text-gray-700 font-semibold">Harga:</label>
-                            <input type="number" name="harga[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" readonly>
-                        </div>
-                        <div class="input-group">
-                            <label for="jumlah" class="block text-gray-700 font-semibold">Jumlah:</label>
-                            <input type="number" name="jumlah_barang[]" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" oninput="calculateSubTotal(this)">
-                        </div>
-                        <div class="input-group">
-                            <label for="sub_total" class="block text-gray-700 font-semibold">Sub Total:</label>
-                            <input type="number" name="sub_total[]" readonly class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-gray-100">
-                        </div>
-                        <div class="col-span-1 md:col-span-2 lg:col-span-4 flex justify-end mt-2"> <!-- Mengatur tombol hapus di bawah sub total -->
-                            <button type="button" class="inline-flex items-center px-3 py-2 border border-red-500 rounded-md text-sm font-semibold text-red-600 hover:bg-red-500 hover:text-white" onclick="removeInput(this)">
-                                <i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>`;
-                document.getElementById('newInputs').insertAdjacentHTML('beforeend', newInputGroup);
-            }
-            function removeInput(element) {
-                const inputGroup = element.closest('.input-group');
-                if (inputGroup) {
-                    inputGroup.remove();
-                }
-            }
+
+                // Setelah harga diupdate, hitung sub total
+                const jumlahInput = parentDiv.querySelector('[name="jumlah_barang[]"]');
+                calculateSubTotal(jumlahInput);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    } else {
+        // Kosongkan nilai nama barang dan harga jika kode barang kosong
+        const parentDiv = input.closest('.grid');
+        parentDiv.querySelector('[name="nama_barang[]"]').value = '';
+        parentDiv.querySelector('[name="harga[]"]').value = '';
+    }
+}
+
+// Fungsi untuk menghitung Sub Total
+function calculateSubTotal(input) {
+    const parentDiv = input.closest('.grid');
+    const harga = parseFloat(parentDiv.querySelector('[name="harga[]"]').value) || 0;
+    const jumlah = parseFloat(input.value) || 0;
+
+    // Menghitung sub total
+    const subTotal = harga * jumlah;
+    parentDiv.querySelector('[name="sub_total[]"]').value = subTotal.toFixed(2);
+
+    // Menghitung total keseluruhan
+    calculateTotalKeseluruhan();
+}
+
+// Fungsi untuk menghitung Total Keseluruhan
+function calculateTotalKeseluruhan() {
+    let totalKeseluruhan = 0;
+
+    // Loop untuk menghitung jumlah sub total
+    document.querySelectorAll('input[name="sub_total[]"]').forEach(function(subTotalInput) {
+        totalKeseluruhan += parseFloat(subTotalInput.value) || 0;
+    });
+
+    // Menampilkan total keseluruhan
+    document.getElementById('total_keseluruhan').value = totalKeseluruhan.toFixed(2);
+}
+
 
             </script>
-
-        </div>
-    </div>
-    <script>
-       document.querySelector('#dynamicForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            Swal.fire({
-                title: 'Apakah sudah benar?',
-                icon: 'info',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya',
-                cancelButtonText: 'Tidak'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    this.submit();
-                }
-            });
-        });
-
-
-        "@if(session('success'))"
-        Swal.fire({
-            icon: 'success',
-            title: 'Sukses!',
-            text: "{{ session('success') }}",
-            timer: 1000,
-            showConfirmButton: false
-        });
-        "@elseif(session('error'))"
-        Swal.fire({
-            icon: 'error',
-            title: 'Gagal!',
-            text: "{{ session('error') }}",
-            timer: 5000,
-            showConfirmButton: false
-        });
-        "@endif"
-    </script>
-    
         </div>
     </div>
     @endsection
-
 </body>
 </html>

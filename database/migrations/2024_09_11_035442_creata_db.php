@@ -22,10 +22,9 @@ return new class extends Migration
             $table->id('id');
             $table->string('nama_barang');
             $table->decimal('harga');
-            $table->integer('kode_barang');
+            $table->string('kode_barang');
             $table->bigInteger('id_kategori')->unsigned(); // Kolom tanpa auto_increment
             $table->integer('stok_barang');
-            $table->integer('barcode');
             $table->timestamps();
 
             $table->foreign('id_kategori')->references('id')->on('kategori')->onDelete('cascade');
