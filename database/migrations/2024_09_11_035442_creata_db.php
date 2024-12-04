@@ -49,6 +49,7 @@ return new class extends Migration
             $table->bigInteger('id_barang')->unsigned(); // Kolom tanpa auto_increment
             $table->integer('jumlah_barang');
             $table->decimal('sub_total', 10, 2); // Kolom untuk subtotal
+            $table->decimal('nominal');
             
             $table->timestamps();
             $table->foreign('id_transaksi')->references('id')->on('transaksi')->onDelete('cascade');

@@ -34,23 +34,7 @@
         <div id="content" class="bg-white rounded-lg shadow-lg p-5 w-3/4">
             <a href="{{ route('admin.home') }}"><i class="fa-solid fa-arrow-left-long"> </i></a>
             <h1 class="text-center text-4xl font-bold text-blue-700">Food & Drink</h1><br>
-            <div class="flex justify-end space-x-4 mb-4">
-               
-                <!-- Filter Buttons -->
-                
-                    <button id="filter-makanan" class="bg-green-500 text-white p-2 rounded hover:bg-green-600">
-                     Makanan
-                    </button>
-                    <button id="filter-minuman" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
-                     Minuman
-                    </button>
-                    <button id="reset-filter" class="bg-gray-500 text-white p-2 rounded hover:bg-gray-600">
-                     Reset
-                    </button>
-                    <button class="bg-blue-500 p-2 rounded ml-auto text-white hover:bg-blue-600  ">
-                        <a href="{{ route('add-detail-data-barang-admin') }}">Add Product</a>
-                    </button>
-            </div>
+            
             @if (Session::has('Success'))
             <span class="text-red-500">{{ Session::get('success') }}</span>
             @endif

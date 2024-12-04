@@ -126,10 +126,10 @@
             </div>
             <div class="mt-6 flex justify-end w-full">
                 <div>
-                    <label for="total_keseluruhan" class="block text-gray-700 font-semibold">Bayar:</label>
-                    <input type="number" id="bayar" name="bayar" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    <label for="nominal" class="block text-gray-700 font-semibold">Nominal:</label>
+                    <input type="number" id="nominal" name="nominal" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                 </div>                   
-        </div>
+            </div>
             
                 <div class="mt-6 flex justify-end ">
                     <div class="">

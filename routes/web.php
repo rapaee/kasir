@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\detailfoodAnddrinkController as AdminDetailfoodAn
 use App\Http\Controllers\admin\detailreportController;
 use App\Http\Controllers\admin\detailtransaksiController;
 use App\Http\Controllers\admin\detailUserController;
+use App\Http\Controllers\admin\kategoriController;
 use App\Http\Controllers\BarangController; 
 use App\Http\Controllers\LaporanKeuanganController; 
 use App\Http\Controllers\LoginController; 
@@ -68,6 +69,9 @@ Route::post('/admin/add-data-barang', [AdminBarangController::class, 'store'])->
 Route::post('/admin/add-detail-data-barang', [AdminDetailfoodAnddrinkController::class, 'store'])->name('add-detail-data-barang-store');   
 Route::get('/user/nota/', [TransaksiController::class, 'nota'])->name('user.nota');
 Route::get('/user/nota/', [DetailUserController::class, 'notaa'])->name('user-notaa');
+Route::get('/admin/kategori',[kategoriController::class,'index'])->name('add-kategori');
+Route::get('/admin/add-kategori',[kategoriController::class,'create'])->name('add-kategori-admin');
+Route::post('/admin/add-kategori',[kategoriController::class,'store'])->name('add-kategori-store');
 
 
 Route::middleware(['auth'])->group(function () {

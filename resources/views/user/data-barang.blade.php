@@ -34,23 +34,46 @@
     <div class="container mx-auto flex justify-end">
         <div id="content" class="bg-white rounded-lg shadow-lg p-5 w-3/4">
             <h1 class="text-center text-4xl font-bold text-blue-700">Product</h1>
-            <div class="flex justify-end space-x-4 mb-4">
-               
-                <!-- Filter Buttons -->
-                
-                    <button id="filter-makanan" class="bg-green-500 text-white p-2 rounded hover:bg-green-600">
-                     Makanan
+            <div class="flex justify-between items-center space-x-4 mb-4">
+                <!-- Search Form -->
+                <div class="flex items-center">
+                    <input 
+                        type="text" 
+                        placeholder="Search product..." 
+                        class="border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300"
+                        id="search-input"
+                    />
+                    <script>
+                        // Event listener untuk input pencarian
+                        document.getElementById('search-input').addEventListener('input', function () {
+                            const searchValue = this.value.toLowerCase(); // Ambil nilai input dan ubah ke huruf kecil
+                            const rows = document.querySelectorAll('tbody tr'); // Ambil semua baris di tabel
+                    
+                            rows.forEach(row => {
+                                const namaBarang = row.cells[1]?.innerText.toLowerCase(); // Ambil teks dari kolom nama barang
+                                if (namaBarang.includes(searchValue)) { 
+                                    row.style.display = ''; // Tampilkan baris jika cocok
+                                } else {
+                                    row.style.display = 'none'; // Sembunyikan baris jika tidak cocok
+                                }
+                            });
+                        });
+                    </script>
+                    
+                    <button 
+                        type="submit" 
+                        class="bg-blue-500 text-white p-2 rounded ml-2 hover:bg-blue-600"
+                    >
+                        Search
                     </button>
-                    <button id="filter-minuman" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
-                     Minuman
-                    </button>
-                    <button id="reset-filter" class="bg-gray-500 text-white p-2 rounded hover:bg-gray-600">
-                     Semua
-                    </button>
-                    <button class="bg-blue-500 p-2 rounded ml-auto text-white hover:bg-blue-600  ">
-                        <a href="{{ route('add-data-barang') }}">Add Product</a>
-                    </button>
+                </div>
+            
+                <!-- Add Product Button -->
+                <button class="bg-blue-500 p-2 rounded text-white hover:bg-blue-600">
+                    <a href="{{ route('add-data-barang') }}">Add Product</a>
+                </button>
             </div>
+            
             @if (Session::has('Success'))
             <span class="text-red-500">{{ Session::get('success') }}</span>
             @endif
@@ -65,7 +88,6 @@
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Kode Barang</th>
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Nama barang</th>
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Harga</th>
-                            <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Kategori</th>
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Stok</th>
                             <th colspan="2" class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Action</th>
                         </tr>
@@ -77,7 +99,6 @@
                             <td class="text-center py-3 border border-gray-300">{{ $item->kode_barang }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->nama_barang }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->harga }}</td>
-                            <td class="text-center py-3 border border-gray-300">{{ $item->kategori->nama_kategori }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->stok_barang }}</td>
                             <td class="text-center py-3 border border-gray-300">
                                 <div class="flex justify-center space-x-2">

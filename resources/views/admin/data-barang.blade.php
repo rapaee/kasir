@@ -21,9 +21,9 @@
             <h1 class="text-center text-4xl font-bold text-blue-700 mb-6">List Product</h1>
             <div class="flex justify-end space-x-4 mb-4">
                 <!-- Filter Buttons -->
-                <button id="filter-makanan" class="bg-green-500 text-white p-2 rounded hover:bg-green-600">Makanan</button>
-                <button id="filter-minuman" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Minuman</button>
-                <button id="reset-filter" class="bg-gray-500 text-white p-2 rounded hover:bg-gray-600">Semua</button>
+                <button class="bg-gray-500 text-white p-2 rounded hover:bg-gray-600">
+                    <a href="{{ route('add-kategori') }}">Kategori</a>
+                </button>
                 <button class="bg-blue-500 p-2 rounded ml-auto text-white hover:bg-blue-600">
                     <a href="{{ route('add-data-barang-admin') }}">Add Product</a>
                 </button>
@@ -35,7 +35,6 @@
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">S/N</th>
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Nama Product</th>
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Harga</th>
-                            <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Kategori</th>
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Stok</th>
                             <th class="px-4 py-3 border border-gray-300 text-center text-sm font-semibold">Action</th>
                         </tr>
@@ -47,7 +46,6 @@
                             <td class="text-center py-3 border border-gray-300">{{ $loop->iteration }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->nama_barang }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->harga }}</td>
-                            <td class="text-center py-3 border border-gray-300">{{ $item->kategori->nama_kategori }}</td>
                             <td class="text-center py-3 border border-gray-300">{{ $item->stok_barang }}</td>
                             <td class="text-center py-3 border border-gray-300">
                                 <div class="flex justify-center space-x-2">

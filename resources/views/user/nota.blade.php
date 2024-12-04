@@ -47,6 +47,9 @@
     <div class="text-right font-bold text-lg">
         <p>Total: Rp. {{ number_format($transaksi->details->sum('sub_total'), 0, ',', '.') }}</p>
     </div>
+    <div class="text-right font-bold text-lg">
+        <p>Kembalian: {{ number_format($kembalian, 0, ',', '.') }}</p>
+    </div>    
     <button onclick="window.print()" class="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg">Print Nota</button>
 </div>
 

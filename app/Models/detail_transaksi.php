@@ -16,7 +16,8 @@ class detail_transaksi extends Model
         'id_transaksi',
         'id_barang', // Foreign key to Product (barang) table
         'jumlah_barang',
-        'sub_total'
+        'sub_total',
+        'nominal',
         
     ];
 

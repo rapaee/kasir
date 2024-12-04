@@ -42,35 +42,35 @@ class BarangController extends Controller
    }
 
    // Menyimpan data produk baru
-   public function store(Request $request)
-   {
-       // Validasi input dari form
-       $request->validate([
-           'nama_barang' => 'required|string',
-           'kode_barang' => 'required|numeric',
-           'harga' => 'required|numeric',
-           'kategori_barang' => 'required|exists:kategori,id', // Validasi kategori harus ada di tabel kategori
-           'stok_barang' => 'required|numeric',
-       ]);
-   
-       try {
-           // Membuat instance produk baru dan menyimpan data
-           $new_product = new Product();
-           $new_product->nama_barang = $request->nama_barang;
-           $new_product->kode_barang = $request->kode_barang;
-           $new_product->harga = $request->harga;
-           $new_product->id_kategori = $request->kategori_barang; // Menyimpan kategori barang yang dipilih
-           $new_product->stok_barang = $request->stok_barang;
-           $new_product->save();
-   
-           // Redirect ke halaman data-barang dengan pesan sukses
-           return redirect()->route('data-barang-admin')->with('success', 'Berhasil menambahkan produk');
-       } catch (\Exception $e) {
-           // Redirect kembali ke form tambah data dengan pesan error
-           return redirect()->route('add-data-barang-admin')->with('error', 'Gagal menambahkan produk: ' . $e->getMessage());
-       }
-   }
-   
+     public function store(Request $request)
+    {
+        // Validasi input dari form
+        $request->validate([
+            'nama_barang' => 'required|string',
+            'kode_barang' => 'required|string',
+            'harga' => 'required|numeric',
+            'kategori_barang' => 'required|exists:kategori,id', // Validasi kategori
+            'stok_barang' => 'required|numeric',
+        ]);
+
+        try {
+            // Membuat instance produk baru dan menyimpan data
+            $new_product = new Product();
+            $new_product->nama_barang = $request->nama_barang;
+            $new_product->kode_barang = $request->kode_barang;
+            $new_product->harga = $request->harga;
+            $new_product->id_kategori = $request->kategori_barang; // Menyimpan kategori barang yang dipilih
+            $new_product->stok_barang = $request->stok_barang;
+            $new_product->save();
+
+            // Redirect ke halaman data-barang dengan pesan sukses
+            return redirect()->route('data-barang-admin')->with('success', 'Berhasil menambahkan produk');
+        } catch (\Exception $e) {
+            // Redirect kembali ke form tambah data dengan pesan error
+            return redirect()->route('add-data-barang-admin')->with('error', 'Gagal menambahkan produk: ' . $e->getMessage());
+        }
+    }
+
 
    public function destroy($id)
    {
