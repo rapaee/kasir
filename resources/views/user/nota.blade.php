@@ -13,6 +13,7 @@
     <a href="{{ route('transaksi-user') }}"><i class="fa-solid fa-xmark"></i></a>
     <h1 class="text-center text-2xl font-bold mb-4">Nota Transaksi</h1>
     <div class="text-gray-600 text-sm mb-4">
+        <h1><strong>Toko Berkah</strong></h1>
         <p><strong>Tanggal:</strong> {{ $transaksi->tanggal }}</p>
         <p><strong>Nama Kasir:</strong>{{ auth()->user()->name }}</p>
     </div>

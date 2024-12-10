@@ -19,6 +19,37 @@
     <div class="container mx-auto flex justify-end">
         <div class="bg-white rounded-lg shadow-lg p-8 w-3/4">
             <h1 class="text-center text-4xl font-bold text-blue-700 mb-6">List Product</h1>
+            <div class="flex items-center">
+                <input 
+                    type="text" 
+                    placeholder="Search product..." 
+                    class="border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300"
+                    id="search-input"
+                />
+                <script>
+                    // Event listener untuk input pencarian
+                    document.getElementById('search-input').addEventListener('input', function () {
+                        const searchValue = this.value.toLowerCase(); // Ambil nilai input dan ubah ke huruf kecil
+                        const rows = document.querySelectorAll('tbody tr'); // Ambil semua baris di tabel
+                
+                        rows.forEach(row => {
+                            const namaBarang = row.cells[1]?.innerText.toLowerCase(); // Ambil teks dari kolom nama barang
+                            if (namaBarang.includes(searchValue)) { 
+                                row.style.display = ''; // Tampilkan baris jika cocok
+                            } else {
+                                row.style.display = 'none'; // Sembunyikan baris jika tidak cocok
+                            }
+                        });
+                    });
+                </script>
+                
+                <button 
+                    type="submit" 
+                    class="bg-blue-500 text-white p-2 rounded ml-2 hover:bg-blue-600"
+                >
+                    Search
+                </button>
+            </div>
             <div class="flex justify-end space-x-4 mb-4">
                 <!-- Filter Buttons -->
                 <button class="bg-gray-500 text-white p-2 rounded hover:bg-gray-600">

@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        Kategori::firstOrCreate(['nama_kategori' => 'Makanan']);
-        Kategori::firstOrCreate(['nama_kategori' => 'Minuman']);
+            Kategori::firstOrCreate(['nama_kategori' => 'Makanan']);
+            Kategori::firstOrCreate(['nama_kategori' => 'Minuman']);
 
     }
 }
